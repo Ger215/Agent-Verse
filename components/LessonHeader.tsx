@@ -20,32 +20,34 @@ interface LessonHeaderProps {
 export default function LessonHeader({ module, title, duration, type }: LessonHeaderProps) {
   return (
     <div style={{ marginBottom: '2rem' }}>
-      <p
-        style={{
-          fontSize: '0.75rem',
-          fontWeight: 600,
-          letterSpacing: '0.08em',
-          textTransform: 'uppercase',
-          color: 'var(--on-surface-variant)',
-          marginBottom: '0.75rem',
-          margin: '0 0 0.75rem 0',
-        }}
-      >
-        {module}
-      </p>
+      <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.45rem', padding: '0.22rem 0.6rem', borderRadius: '999px', background: 'var(--surface-high)', marginBottom: '0.9rem' }}>
+        <span className="material-symbols-outlined" style={{ fontSize: '0.9rem', color: 'var(--secondary)' }}>auto_awesome</span>
+        <p
+          style={{
+            fontSize: '0.71rem',
+            fontWeight: 700,
+            letterSpacing: '0.1em',
+            textTransform: 'uppercase',
+            color: 'var(--on-surface-variant)',
+            margin: 0,
+          }}
+        >
+          {module}
+        </p>
+      </div>
       <h1
         style={{
-          fontSize: '2rem',
-          fontWeight: 700,
+          fontSize: 'clamp(1.65rem, 2.7vw, 2.2rem)',
+          fontWeight: 800,
           letterSpacing: '-0.03em',
           color: 'var(--on-surface)',
-          lineHeight: 1.2,
-          margin: '0 0 1rem 0',
+          lineHeight: 1.15,
+          margin: '0 0 1.05rem 0',
         }}
       >
         {title}
       </h1>
-      <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', flexWrap: 'wrap' }}>
         <span
           style={{
             display: 'flex',
@@ -53,6 +55,9 @@ export default function LessonHeader({ module, title, duration, type }: LessonHe
             gap: '0.25rem',
             fontSize: '0.8125rem',
             color: 'var(--on-surface-variant)',
+            background: 'var(--surface-high)',
+            borderRadius: '999px',
+            padding: '0.2rem 0.55rem',
           }}
         >
           <span className="material-symbols-outlined" style={{ fontSize: '1rem' }}>schedule</span>

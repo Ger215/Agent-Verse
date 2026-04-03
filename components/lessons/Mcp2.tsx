@@ -6,42 +6,42 @@ import LessonHeader from '@/components/LessonHeader'
 const blocks = [
   {
     id: 'model',
-    label: 'Model',
+    label: 'Client (Claude Code)',
     icon: 'psychology',
     color: '#ddb7ff',
-    what: 'The AI reasoning engine',
-    provides: 'Inference, understanding, generation',
-    example: 'GPT-4, Claude, Llama',
+    what: 'The MCP client that discovers and invokes capabilities',
+    provides: 'Tool selection, prompt execution, resource references',
+    example: 'Claude Code using /mcp and MCP tools',
     connections: ['memory', 'tools', 'ui'],
   },
   {
     id: 'memory',
-    label: 'Memory',
+    label: 'MCP Server',
     icon: 'memory',
     color: '#4d8eff',
-    what: 'Persistent knowledge store',
-    provides: 'Context retrieval, session history',
-    example: 'Vector DB, key-value store',
+    what: 'A service that exposes tools, resources, and prompts over MCP',
+    provides: 'Domain actions with a stable protocol contract',
+    example: 'GitHub, Sentry, database, internal API MCP servers',
     connections: ['model'],
   },
   {
     id: 'tools',
-    label: 'Tools',
+    label: 'Transport',
     icon: 'bolt',
     color: '#f59e0b',
-    what: 'External capability executors',
-    provides: 'Real-world actions, data fetching',
-    example: 'APIs, code runners, file systems',
+    what: 'How the client talks to the server',
+    provides: 'Connection channel and auth boundary',
+    example: 'stdio (local), http (recommended remote), sse (deprecated)',
     connections: ['model'],
   },
   {
     id: 'ui',
-    label: 'UI',
+    label: 'Scope & Trust',
     icon: 'web',
     color: '#34d399',
-    what: 'User-facing interface layer',
-    provides: 'Input capture, output rendering',
-    example: 'Chat UI, dashboard, API consumer',
+    what: 'Where config lives and who can use it',
+    provides: 'Access control and safer team sharing',
+    example: 'local/user in ~/.claude.json, project in .mcp.json',
     connections: ['model'],
   },
 ]
@@ -58,8 +58,8 @@ export default function Mcp2() {
       <LessonHeader module="MCP Protocol" title="Modular Architecture" duration="6 min" type="interactive" />
 
       <p style={{ fontSize: '1rem', lineHeight: 1.75, color: 'var(--on-surface)', marginBottom: '2rem' }}>
-        An MCP-based system is made of independent blocks connected via the protocol. Click each block to see what it does
-        and how it connects to the rest of the system.
+        The Claude MCP architecture is client-server: the client discovers capabilities from MCP servers and invokes them
+        through a transport. Click each block to understand responsibilities and boundaries.
       </p>
 
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', marginBottom: '2rem', alignItems: 'start' }}>

@@ -22,17 +22,18 @@ export default function LessonNav({
   return (
     <div
       style={{
-        background: 'var(--surface-lowest)',
-        borderTop: '1px solid rgba(70,69,84,0.15)',
-        padding: '1.25rem 2rem',
+        background: 'rgba(10, 11, 15, 0.96)',
+        backdropFilter: 'blur(20px)',
+        padding: '1rem 1.25rem',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
         gap: '1rem',
         flexShrink: 0,
+        boxShadow: '0 -14px 30px rgba(0, 0, 0, 0.56)',
       }}
+      className="lesson-nav"
     >
-      {/* Previous */}
       <button
         onClick={onPrev}
         disabled={!hasPrev}
@@ -40,10 +41,11 @@ export default function LessonNav({
           display: 'flex',
           alignItems: 'center',
           gap: '0.375rem',
-          padding: '0.5rem 1rem',
+          minHeight: '44px',
+          padding: '0.55rem 1rem',
           background: 'transparent',
-          border: '1px solid rgba(70,69,84,0.3)',
-          borderRadius: '6px',
+          border: '1px solid rgba(70, 69, 84, 0.1)',
+          borderRadius: '10px',
           color: hasPrev ? 'var(--on-surface-variant)' : 'var(--outline-variant)',
           fontSize: '0.875rem',
           cursor: hasPrev ? 'pointer' : 'not-allowed',
@@ -57,7 +59,6 @@ export default function LessonNav({
         Previous
       </button>
 
-      {/* Complete / Next */}
       {isCompleted ? (
         hasNext ? (
           <button
@@ -66,10 +67,11 @@ export default function LessonNav({
               display: 'flex',
               alignItems: 'center',
               gap: '0.375rem',
-              padding: '0.5rem 1.25rem',
-              background: 'var(--surface-high)',
-              border: '1px solid rgba(70,69,84,0.3)',
-              borderRadius: '6px',
+              minHeight: '44px',
+              padding: '0.55rem 1.25rem',
+              background: 'rgba(255, 255, 255, 0.07)',
+              border: '1px solid rgba(70, 69, 84, 0.08)',
+              borderRadius: '10px',
               color: 'var(--on-surface)',
               fontSize: '0.875rem',
               cursor: 'pointer',
@@ -90,9 +92,13 @@ export default function LessonNav({
               display: 'flex',
               alignItems: 'center',
               gap: '0.375rem',
-              padding: '0.5rem 1.25rem',
+              minHeight: '44px',
+              padding: '0.55rem 1.25rem',
               color: '#4d8eff',
               fontSize: '0.875rem',
+              borderRadius: '10px',
+              background: 'rgba(77,142,255,0.1)',
+              boxShadow: '0 0 0 1px rgba(70, 69, 84, 0.12)',
             }}
           >
             <span className="material-symbols-outlined" style={{ fontSize: '1rem' }}>
@@ -108,18 +114,25 @@ export default function LessonNav({
             display: 'flex',
             alignItems: 'center',
             gap: '0.375rem',
-            padding: '0.5rem 1.25rem',
+            minHeight: '44px',
+            padding: '0.55rem 1.25rem',
             background: 'linear-gradient(135deg, #ddb7ff, #4d8eff)',
             border: 'none',
-            borderRadius: '6px',
-            color: '#0e0e0e',
+            borderRadius: '10px',
+            color: '#2c0051',
             fontSize: '0.875rem',
-            fontWeight: 600,
+            fontWeight: 700,
             cursor: 'pointer',
-            transition: 'opacity 0.15s ease',
+            transition: 'opacity 0.15s ease, box-shadow 0.15s ease',
+            boxShadow: '0 0 0 rgba(111, 0, 190, 0)',
           }}
           onMouseOver={e => (e.currentTarget.style.opacity = '0.9')}
-          onMouseOut={e => (e.currentTarget.style.opacity = '1')}
+          onMouseOut={e => {
+            e.currentTarget.style.opacity = '1'
+            e.currentTarget.style.boxShadow = '0 0 0 rgba(111, 0, 190, 0)'
+          }}
+          onFocus={e => (e.currentTarget.style.boxShadow = '0 0 0 4px rgba(111, 0, 190, 0.1)')}
+          onBlur={e => (e.currentTarget.style.boxShadow = '0 0 0 rgba(111, 0, 190, 0)')}
         >
           {isLast ? (
             <>
@@ -138,6 +151,19 @@ export default function LessonNav({
           )}
         </button>
       )}
+
+      <style>{`
+        @media (max-width: 700px) {
+          .lesson-nav {
+            flex-direction: column;
+            align-items: stretch;
+          }
+          .lesson-nav button {
+            width: 100%;
+            justify-content: center;
+          }
+        }
+      `}</style>
     </div>
   )
 }

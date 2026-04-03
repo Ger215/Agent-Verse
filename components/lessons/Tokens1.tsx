@@ -1,30 +1,30 @@
 import LessonHeader from '@/components/LessonHeader'
 import CalloutBox from '@/components/CalloutBox'
 
-const contextLimits = [
-  { model: 'GPT-3.5', limit: '16K tokens', words: '~12K words' },
-  { model: 'Claude Sonnet', limit: '200K tokens', words: '~150K words' },
-  { model: 'GPT-4o', limit: '128K tokens', words: '~96K words' },
-  { model: 'Llama 3', limit: '128K tokens', words: '~96K words' },
+const rtkSavings = [
+  { operation: 'ls / tree', standard: '~2,000', rtk: '~400', savings: '-80%' },
+  { operation: 'cat / read', standard: '~40,000', rtk: '~12,000', savings: '-70%' },
+  { operation: 'git status', standard: '~3,000', rtk: '~600', savings: '-80%' },
+  { operation: 'test runners', standard: '~25,000', rtk: '~2,500', savings: '-90%' },
 ]
 
 const problems = [
   {
     icon: 'data_loss_prevention',
-    title: 'Context Overflow',
-    desc: 'When the context window fills, the model loses access to earlier information — like forgetting the start of a conversation.',
+    title: 'Context Bloat',
+    desc: 'Raw shell output is noisy. Large logs, diffs, and test output consume context that should be used for reasoning.',
     color: '#f87171',
   },
   {
     icon: 'payments',
-    title: 'High Cost',
-    desc: 'Most AI providers charge per token. Long contexts = expensive operations, especially at scale with many concurrent agents.',
+    title: 'Higher Cost',
+    desc: 'Token-heavy workflows directly increase spend. Repeating verbose commands all day multiplies that cost fast.',
     color: '#f59e0b',
   },
   {
     icon: 'hourglass_slow',
-    title: 'Slow Inference',
-    desc: 'The longer the context, the longer the model takes to process it. Performance degrades as context grows.',
+    title: 'Slower Iteration',
+    desc: 'More tokens means slower responses and slower debugging loops. Productivity drops when each step takes longer.',
     color: '#ddb7ff',
   },
 ]
@@ -32,11 +32,11 @@ const problems = [
 export default function Tokens1() {
   return (
     <>
-      <LessonHeader module="Token Optimization" title="Why Tokens Matter" duration="4 min" type="reading" />
+      <LessonHeader module="Token Optimization" title="Why RTK Matters" duration="4 min" type="reading" />
 
       <p style={{ fontSize: '1rem', lineHeight: 1.75, color: 'var(--on-surface)', marginBottom: '1.5rem' }}>
-        Every AI model has a token limit — the maximum amount of text it can process at once. Tokens are roughly words
-        or word-pieces: on average, 1 token ≈ ¾ of a word.
+        RTK (Rust Token Killer) is a Rust CLI proxy that compresses command output before it reaches the LLM context.
+        According to the project docs, common development workflows can cut token usage by 60 to 90 percent.
       </p>
 
       {/* Token equivalencies */}
@@ -50,13 +50,13 @@ export default function Tokens1() {
         }}
       >
         <h3 style={{ fontSize: '0.875rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.06em', color: 'var(--on-surface-variant)', margin: '0 0 1rem' }}>
-          Token Reference
+          RTK Snapshot
         </h3>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1rem' }}>
           {[
-            { tokens: '1K', equals: '~750 words', icon: 'article' },
-            { tokens: '10K', equals: '~7,500 words', icon: 'book' },
-            { tokens: '100K', equals: '~75,000 words', icon: 'library_books' },
+            { tokens: 'Rust binary', equals: 'single executable', icon: 'memory' },
+            { tokens: '100+ commands', equals: 'supported rewrites', icon: 'terminal' },
+            { tokens: '<10ms', equals: 'reported overhead', icon: 'bolt' },
           ].map(item => (
             <div
               key={item.tokens}
@@ -71,39 +71,41 @@ export default function Tokens1() {
                 {item.icon}
               </span>
               <div style={{ fontSize: '1.125rem', fontWeight: 700, color: 'var(--on-surface)', marginBottom: '0.25rem' }}>
-                {item.tokens} tokens
-              </div>
+                 {item.tokens}
+               </div>
               <div style={{ fontSize: '0.8125rem', color: 'var(--on-surface-variant)' }}>{item.equals}</div>
             </div>
           ))}
         </div>
       </div>
 
-      {/* Context limits table */}
+      {/* RTK savings table */}
       <h2 style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--on-surface)', margin: '2rem 0 1rem', letterSpacing: '-0.02em' }}>
-        Context Limits by Model
+        Typical Savings by Command
       </h2>
 
       <div style={{ border: '1px solid rgba(70,69,84,0.2)', borderRadius: '10px', overflow: 'hidden', marginBottom: '2rem' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', background: 'var(--surface-high)', padding: '0.75rem 1.25rem', fontSize: '0.75rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.06em', color: 'var(--on-surface-variant)' }}>
-          <div>Model</div>
-          <div>Limit</div>
-          <div>Equivalent</div>
+        <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr 1fr 0.8fr', background: 'var(--surface-high)', padding: '0.75rem 1.25rem', fontSize: '0.75rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.06em', color: 'var(--on-surface-variant)' }}>
+          <div>Operation</div>
+          <div>Standard</div>
+          <div>RTK</div>
+          <div>Savings</div>
         </div>
-        {contextLimits.map((row, i) => (
+        {rtkSavings.map((row, i) => (
           <div
-            key={row.model}
-            style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', padding: '0.75rem 1.25rem', borderTop: '1px solid rgba(70,69,84,0.1)', background: i % 2 === 0 ? 'transparent' : 'var(--surface-low)' }}
+            key={row.operation}
+            style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr 1fr 0.8fr', padding: '0.75rem 1.25rem', borderTop: '1px solid rgba(70,69,84,0.1)', background: i % 2 === 0 ? 'transparent' : 'var(--surface-low)' }}
           >
-            <div style={{ fontSize: '0.875rem', color: 'var(--on-surface)', fontWeight: 500 }}>{row.model}</div>
-            <div style={{ fontSize: '0.875rem', color: '#4d8eff', fontFamily: 'ui-monospace, monospace' }}>{row.limit}</div>
-            <div style={{ fontSize: '0.875rem', color: 'var(--on-surface-variant)' }}>{row.words}</div>
+            <div style={{ fontSize: '0.875rem', color: 'var(--on-surface)', fontWeight: 500 }}>{row.operation}</div>
+            <div style={{ fontSize: '0.875rem', color: '#fca5a5', fontFamily: 'ui-monospace, monospace' }}>{row.standard}</div>
+            <div style={{ fontSize: '0.875rem', color: '#86efac', fontFamily: 'ui-monospace, monospace' }}>{row.rtk}</div>
+            <div style={{ fontSize: '0.875rem', color: '#34d399', fontWeight: 700 }}>{row.savings}</div>
           </div>
         ))}
       </div>
 
       <CalloutBox variant="warning">
-        As agents work through long tasks, context grows. Hitting the limit means losing information or failing entirely.
+        RTK is strongest when used as a hook layer that rewrites shell commands to compact equivalents before execution.
       </CalloutBox>
 
       {/* Three problems */}

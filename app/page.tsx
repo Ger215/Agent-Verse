@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import TopBar from '@/components/TopBar'
 import CourseSidebar from '@/components/CourseSidebar'
 import LessonViewer from '@/components/LessonViewer'
@@ -8,23 +8,22 @@ import { allLessons } from '@/lib/courseData'
 
 const STORAGE_KEY = 'obsidian-ai-progress'
 
+function loadCompletedFromStorage(): Set<string> {
+  if (typeof window === 'undefined') return new Set()
+  try {
+    const stored = localStorage.getItem(STORAGE_KEY)
+    if (!stored) return new Set()
+    const ids: string[] = JSON.parse(stored)
+    return new Set(ids)
+  } catch {
+    return new Set()
+  }
+}
+
 export default function Home() {
   const [currentLessonId, setCurrentLessonId] = useState('agents-1')
-  const [completed, setCompleted] = useState<Set<string>>(new Set())
+  const [completed, setCompleted] = useState<Set<string>>(loadCompletedFromStorage)
   const [sidebarOpen, setSidebarOpen] = useState(false)
-
-  // Load progress from localStorage on mount
-  useEffect(() => {
-    try {
-      const stored = localStorage.getItem(STORAGE_KEY)
-      if (stored) {
-        const ids: string[] = JSON.parse(stored)
-        setCompleted(new Set(ids))
-      }
-    } catch {
-      // localStorage unavailable or corrupt — start fresh
-    }
-  }, [])
 
   const saveCompleted = (updated: Set<string>) => {
     try {
@@ -75,9 +74,10 @@ export default function Home() {
       style={{
         display: 'flex',
         flexDirection: 'column',
-        height: '100vh',
+        height: '100dvh',
         overflow: 'hidden',
-        background: 'var(--background)',
+        background: 'transparent',
+        padding: '0.75rem',
       }}
     >
       <TopBar
@@ -86,7 +86,18 @@ export default function Home() {
         onMenuToggle={() => setSidebarOpen(o => !o)}
       />
 
-      <div style={{ display: 'flex', flex: 1, overflow: 'hidden' }}>
+      <div
+        style={{
+          display: 'flex',
+          flex: 1,
+          minHeight: 0,
+          overflow: 'hidden',
+          marginTop: '0.75rem',
+          borderRadius: '16px',
+          boxShadow: 'var(--panel-shadow)',
+          background: 'var(--surface-lowest)',
+        }}
+      >
         <CourseSidebar
           currentLessonId={currentLessonId}
           completed={completed}
@@ -94,7 +105,16 @@ export default function Home() {
           open={sidebarOpen}
         />
 
-        <main style={{ flex: 1, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+        <main
+          style={{
+            flex: 1,
+            minHeight: 0,
+            overflow: 'hidden',
+            display: 'flex',
+            flexDirection: 'column',
+            background: 'var(--surface-low)',
+          }}
+        >
           <LessonViewer
             key={currentLessonId}
             lessonId={currentLessonId}

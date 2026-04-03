@@ -3,36 +3,37 @@
 import { useState } from 'react'
 import LessonHeader from '@/components/LessonHeader'
 
-const uncompressedText = `[SYSTEM] You are an AI assistant helping with code review tasks.
-Your job is to analyze pull requests and provide detailed feedback.
-You have access to the following tools: search_code, read_file, add_comment.
-Always be thorough and check for edge cases.
+const uncompressedText = `$ git status
+On branch feature/auth-refresh
+Changes not staged for commit:
+  modified: src/auth/refresh.ts
+  modified: src/auth/token.ts
+  modified: src/auth/index.ts
+  modified: src/ui/LoginForm.tsx
+  modified: src/ui/SessionBanner.tsx
+  ... 27 more files
 
-[USER SESSION - 2024-01-15 09:32:11]
-User: Can you review the authentication module?
-Assistant: I'll start by reading the authentication files to understand the current implementation.
-Tool call: read_file(path="src/auth/index.ts")
-Result: [2,847 lines of authentication code...]
+$ cargo test
+running 148 tests
+test auth::token::tests::valid_signature ... ok
+test auth::token::tests::expired_token ... FAILED
+test auth::refresh::tests::rotates_refresh_token ... FAILED
+test auth::refresh::tests::replay_attack_blocked ... ok
+... 140 more lines of test output
 
-[USER] Looks good. Can you check the token validation logic specifically?
-[ASSISTANT] Let me search for token validation functions.
-Tool call: search_code(query="validateToken", scope="src/auth")
-Result: Found 12 matches across 7 files...
+Raw command output includes repeated boilerplate, long file lists, and full runner logs.`
 
-[USER] What about the refresh token logic?
-[ASSISTANT] I'll look at the refresh token implementation now.
-Tool call: read_file(path="src/auth/refresh.ts")
-Result: [1,203 lines of refresh token code...]
+const compressedText = `$ rtk git status
+changed files: 32 (auth: 3, ui: 2, tests: 12, other: 15)
+focus: src/auth/refresh.ts, src/auth/token.ts
 
-[Previous conversation continues for 47 more exchanges...]
-[Tool results, intermediate analysis, error messages, retry attempts...]
-[Full file contents loaded 8 separate times...]
-[Debug logs, stack traces, test output...]`
+$ rtk test cargo test
+FAILED: 2/148 tests
+- auth::token::tests::expired_token
+- auth::refresh::tests::rotates_refresh_token
+hint: inspect src/auth/token.ts and src/auth/refresh.ts
 
-const compressedText = `[CTX] Code review agent | tools: search_code, read_file, add_comment
-[HISTORY-SUMMARY] Reviewed auth module. Token validation: 12 matches/7 files. Refresh token: refresh.ts analyzed.
-[ACTIVE] User asking about refresh token logic → already analyzed, summary available
-[NEXT] Respond with refresh token summary`
+Signal preserved, noise removed.`
 
 const techniques = [
   { label: 'Recursive Pruning', color: '#ddb7ff', desc: 'Removes redundant and low-signal content iteratively' },
@@ -79,11 +80,33 @@ export default function Tokens2() {
 
   return (
     <>
-      <LessonHeader module="Token Optimization" title="Compression in Action" duration="5 min" type="interactive" />
+      <LessonHeader module="Token Optimization" title="RTK Compression in Action" duration="5 min" type="interactive" />
 
       <p style={{ fontSize: '1rem', lineHeight: 1.75, color: 'var(--on-surface)', marginBottom: '2rem' }}>
-        Rust Token Killer (RTK) compresses agent context without losing meaning. Watch the token count drop while the essential information is preserved.
+        RTK compresses command output while preserving high-signal information. Trigger compression below to simulate
+        what happens when verbose context is rewritten into compact summaries.
       </p>
+
+      <div style={{ background: 'var(--surface-low)', border: '1px solid rgba(70,69,84,0.18)', borderRadius: '10px', padding: '0.875rem', marginBottom: '1.25rem' }}>
+        <div style={{ fontSize: '0.75rem', color: 'var(--on-surface-variant)', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '0.4rem', fontWeight: 600 }}>
+          Typical Setup
+        </div>
+        <div style={{ fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace', fontSize: '0.8125rem', color: '#bfdbfe', lineHeight: 1.65 }}>
+          brew install rtk<br />
+          rtk init -g<br />
+          restart your agent CLI
+        </div>
+      </div>
+
+      <div style={{ background: 'var(--surface-low)', border: '1px solid rgba(70,69,84,0.18)', borderRadius: '10px', padding: '0.875rem', marginBottom: '1.25rem' }}>
+        <div style={{ fontSize: '0.75rem', color: 'var(--on-surface-variant)', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '0.35rem', fontWeight: 600 }}>
+          Command Rewrite Example
+        </div>
+        <div style={{ fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace', fontSize: '0.8125rem', color: 'var(--on-surface)', lineHeight: 1.65 }}>
+          {'git status -> rtk git status'}<br />
+          {'cargo test -> rtk test cargo test'}
+        </div>
+      </div>
 
       {/* Token counter */}
       <div
@@ -226,6 +249,16 @@ export default function Tokens2() {
             <div style={{ fontSize: '0.75rem', color: 'var(--on-surface-variant)', lineHeight: 1.5 }}>{t.desc}</div>
           </div>
         ))}
+      </div>
+
+      <div style={{ background: 'var(--surface-low)', border: '1px solid rgba(70,69,84,0.2)', borderRadius: '10px', padding: '0.875rem' }}>
+        <div style={{ fontSize: '0.75rem', color: 'var(--on-surface-variant)', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '0.35rem', fontWeight: 600 }}>
+          Hook Behavior
+        </div>
+        <p style={{ margin: 0, fontSize: '0.8125rem', color: 'var(--on-surface-variant)', lineHeight: 1.6 }}>
+          In Claude Code, RTK rewrites Bash commands through hooks. Built-in read/search tools bypass that hook, so
+          use shell workflows when you want RTK filtering.
+        </p>
       </div>
     </>
   )

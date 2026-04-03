@@ -3,19 +3,19 @@ import { ReactNode } from 'react'
 const variantStyles: Record<string, { border: string; bg: string; icon: string; iconColor: string }> = {
   info: {
     border: '#4d8eff',
-    bg: '#4d8eff14',
+    bg: 'linear-gradient(135deg, rgba(77,142,255,0.16), rgba(77,142,255,0.06))',
     icon: 'info',
     iconColor: '#4d8eff',
   },
   warning: {
     border: '#f59e0b',
-    bg: '#f59e0b14',
+    bg: 'linear-gradient(135deg, rgba(245,158,11,0.16), rgba(245,158,11,0.06))',
     icon: 'warning',
     iconColor: '#f59e0b',
   },
   tip: {
     border: '#ddb7ff',
-    bg: '#ddb7ff14',
+    bg: 'linear-gradient(135deg, rgba(221,183,255,0.18), rgba(221,183,255,0.06))',
     icon: 'lightbulb',
     iconColor: '#ddb7ff',
   },
@@ -33,12 +33,13 @@ export default function CalloutBox({ children, variant = 'tip' }: CalloutBoxProp
       style={{
         borderLeft: `3px solid ${s.border}`,
         background: s.bg,
-        borderRadius: '0 8px 8px 0',
+        borderRadius: '0 10px 10px 0',
         padding: '1rem 1.25rem',
         margin: '1.5rem 0',
         display: 'flex',
         gap: '0.75rem',
         alignItems: 'flex-start',
+        boxShadow: '0 0 0 1px rgba(70, 69, 84, 0.14)',
       }}
     >
       <span

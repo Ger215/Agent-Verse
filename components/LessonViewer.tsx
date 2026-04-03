@@ -15,7 +15,7 @@ import Memory1 from '@/components/lessons/Memory1'
 import Memory2 from '@/components/lessons/Memory2'
 import Tokens1 from '@/components/lessons/Tokens1'
 import Tokens2 from '@/components/lessons/Tokens2'
-import Playground1 from '@/components/lessons/Playground1'
+import Tokens3 from '@/components/lessons/Tokens3'
 
 const lessonComponents: Record<string, React.ComponentType> = {
   'agents-1': Agents1,
@@ -30,7 +30,7 @@ const lessonComponents: Record<string, React.ComponentType> = {
   'memory-2': Memory2,
   'tokens-1': Tokens1,
   'tokens-2': Tokens2,
-  'playground-1': Playground1,
+  'tokens-3': Tokens3,
 }
 
 interface LessonViewerProps {
@@ -63,41 +63,50 @@ export default function LessonViewer({
         display: 'flex',
         flexDirection: 'column',
         height: '100%',
+        minHeight: 0,
+        background: 'transparent',
       }}
     >
-      {/* Scrollable content */}
-      <div style={{ flex: 1, overflowY: 'auto' }}>
+      <div style={{ flex: 1, minHeight: 0, overflowY: 'auto', scrollbarGutter: 'stable' }}>
         <div
           style={{
-            maxWidth: '720px',
+            maxWidth: '860px',
             margin: '0 auto',
-            padding: '2.5rem 2rem',
+            padding: '2rem 1.25rem 1.5rem',
           }}
         >
-          {LessonComponent ? (
-            <LessonComponent key={lessonId} />
-          ) : (
-            <div
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center',
-                minHeight: '300px',
-                gap: '1rem',
-                color: 'var(--on-surface-variant)',
-              }}
-            >
-              <span className="material-symbols-outlined" style={{ fontSize: '3rem', opacity: 0.3 }}>
-                school
-              </span>
-              <p style={{ fontSize: '1rem', margin: 0 }}>Lesson not found: {lessonId}</p>
-            </div>
-          )}
+          <div
+            style={{
+              background: 'var(--surface)',
+              borderRadius: '16px',
+              padding: '1.75rem clamp(1rem, 2.5vw, 2rem)',
+              boxShadow: '0 30px 68px rgba(0, 0, 0, 0.72)',
+            }}
+          >
+            {LessonComponent ? (
+              <LessonComponent key={lessonId} />
+            ) : (
+              <div
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  minHeight: '300px',
+                  gap: '1rem',
+                  color: 'var(--on-surface-variant)',
+                }}
+              >
+                <span className="material-symbols-outlined" style={{ fontSize: '3rem', opacity: 0.3 }}>
+                  school
+                </span>
+                <p style={{ fontSize: '1rem', margin: 0 }}>Lesson not found: {lessonId}</p>
+              </div>
+            )}
+          </div>
         </div>
       </div>
 
-      {/* Fixed nav at bottom */}
       <LessonNav
         onPrev={onPrev}
         onNext={onNext}

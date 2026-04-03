@@ -2,20 +2,20 @@ import LessonHeader from '@/components/LessonHeader'
 import CalloutBox from '@/components/CalloutBox'
 
 const useCases = [
-  { session: 'Track conversation history', persistent: 'User preferences & settings' },
-  { session: 'Temporary task state', persistent: 'Long-term knowledge base' },
-  { session: 'Current request context', persistent: 'Past decisions & outcomes' },
-  { session: 'Active tool results', persistent: 'Cross-session learning' },
+  { session: 'Current prompt and temporary state', persistent: 'Saved observations with What/Why/Where/Learned' },
+  { session: 'One conversation context window', persistent: 'Cross-session recall via full-text search' },
+  { session: 'Ephemeral tool output', persistent: 'Structured session summaries' },
+  { session: 'Local reasoning only', persistent: 'Project-scoped memory for teams and agents' },
 ]
 
 export default function Memory1() {
   return (
     <>
-      <LessonHeader module="Memory Systems" title="Session vs Persistent" duration="5 min" type="reading" />
+      <LessonHeader module="Engram" title="Why Engram Exists" duration="5 min" type="reading" />
 
       <p style={{ fontSize: '1rem', lineHeight: 1.75, color: 'var(--on-surface)', marginBottom: '1.5rem' }}>
-        Agents need to remember things. But not all memory is the same — where data is stored and how long it lasts
-        determines how an agent can use it.
+        Engram is a persistent memory system for coding agents. It stores important facts in SQLite with FTS5 search,
+        and exposes that memory through MCP tools so agents can recover context after session resets.
       </p>
 
       {/* Two-column comparison */}
@@ -40,7 +40,7 @@ export default function Memory1() {
             }}
           >
             <span className="material-symbols-outlined" style={{ fontSize: '1.125rem', color: '#4d8eff' }}>memory_alt</span>
-            <span style={{ fontWeight: 700, fontSize: '0.9375rem', color: 'var(--on-surface)' }}>Session Memory</span>
+            <span style={{ fontWeight: 700, fontSize: '0.9375rem', color: 'var(--on-surface)' }}>Session Context</span>
           </div>
           <div style={{ padding: '1.25rem' }}>
             <div
@@ -57,7 +57,7 @@ export default function Memory1() {
               Like RAM
             </div>
             <ul style={{ margin: 0, padding: '0 0 0 1.25rem', display: 'flex', flexDirection: 'column', gap: '0.375rem' }}>
-              {['Fast access', 'Temporary — lost on session end', 'Holds current conversation', 'No setup required'].map(item => (
+              {['Fast access', 'Temporary and volatile', 'Holds only current conversation', 'Resets on compaction/session end'].map(item => (
                 <li key={item} style={{ fontSize: '0.875rem', color: 'var(--on-surface-variant)', lineHeight: 1.5 }}>{item}</li>
               ))}
             </ul>
@@ -84,7 +84,7 @@ export default function Memory1() {
             }}
           >
             <span className="material-symbols-outlined" style={{ fontSize: '1.125rem', color: '#ddb7ff' }}>storage</span>
-            <span style={{ fontWeight: 700, fontSize: '0.9375rem', color: 'var(--on-surface)' }}>Persistent Memory</span>
+            <span style={{ fontWeight: 700, fontSize: '0.9375rem', color: 'var(--on-surface)' }}>Engram Persistent Memory</span>
           </div>
           <div style={{ padding: '1.25rem' }}>
             <div
@@ -101,7 +101,7 @@ export default function Memory1() {
               Like a Hard Drive
             </div>
             <ul style={{ margin: 0, padding: '0 0 0 1.25rem', display: 'flex', flexDirection: 'column', gap: '0.375rem' }}>
-              {['Slower retrieval', 'Survives restarts', 'Stores long-term knowledge', 'Requires indexing/DB'].map(item => (
+              {['FTS5-powered retrieval', 'Survives restarts and compaction', 'Project and session organization', 'MCP tools for save/search/summaries'].map(item => (
                 <li key={item} style={{ fontSize: '0.875rem', color: 'var(--on-surface-variant)', lineHeight: 1.5 }}>{item}</li>
               ))}
             </ul>
@@ -110,8 +110,30 @@ export default function Memory1() {
       </div>
 
       <CalloutBox variant="tip">
-        Session memory is what you hold in your head during a conversation. Persistent memory is your notebook.
+        Session context is your short-term memory. Engram is the long-term notebook your agent can query anytime.
       </CalloutBox>
+
+      <h2 style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--on-surface)', margin: '2rem 0 1rem', letterSpacing: '-0.02em' }}>
+        Core Engram Tools
+      </h2>
+
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '0.75rem', marginBottom: '2rem' }}>
+        {[
+          { name: 'mem_save', use: 'Save a structured observation' },
+          { name: 'mem_search', use: 'Find relevant past context' },
+          { name: 'mem_get_observation', use: 'Read full observation by ID' },
+          { name: 'mem_context', use: 'Load recent session memory' },
+          { name: 'mem_session_summary', use: 'Persist end-of-session summary' },
+          { name: 'mem_update', use: 'Refine an existing memory item' },
+        ].map(tool => (
+          <div key={tool.name} style={{ background: 'var(--surface-low)', border: '1px solid rgba(70,69,84,0.2)', borderRadius: '8px', padding: '0.75rem' }}>
+            <div style={{ fontSize: '0.8rem', fontWeight: 700, color: '#93c5fd', marginBottom: '0.35rem', fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace' }}>
+              {tool.name}
+            </div>
+            <div style={{ fontSize: '0.8125rem', color: 'var(--on-surface-variant)', lineHeight: 1.6 }}>{tool.use}</div>
+          </div>
+        ))}
+      </div>
 
       {/* Use cases table */}
       <h2 style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--on-surface)', margin: '2rem 0 1rem', letterSpacing: '-0.02em' }}>
@@ -140,7 +162,7 @@ export default function Memory1() {
           }}
         >
           <div>Session</div>
-          <div>Persistent</div>
+          <div>Engram</div>
         </div>
         {useCases.map((row, i) => (
           <div

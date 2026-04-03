@@ -44,11 +44,11 @@ export const modules: Module[] = [
   },
   {
     id: 'memory',
-    title: 'Memory Systems',
+    title: 'Engram',
     icon: 'memory',
     lessons: [
-      { id: 'memory-1', title: 'Session vs Persistent', duration: '5 min', type: 'reading' },
-      { id: 'memory-2', title: 'Vector Retrieval', duration: '6 min', type: 'interactive' },
+      { id: 'memory-1', title: 'Why Engram Exists', duration: '5 min', type: 'reading' },
+      { id: 'memory-2', title: 'Engram Tool Flow', duration: '6 min', type: 'interactive' },
     ],
   },
   {
@@ -56,16 +56,9 @@ export const modules: Module[] = [
     title: 'Token Optimization',
     icon: 'generating_tokens',
     lessons: [
-      { id: 'tokens-1', title: 'Why Tokens Matter', duration: '4 min', type: 'reading' },
-      { id: 'tokens-2', title: 'Compression in Action', duration: '5 min', type: 'interactive' },
-    ],
-  },
-  {
-    id: 'playground',
-    title: 'Playground',
-    icon: 'science',
-    lessons: [
-      { id: 'playground-1', title: 'Simulate an Agent', duration: '10 min', type: 'exercise' },
+      { id: 'tokens-1', title: 'Why RTK Matters', duration: '4 min', type: 'reading' },
+      { id: 'tokens-2', title: 'RTK Compression in Action', duration: '5 min', type: 'interactive' },
+      { id: 'tokens-3', title: 'Hooks & Plugins', duration: '5 min', type: 'reading' },
     ],
   },
 ]

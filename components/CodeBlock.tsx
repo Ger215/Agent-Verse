@@ -8,20 +8,23 @@ export default function CodeBlock({ code, language }: CodeBlockProps) {
     <div
       style={{
         background: 'var(--surface-lowest)',
-        border: '1px solid var(--outline-variant)',
-        borderRadius: '8px',
+        borderRadius: '12px',
         overflow: 'hidden',
         margin: '1.5rem 0',
+        boxShadow: '0 24px 48px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(70, 69, 84, 0.15)',
       }}
     >
       {language && (
         <div
           style={{
-            padding: '0.5rem 1rem',
-            borderBottom: '1px solid var(--outline-variant)',
-            fontSize: '0.75rem',
+            padding: '0.55rem 1rem',
+            borderBottom: '1px solid rgba(70, 69, 84, 0.15)',
+            fontSize: '0.72rem',
             color: 'var(--on-surface-variant)',
             fontFamily: 'monospace',
+            background: 'var(--surface)',
+            letterSpacing: '0.04em',
+            textTransform: 'uppercase',
           }}
         >
           {language}
@@ -30,7 +33,7 @@ export default function CodeBlock({ code, language }: CodeBlockProps) {
       <pre
         style={{
           margin: 0,
-          padding: '1.25rem',
+          padding: '1.1rem 1.25rem 1.25rem',
           overflowX: 'auto',
           fontSize: '0.8125rem',
           lineHeight: 1.7,

@@ -4,48 +4,48 @@ import { useState } from 'react'
 import LessonHeader from '@/components/LessonHeader'
 
 const presetQueries = [
-  "What's the weather?",
-  'Remind me about the meeting',
-  'What did we discuss yesterday?',
+  'How do we save architecture decisions?',
+  'Show recent session summary',
+  'Find bugfix context for auth',
 ]
 
 const memories = [
   {
     id: 'm1',
-    text: 'User asked about weather in Buenos Aires: 22°C, sunny',
-    tags: ['weather', 'Buenos Aires'],
+    text: 'Decision: Chose HTTP transport for remote MCP servers; SSE is deprecated where HTTP is available.',
+    tags: ['decision', 'mcp', 'transport', 'http'],
     color: '#4d8eff',
     x: 15,
     y: 20,
   },
   {
     id: 'm2',
-    text: 'Scheduled meeting with team on Tuesday at 3pm to review Q4 goals',
-    tags: ['meeting', 'schedule'],
+    text: 'Session summary: Implemented interactive MCP communication diagram and server cards in the lesson.',
+    tags: ['session', 'summary', 'mcp', 'diagram'],
     color: '#ddb7ff',
     x: 65,
     y: 15,
   },
   {
     id: 'm3',
-    text: 'Discussed project architecture: hexagonal, screaming, clean boundaries',
-    tags: ['architecture', 'project'],
+    text: 'Architecture note: Use topic_key for evolving decisions so future writes update instead of duplicating.',
+    tags: ['architecture', 'topic_key', 'decision'],
     color: '#f59e0b',
     x: 40,
     y: 55,
   },
   {
     id: 'm4',
-    text: 'User prefers Celsius for temperature readings',
-    tags: ['preferences', 'weather'],
+    text: 'Bugfix memory: Corrected unescaped JSX entities in lesson content to satisfy lint rules.',
+    tags: ['bugfix', 'lint', 'jsx'],
     color: '#34d399',
     x: 80,
     y: 60,
   },
   {
     id: 'm5',
-    text: 'Previous day: discussed token optimization strategies with RTK',
-    tags: ['tokens', 'yesterday', 'rtk'],
+    text: 'Workflow pattern: mem_search -> mem_get_observation is required to retrieve full memory details.',
+    tags: ['workflow', 'mem_search', 'mem_get_observation'],
     color: '#fb923c',
     x: 25,
     y: 75,
@@ -58,9 +58,10 @@ function scoreMemory(query: string, memory: typeof memories[0]): number {
   memory.tags.forEach(tag => {
     if (q.includes(tag)) score += 0.4
   })
-  if (q.includes('weather') && memory.tags.includes('weather')) score += 0.5
-  if ((q.includes('meeting') || q.includes('remind')) && memory.tags.includes('meeting')) score += 0.6
-  if ((q.includes('yesterday') || q.includes('discuss')) && (memory.tags.includes('yesterday') || memory.tags.includes('project'))) score += 0.5
+  if ((q.includes('decision') || q.includes('architecture')) && (memory.tags.includes('decision') || memory.tags.includes('architecture'))) score += 0.5
+  if ((q.includes('summary') || q.includes('recent')) && memory.tags.includes('summary')) score += 0.6
+  if ((q.includes('bugfix') || q.includes('auth') || q.includes('lint')) && memory.tags.includes('bugfix')) score += 0.5
+  if ((q.includes('search') || q.includes('retrieve') || q.includes('context')) && memory.tags.includes('mem_search')) score += 0.5
   return Math.min(score + Math.random() * 0.1, 0.99)
 }
 
@@ -87,11 +88,11 @@ export default function Memory2() {
 
   return (
     <>
-      <LessonHeader module="Memory Systems" title="Vector Retrieval" duration="6 min" type="interactive" />
+      <LessonHeader module="Engram" title="Engram Tool Flow" duration="6 min" type="interactive" />
 
       <p style={{ fontSize: '1rem', lineHeight: 1.75, color: 'var(--on-surface)', marginBottom: '2rem' }}>
-        Persistent memory uses vector embeddings to find relevant information. Instead of exact keyword matches,
-        it finds <em>semantically similar</em> content. Try a query to see which memories match.
+        Engram stores structured observations and lets agents retrieve them with search tools. Run a query to simulate
+        how an agent finds relevant context before calling <code style={{ fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace' }}>mem_get_observation</code>.
       </p>
 
       {/* Query input */}
@@ -102,7 +103,7 @@ export default function Memory2() {
             value={query}
             onChange={e => setQuery(e.target.value)}
             onKeyDown={e => e.key === 'Enter' && query.trim() && handleSearch(query)}
-            placeholder="Type a question..."
+            placeholder="Ask for memory context..."
             style={{
               flex: 1,
               padding: '0.625rem 0.875rem',
@@ -164,7 +165,7 @@ export default function Memory2() {
         }}
       >
         <div style={{ position: 'absolute', top: '0.5rem', left: '0.75rem', fontSize: '0.6875rem', color: 'var(--outline-variant)' }}>
-          Vector Space
+          Memory Index Space
         </div>
         {memories.map(m => {
           const score = scores[m.id] || 0
@@ -206,10 +207,10 @@ export default function Memory2() {
             <span className="material-symbols-outlined" style={{ fontSize: '1rem', color: topMatch.color }}>
               data_object
             </span>
-            <span style={{ fontSize: '0.8125rem', fontWeight: 600, color: topMatch.color }}>
-              Top match — {Math.round((scores[topMatch.id] || 0) * 100)}% similarity
-            </span>
-          </div>
+              <span style={{ fontSize: '0.8125rem', fontWeight: 600, color: topMatch.color }}>
+              Top match - {Math.round((scores[topMatch.id] || 0) * 100)} relevance
+              </span>
+            </div>
           <p style={{ fontSize: '0.9375rem', color: 'var(--on-surface)', margin: 0, lineHeight: 1.6 }}>
             {topMatch.text}
           </p>
@@ -231,6 +232,15 @@ export default function Memory2() {
           </div>
         </div>
       )}
+
+      <div style={{ marginTop: '1rem', background: 'var(--surface-low)', border: '1px solid rgba(70,69,84,0.2)', borderRadius: '10px', padding: '1rem' }}>
+        <div style={{ fontSize: '0.8125rem', color: 'var(--on-surface-variant)', marginBottom: '0.4rem', textTransform: 'uppercase', letterSpacing: '0.06em', fontWeight: 600 }}>
+          Recommended Retrieval Sequence
+        </div>
+        <div style={{ fontSize: '0.875rem', color: 'var(--on-surface)', lineHeight: 1.7, fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace' }}>
+          {`mem_context -> mem_search -> mem_get_observation -> mem_update or mem_save`}
+        </div>
+      </div>
     </>
   )
 }

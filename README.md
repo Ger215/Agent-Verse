@@ -15,13 +15,13 @@ How agents work at a fundamental level: the perception → action → verificati
 What skills are in the context of AI agents, how a `SKILL.md` file is structured, and how skills are discovered, loaded, and invoked at runtime.
 
 ### MCP (Model Context Protocol)
-How context flows between the model, tools, and the environment. How modular architectures let you compose capabilities without coupling them.
+How MCP enables client-server integrations via tools, resources, and prompts; when to use stdio vs HTTP transport; and how local/project/user scopes affect trust and team sharing.
 
-### Memory
-The difference between session memory (volatile, in-context) and persistent memory (cross-session, retrieval-based). How vector search enables agents to recall relevant information at scale.
+### Engram
+How Engram gives agents persistent memory across sessions with SQLite + FTS5, and how MCP tools like `mem_save`, `mem_search`, and `mem_session_summary` support reliable context recovery.
 
 ### Tokens
-Why token budgets matter: context overflow, cost, and latency. How compression, summarization, and selective retention keep agents running efficiently.
+Why token budgets matter: context overflow, cost, and latency. Includes RTK (Rust Token Killer) command-output compression plus Claude Code hooks and plugins for scalable automation.
 
 ---
 

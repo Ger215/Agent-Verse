@@ -16,32 +16,31 @@ export default function TopBar({ completed, onMenuToggle }: TopBarProps) {
   return (
     <header
       style={{
-        background: 'var(--surface-lowest)',
-        borderBottom: '1px solid rgba(70,69,84,0.15)',
-        height: '56px',
+        background: 'rgba(12, 13, 18, 0.94)',
+        backdropFilter: 'blur(20px)',
+        borderRadius: '14px',
+        minHeight: '62px',
         display: 'flex',
         alignItems: 'center',
-        padding: '0 1.5rem',
-        gap: '1.5rem',
+        padding: '0.7rem 1rem',
+        gap: '1rem',
         flexShrink: 0,
         zIndex: 10,
+        boxShadow: '0 14px 30px rgba(0, 0, 0, 0.58)',
       }}
     >
-      {/* Logo + Course name */}
       <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexShrink: 0 }}>
         <div
           style={{
-            width: '28px',
-            height: '28px',
-            borderRadius: '6px',
+            width: '32px',
+            height: '32px',
+            borderRadius: '10px',
             background: 'linear-gradient(135deg, #ddb7ff, #4d8eff)',
             flexShrink: 0,
+            boxShadow: '0 8px 18px rgba(77, 142, 255, 0.24)',
           }}
         />
-        <span
-          className="gradient-text"
-          style={{ fontWeight: 700, fontSize: '0.9375rem', letterSpacing: '-0.01em' }}
-        >
+        <span className="gradient-text" style={{ fontWeight: 700, fontSize: '0.95rem', letterSpacing: '-0.01em' }}>
           Obsidian AI
         </span>
         <span
@@ -54,29 +53,36 @@ export default function TopBar({ completed, onMenuToggle }: TopBarProps) {
         />
         <span
           style={{
-            fontSize: '0.8125rem',
+            fontSize: '0.75rem',
             color: 'var(--on-surface-variant)',
-            fontWeight: 500,
+            fontWeight: 600,
+            padding: '0.22rem 0.5rem',
+            borderRadius: '999px',
+            border: '1px solid rgba(70, 69, 84, 0.22)',
+            background: 'var(--surface-variant)',
           }}
         >
           Modern AI Systems
         </span>
       </div>
 
-      {/* Progress bar — center */}
       <div
         style={{
           flex: 1,
           display: 'flex',
           alignItems: 'center',
-          gap: '0.75rem',
-          maxWidth: '320px',
+          gap: '0.55rem',
+          maxWidth: '360px',
           margin: '0 auto',
+          background: 'rgba(8, 9, 13, 0.74)',
+          padding: '0.45rem 0.6rem',
+          borderRadius: '10px',
         }}
+        className="topbar-progress"
       >
         <span
           style={{
-            fontSize: '0.75rem',
+            fontSize: '0.72rem',
             color: 'var(--on-surface-variant)',
             whiteSpace: 'nowrap',
             flexShrink: 0,
@@ -87,8 +93,8 @@ export default function TopBar({ completed, onMenuToggle }: TopBarProps) {
         <div
           style={{
             flex: 1,
-            height: '4px',
-            background: 'var(--surface-high)',
+            height: '6px',
+            background: 'rgba(255, 255, 255, 0.06)',
             borderRadius: '100px',
             overflow: 'hidden',
           }}
@@ -105,26 +111,27 @@ export default function TopBar({ completed, onMenuToggle }: TopBarProps) {
         </div>
         <span
           style={{
-            fontSize: '0.75rem',
+            fontSize: '0.72rem',
             color: 'var(--on-surface-variant)',
             whiteSpace: 'nowrap',
             flexShrink: 0,
+            fontVariantNumeric: 'tabular-nums',
           }}
         >
           {Math.round(pct)}%
         </span>
       </div>
 
-      {/* Mobile hamburger */}
       <button
         onClick={onMenuToggle}
         style={{
           marginLeft: 'auto',
-          background: 'none',
-          border: 'none',
+          background: 'var(--surface-variant)',
+          border: '1px solid rgba(70, 69, 84, 0.18)',
+          borderRadius: '8px',
           cursor: 'pointer',
-          color: 'var(--on-surface-variant)',
-          padding: '0.25rem',
+          color: 'var(--on-surface)',
+          padding: '0.35rem',
           display: 'none',
         }}
         className="menu-toggle"
@@ -135,6 +142,7 @@ export default function TopBar({ completed, onMenuToggle }: TopBarProps) {
 
       <style>{`
         @media (max-width: 768px) {
+          .topbar-progress { display: none !important; }
           .menu-toggle { display: flex !important; }
         }
       `}</style>

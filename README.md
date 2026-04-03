@@ -1,36 +1,56 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Agent Verse
 
-## Getting Started
+An interactive course platform for learning modern AI systems — agents, skills, memory, MCP, and token optimization. Each lesson combines reading with animated demos and hands-on exercises, all within a single-page dark-themed UI.
 
-First, run the development server:
+Progress is tracked per-lesson and persisted in the browser via `localStorage` — no account needed.
+
+---
+
+## What you'll learn
+
+### AI Agents
+How agents work at a fundamental level: the perception → action → verification loop, the role of models vs tools, and how context windows and sessions shape agent behavior.
+
+### Skills
+What skills are in the context of AI agents, how a `SKILL.md` file is structured, and how skills are discovered, loaded, and invoked at runtime.
+
+### MCP (Model Context Protocol)
+How context flows between the model, tools, and the environment. How modular architectures let you compose capabilities without coupling them.
+
+### Memory
+The difference between session memory (volatile, in-context) and persistent memory (cross-session, retrieval-based). How vector search enables agents to recall relevant information at scale.
+
+### Tokens
+Why token budgets matter: context overflow, cost, and latency. How compression, summarization, and selective retention keep agents running efficiently.
+
+---
+
+## Getting started
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+pnpm install
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+pnpm build    # Production build
+pnpm lint     # Run ESLint
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## Stack
 
-To learn more about Next.js, take a look at the following resources:
+| Layer | Technology |
+|-------|-----------|
+| Framework | Next.js 16 (App Router, RSC-first) |
+| Runtime | React 19 |
+| Language | TypeScript 5 (strict) |
+| Styling | Inline styles + CSS custom properties |
+| Animations | Framer Motion 12 |
+| Icons | Material Symbols Outlined |
+| Package manager | pnpm |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---

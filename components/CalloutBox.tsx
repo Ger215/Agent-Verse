@@ -2,22 +2,22 @@ import { ReactNode } from 'react'
 
 const variantStyles: Record<string, { border: string; bg: string; icon: string; iconColor: string }> = {
   info: {
-    border: '#4d8eff',
-    bg: 'linear-gradient(135deg, rgba(77,142,255,0.16), rgba(77,142,255,0.06))',
+    border: 'rgba(59,130,246,0.4)',
+    bg: 'linear-gradient(135deg, rgba(59,130,246,0.18), rgba(59,130,246,0.06))',
     icon: 'info',
-    iconColor: '#4d8eff',
+    iconColor: 'var(--secondary)',
   },
   warning: {
-    border: '#f59e0b',
-    bg: 'linear-gradient(135deg, rgba(245,158,11,0.16), rgba(245,158,11,0.06))',
+    border: 'rgba(255,183,132,0.4)',
+    bg: 'linear-gradient(135deg, rgba(255,183,132,0.2), rgba(217,119,6,0.06))',
     icon: 'warning',
-    iconColor: '#f59e0b',
+    iconColor: 'var(--tertiary)',
   },
   tip: {
-    border: '#ddb7ff',
-    bg: 'linear-gradient(135deg, rgba(221,183,255,0.18), rgba(221,183,255,0.06))',
+    border: 'rgba(124,58,237,0.4)',
+    bg: 'linear-gradient(135deg, rgba(210,187,255,0.2), rgba(124,58,237,0.08))',
     icon: 'lightbulb',
-    iconColor: '#ddb7ff',
+    iconColor: 'var(--primary)',
   },
 }
 
@@ -31,15 +31,15 @@ export default function CalloutBox({ children, variant = 'tip' }: CalloutBoxProp
   return (
     <div
       style={{
-        borderLeft: `3px solid ${s.border}`,
+        boxShadow: 'none',
         background: s.bg,
-        borderRadius: '0 10px 10px 0',
+        borderRadius: '8px',
         padding: '1rem 1.25rem',
         margin: '1.5rem 0',
         display: 'flex',
         gap: '0.75rem',
         alignItems: 'flex-start',
-        boxShadow: '0 0 0 1px rgba(70, 69, 84, 0.14)',
+        backdropFilter: 'blur(12px)',
       }}
     >
       <span

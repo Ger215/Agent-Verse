@@ -7,22 +7,22 @@ export default function CodeBlock({ code, language }: CodeBlockProps) {
   return (
     <div
       style={{
-        background: 'var(--surface-lowest)',
-        borderRadius: '12px',
+        background: 'rgba(15, 17, 23, 0.78)',
+        borderRadius: '10px',
         overflow: 'hidden',
         margin: '1.5rem 0',
-        boxShadow: '0 24px 48px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(70, 69, 84, 0.15)',
+        backdropFilter: 'blur(12px)',
+        boxShadow: 'none',
       }}
     >
       {language && (
         <div
           style={{
             padding: '0.55rem 1rem',
-            borderBottom: '1px solid rgba(70, 69, 84, 0.15)',
             fontSize: '0.72rem',
             color: 'var(--on-surface-variant)',
             fontFamily: 'monospace',
-            background: 'var(--surface)',
+            background: 'rgba(9, 10, 14, 0.82)',
             letterSpacing: '0.04em',
             textTransform: 'uppercase',
           }}

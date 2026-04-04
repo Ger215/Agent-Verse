@@ -22,15 +22,15 @@ export default function LessonNav({
   return (
     <div
       style={{
-        background: 'rgba(10, 11, 15, 0.96)',
-        backdropFilter: 'blur(20px)',
+        background: 'rgba(9, 10, 14, 0.86)',
+        backdropFilter: 'blur(12px)',
         padding: '1rem 1.25rem',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
         gap: '1rem',
         flexShrink: 0,
-        boxShadow: '0 -14px 30px rgba(0, 0, 0, 0.56)',
+        boxShadow: 'none',
       }}
       className="lesson-nav"
     >
@@ -44,8 +44,9 @@ export default function LessonNav({
           minHeight: '44px',
           padding: '0.55rem 1rem',
           background: 'transparent',
-          border: '1px solid rgba(70, 69, 84, 0.1)',
-          borderRadius: '10px',
+          border: 'none',
+          borderRadius: '6px',
+          boxShadow: 'none',
           color: hasPrev ? 'var(--on-surface-variant)' : 'var(--outline-variant)',
           fontSize: '0.875rem',
           cursor: hasPrev ? 'pointer' : 'not-allowed',
@@ -69,16 +70,17 @@ export default function LessonNav({
               gap: '0.375rem',
               minHeight: '44px',
               padding: '0.55rem 1.25rem',
-              background: 'rgba(255, 255, 255, 0.07)',
-              border: '1px solid rgba(70, 69, 84, 0.08)',
-              borderRadius: '10px',
+              background: 'transparent',
+              border: 'none',
+              borderRadius: '6px',
+              boxShadow: 'none',
               color: 'var(--on-surface)',
               fontSize: '0.875rem',
               cursor: 'pointer',
               transition: 'all 0.15s ease',
             }}
           >
-            <span className="material-symbols-outlined" style={{ fontSize: '1rem', color: '#4d8eff' }}>
+            <span className="material-symbols-outlined" style={{ fontSize: '1rem', color: 'var(--secondary-container)' }}>
               check_circle
             </span>
             Completed — Next
@@ -94,11 +96,11 @@ export default function LessonNav({
               gap: '0.375rem',
               minHeight: '44px',
               padding: '0.55rem 1.25rem',
-              color: '#4d8eff',
+              color: 'var(--secondary)',
               fontSize: '0.875rem',
-              borderRadius: '10px',
-              background: 'rgba(77,142,255,0.1)',
-              boxShadow: '0 0 0 1px rgba(70, 69, 84, 0.12)',
+              borderRadius: '8px',
+              background: 'rgba(9, 10, 14, 0.72)',
+              boxShadow: 'none',
             }}
           >
             <span className="material-symbols-outlined" style={{ fontSize: '1rem' }}>
@@ -114,25 +116,29 @@ export default function LessonNav({
             display: 'flex',
             alignItems: 'center',
             gap: '0.375rem',
-            minHeight: '44px',
-            padding: '0.55rem 1.25rem',
-            background: 'linear-gradient(135deg, #ddb7ff, #4d8eff)',
-            border: 'none',
-            borderRadius: '10px',
-            color: '#2c0051',
-            fontSize: '0.875rem',
-            fontWeight: 700,
-            cursor: 'pointer',
-            transition: 'opacity 0.15s ease, box-shadow 0.15s ease',
-            boxShadow: '0 0 0 rgba(111, 0, 190, 0)',
+              minHeight: '44px',
+              padding: '0.55rem 1.25rem',
+              background: 'var(--gradient)',
+              border: 'none',
+              borderRadius: '6px',
+              color: '#1a1222',
+              fontSize: '0.875rem',
+              fontWeight: 700,
+              cursor: 'pointer',
+              transition: 'opacity 0.15s ease, transform 0.15s ease',
+              boxShadow: 'none',
+            }}
+          onMouseOver={e => {
+            e.currentTarget.style.opacity = '0.92'
+            e.currentTarget.style.transform = 'translateY(-1px)'
           }}
-          onMouseOver={e => (e.currentTarget.style.opacity = '0.9')}
           onMouseOut={e => {
             e.currentTarget.style.opacity = '1'
-            e.currentTarget.style.boxShadow = '0 0 0 rgba(111, 0, 190, 0)'
+            e.currentTarget.style.transform = 'translateY(0)'
+            e.currentTarget.style.boxShadow = 'none'
           }}
-          onFocus={e => (e.currentTarget.style.boxShadow = '0 0 0 4px rgba(111, 0, 190, 0.1)')}
-          onBlur={e => (e.currentTarget.style.boxShadow = '0 0 0 rgba(111, 0, 190, 0)')}
+          onFocus={e => (e.currentTarget.style.boxShadow = 'none')}
+          onBlur={e => (e.currentTarget.style.boxShadow = 'none')}
         >
           {isLast ? (
             <>
@@ -143,7 +149,7 @@ export default function LessonNav({
             </>
           ) : (
             <>
-              Mark Complete & Continue
+              Complete & Continue
               <span className="material-symbols-outlined" style={{ fontSize: '1rem' }}>
                 arrow_forward
               </span>

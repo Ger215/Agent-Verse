@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --background: #07080b;
+  --background: #0b0011;
   --surface-lowest: #090a0e;
   --surface-low: #0f1117;
   --surface: #13151c;
@@ -10,21 +10,23 @@
   --surface-bright: #12141b;
   --surface-variant: rgba(24, 26, 33, 0.72);
   --on-surface: #e5e2e1;
-  --on-surface-variant: #c7c4d7;
-  --secondary: #ddb7ff;
-  --secondary-container: #6f00be;
-  --tertiary: #adc6ff;
-  --tertiary-container: #4d8eff;
-  --outline-variant: #262935;
-  --gradient: linear-gradient(135deg, #ddb7ff, #4d8eff);
-  --focus-ring: #adc6ff;
+  --on-surface-variant: #b8b3c2;
+  --primary: #d2bbff;
+  --primary-container: #7c3aed;
+  --secondary: #adc6ff;
+  --secondary-container: #3b82f6;
+  --tertiary: #ffb784;
+  --tertiary-container: #d97706;
+  --outline-variant: #4a4455;
+  --gradient: linear-gradient(135deg, #d2bbff, #7c3aed);
+  --focus-ring: #d2bbff;
   --panel-shadow: 0 30px 64px rgba(0, 0, 0, 0.68);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--on-surface);
-  --font-sans: var(--font-inter);
+  --font-sans: var(--font-plus-jakarta);
 }
 
 * {
@@ -42,7 +44,7 @@ body {
 body {
   background: var(--background);
   color: var(--on-surface);
-  font-family: var(--font-inter), Inter, system-ui, sans-serif;
+  font-family: var(--font-plus-jakarta), "Plus Jakarta Sans", system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   position: relative;
@@ -53,8 +55,8 @@ body::before {
   position: fixed;
   inset: 0;
   background:
-    radial-gradient(1000px 500px at 8% -5%, rgba(221, 183, 255, 0.08), transparent 64%),
-    radial-gradient(900px 460px at 100% 0%, rgba(77, 142, 255, 0.07), transparent 58%),
+    radial-gradient(1000px 500px at 8% -5%, rgba(210, 187, 255, 0.08), transparent 64%),
+    radial-gradient(900px 460px at 100% 0%, rgba(59, 130, 246, 0.07), transparent 58%),
     linear-gradient(180deg, rgba(255, 255, 255, 0.012), rgba(255, 255, 255, 0));
   pointer-events: none;
   z-index: -1;
@@ -66,14 +68,14 @@ body::before {
   height: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.02);
+  background: rgba(74, 68, 85, 0.2);
 }
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #4c4b58, #616070);
+  background: linear-gradient(180deg, #4a4455, #6f6790);
   border-radius: 999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, #5a596a, #767488);
+  background: linear-gradient(180deg, #5a546a, #7c3aed);
 }
 
 :focus-visible {
@@ -90,9 +92,9 @@ body::before {
 }
 
 /* Code block styles */
-.code-keyword { color: #ddb7ff; }
-.code-string { color: #adc6ff; }
-.code-number { color: #f8c5a0; }
-.code-comment { color: #6b7280; font-style: italic; }
-.code-property { color: #7dd3fc; }
-.code-punctuation { color: #9ca3af; }
+.code-keyword { color: var(--primary); }
+.code-string { color: var(--secondary); }
+.code-number { color: var(--tertiary); }
+.code-comment { color: #8e879d; font-style: italic; }
+.code-property { color: #8bc3ff; }
+.code-punctuation { color: #a8a2b6; }

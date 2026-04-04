@@ -100,9 +100,9 @@ export default function Home() {
           minHeight: 0,
           overflow: 'hidden',
           marginTop: '0.75rem',
-          borderRadius: '16px',
-          boxShadow: 'var(--panel-shadow)',
-          background: 'var(--surface-lowest)',
+          borderRadius: '10px',
+          boxShadow: 'none',
+          background: 'rgba(12, 14, 20, 0.94)',
         }}
       >
         <CourseSidebar
@@ -119,7 +119,7 @@ export default function Home() {
             overflow: 'hidden',
             display: 'flex',
             flexDirection: 'column',
-            background: 'var(--surface-low)',
+            background: 'rgba(10, 12, 18, 0.96)',
           }}
         >
           <LessonViewer

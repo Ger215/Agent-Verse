@@ -210,13 +210,14 @@ export default function Memory2() {
             onClick={() => query.trim() && handleSearch(query)}
             style={{
               padding: '0.625rem 1.25rem',
-              background: 'linear-gradient(135deg, #ddb7ff, #4d8eff)',
+              background: 'var(--gradient)',
               border: 'none',
               borderRadius: '6px',
-              color: '#0e0e0e',
+              color: '#16101f',
               fontSize: '0.875rem',
               fontWeight: 600,
               cursor: 'pointer',
+              boxShadow: '0 10px 22px rgba(124, 58, 237, 0.24)',
             }}
           >
             Search

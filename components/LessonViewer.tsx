@@ -75,10 +75,11 @@ export default function LessonViewer({
         >
           <div
             style={{
-              background: 'var(--surface)',
-              borderRadius: '16px',
+              background: 'rgba(16, 18, 26, 0.62)',
+              backdropFilter: 'blur(12px)',
+              borderRadius: '12px',
               padding: '1.75rem clamp(1rem, 2.5vw, 2rem)',
-              boxShadow: '0 30px 68px rgba(0, 0, 0, 0.72)',
+              boxShadow: 'none',
             }}
           >
             {LessonComponent ? (

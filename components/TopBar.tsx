@@ -16,9 +16,9 @@ export default function TopBar({ completed, onMenuToggle }: TopBarProps) {
   return (
     <header
       style={{
-        background: 'rgba(12, 13, 18, 0.94)',
-        backdropFilter: 'blur(20px)',
-        borderRadius: '14px',
+        background: 'rgba(9, 10, 14, 0.86)',
+        backdropFilter: 'blur(12px)',
+        borderRadius: '12px',
         minHeight: '62px',
         display: 'flex',
         alignItems: 'center',
@@ -26,7 +26,7 @@ export default function TopBar({ completed, onMenuToggle }: TopBarProps) {
         gap: '1rem',
         flexShrink: 0,
         zIndex: 10,
-        boxShadow: '0 14px 30px rgba(0, 0, 0, 0.58)',
+        boxShadow: 'none',
       }}
     >
       <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexShrink: 0 }}>
@@ -34,10 +34,10 @@ export default function TopBar({ completed, onMenuToggle }: TopBarProps) {
           style={{
             width: '32px',
             height: '32px',
-            borderRadius: '10px',
-            background: 'linear-gradient(135deg, #ddb7ff, #4d8eff)',
+            borderRadius: '8px',
+            background: 'var(--gradient)',
             flexShrink: 0,
-            boxShadow: '0 8px 18px rgba(77, 142, 255, 0.24)',
+            boxShadow: 'none',
           }}
         />
         <span className="gradient-text" style={{ fontWeight: 700, fontSize: '0.95rem', letterSpacing: '-0.01em' }}>
@@ -58,8 +58,8 @@ export default function TopBar({ completed, onMenuToggle }: TopBarProps) {
             fontWeight: 600,
             padding: '0.22rem 0.5rem',
             borderRadius: '999px',
-            border: '1px solid rgba(70, 69, 84, 0.22)',
-            background: 'var(--surface-variant)',
+            boxShadow: 'none',
+            background: 'rgba(15, 17, 23, 0.82)',
           }}
         >
           Modern AI Systems
@@ -74,9 +74,9 @@ export default function TopBar({ completed, onMenuToggle }: TopBarProps) {
           gap: '0.55rem',
           maxWidth: '360px',
           margin: '0 auto',
-          background: 'rgba(8, 9, 13, 0.74)',
+          background: 'rgba(9, 10, 14, 0.8)',
           padding: '0.45rem 0.6rem',
-          borderRadius: '10px',
+          borderRadius: '8px',
         }}
         className="topbar-progress"
       >
@@ -94,7 +94,7 @@ export default function TopBar({ completed, onMenuToggle }: TopBarProps) {
           style={{
             flex: 1,
             height: '6px',
-            background: 'rgba(255, 255, 255, 0.06)',
+            background: 'rgba(74, 68, 85, 0.36)',
             borderRadius: '100px',
             overflow: 'hidden',
           }}
@@ -103,7 +103,7 @@ export default function TopBar({ completed, onMenuToggle }: TopBarProps) {
             style={{
               width: `${pct}%`,
               height: '100%',
-              background: 'linear-gradient(90deg, #ddb7ff, #4d8eff)',
+              background: 'var(--gradient)',
               borderRadius: '100px',
               transition: 'width 0.4s ease',
             }}
@@ -126,14 +126,18 @@ export default function TopBar({ completed, onMenuToggle }: TopBarProps) {
         onClick={onMenuToggle}
         style={{
           marginLeft: 'auto',
-          background: 'var(--surface-variant)',
-          border: '1px solid rgba(70, 69, 84, 0.18)',
-          borderRadius: '8px',
+          background: 'transparent',
+          boxShadow: 'none',
+          border: 'none',
+          borderRadius: '6px',
           cursor: 'pointer',
           color: 'var(--on-surface)',
           padding: '0.35rem',
           display: 'none',
+          transition: 'background 0.15s ease',
         }}
+        onMouseOver={e => (e.currentTarget.style.background = 'var(--surface-high)')}
+        onMouseOut={e => (e.currentTarget.style.background = 'transparent')}
         className="menu-toggle"
         aria-label="Toggle menu"
       >

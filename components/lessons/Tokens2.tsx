@@ -195,16 +195,17 @@ export default function Tokens2() {
           disabled={compressed || animating}
           style={{
             padding: '0.625rem 1.5rem',
-            background: compressed || animating ? 'var(--surface-high)' : 'linear-gradient(135deg, #ddb7ff, #4d8eff)',
+            background: compressed || animating ? 'var(--surface-high)' : 'var(--gradient)',
             border: 'none',
             borderRadius: '6px',
-            color: compressed || animating ? 'var(--on-surface-variant)' : '#0e0e0e',
+            color: compressed || animating ? 'var(--on-surface-variant)' : '#16101f',
             fontSize: '0.875rem',
             fontWeight: 600,
             cursor: compressed || animating ? 'not-allowed' : 'pointer',
             display: 'flex',
             alignItems: 'center',
             gap: '0.375rem',
+            boxShadow: compressed || animating ? 'none' : '0 10px 22px rgba(124, 58, 237, 0.24)',
           }}
         >
           <span className="material-symbols-outlined" style={{ fontSize: '1rem' }}>

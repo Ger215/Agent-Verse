@@ -18,13 +18,13 @@ export default function LessonHeader({ module, title }: LessonHeaderProps) {
 
   return (
     <div style={{ marginBottom: '2rem' }}>
-      <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.45rem', padding: '0.22rem 0.6rem', borderRadius: '999px', background: 'var(--surface-high)', marginBottom: '0.9rem' }}>
+      <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.45rem', padding: '0.22rem 0.6rem', borderRadius: '999px', background: 'rgba(15, 17, 23, 0.78)', marginBottom: '0.9rem', boxShadow: 'none' }}>
         <span className="material-symbols-outlined" style={{ fontSize: '0.9rem', color: 'var(--secondary)' }}>{moduleIcon}</span>
         <p
           style={{
             fontSize: '0.71rem',
             fontWeight: 700,
-            letterSpacing: '0.1em',
+            letterSpacing: '0.08em',
             textTransform: 'uppercase',
             color: 'var(--on-surface-variant)',
             margin: 0,

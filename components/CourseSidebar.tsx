@@ -24,7 +24,8 @@ export default function CourseSidebar({
           style={{
             position: 'fixed',
             inset: 0,
-            background: 'rgba(0,0,0,0.5)',
+            background: 'rgba(16, 15, 15, 0.62)',
+            backdropFilter: 'blur(4px)',
             zIndex: 19,
             display: 'none',
           }}
@@ -36,9 +37,9 @@ export default function CourseSidebar({
         style={{
           width: '296px',
           flexShrink: 0,
-          background: 'var(--surface-lowest)',
+          background: 'rgba(10, 12, 18, 0.96)',
           minHeight: 0,
-          overflowY: 'auto',
+          overflowY: 'hidden',
           scrollbarGutter: 'stable',
           height: '100%',
         }}
@@ -54,8 +55,9 @@ export default function CourseSidebar({
                 key={mod.id}
                 style={{
                   marginBottom: '0.75rem',
-                  borderRadius: '10px',
-                  background: 'var(--surface-lowest)',
+                  borderRadius: '8px',
+                  background: 'rgba(14, 16, 22, 0.96)',
+                  boxShadow: 'none',
                   overflow: 'hidden',
                 }}
               >
@@ -65,7 +67,7 @@ export default function CourseSidebar({
                     alignItems: 'center',
                     gap: '0.5rem',
                     padding: '0.65rem 0.85rem',
-                    background: 'rgba(255, 255, 255, 0.03)',
+                    background: 'rgba(18, 20, 28, 0.92)',
                   }}
                 >
                   <span
@@ -89,7 +91,7 @@ export default function CourseSidebar({
                     style={{
                       fontSize: '0.67rem',
                       color: 'var(--on-surface-variant)',
-                      background: 'rgba(255, 255, 255, 0.03)',
+                      background: 'rgba(16, 18, 25, 0.88)',
                       padding: '0.125rem 0.4rem',
                       borderRadius: '100px',
                     }}
@@ -112,34 +114,34 @@ export default function CourseSidebar({
                         alignItems: 'center',
                         gap: '0.625rem',
                         padding: '0.56rem 0.85rem 0.56rem 1rem',
-                        background: isCurrent ? 'rgba(255, 255, 255, 0.07)' : 'transparent',
+                        background: isCurrent ? 'var(--surface-highest)' : 'transparent',
                         border: 'none',
-                        borderLeft: isCurrent
-                          ? '3px solid transparent'
-                          : '3px solid transparent',
-                        backgroundImage: isCurrent
-                          ? 'linear-gradient(var(--surface-highest), var(--surface-highest)), linear-gradient(135deg, #ddb7ff, #4d8eff)'
-                          : 'none',
-                        backgroundOrigin: isCurrent ? 'border-box' : 'initial',
-                        backgroundClip: isCurrent ? 'padding-box, border-box' : 'initial',
+                        boxShadow: 'none',
                         cursor: 'pointer',
                         textAlign: 'left',
                         transition: 'background 0.15s ease',
-                        borderRadius: isCurrent ? '0 6px 6px 0' : '0',
+                        borderRadius: '6px',
                         position: 'relative',
                       }}
+                      onMouseOver={e => {
+                        if (!isCurrent) e.currentTarget.style.background = 'var(--surface-highest)'
+                      }}
+                      onMouseOut={e => {
+                        if (!isCurrent) e.currentTarget.style.background = 'transparent'
+                      }}
                     >
-                      {/* Active border indicator */}
+                      {/* Active glow indicator */}
                       {isCurrent && (
                         <div
                           style={{
                             position: 'absolute',
-                            left: 0,
+                            left: '0.4rem',
                             top: 0,
                             bottom: 0,
-                            width: '3px',
-                            background: 'linear-gradient(135deg, #ddb7ff, #4d8eff)',
-                            borderRadius: '0 2px 2px 0',
+                            width: '2px',
+                            background: 'var(--gradient)',
+                            borderRadius: '999px',
+                            opacity: 0.9,
                           }}
                         />
                       )}
@@ -155,19 +157,19 @@ export default function CourseSidebar({
                           alignItems: 'center',
                           justifyContent: 'center',
                           background: isDone
-                            ? 'linear-gradient(135deg, #ddb7ff, #4d8eff)'
+                            ? 'var(--gradient)'
                             : 'transparent',
                           border: isDone
                             ? 'none'
                             : isCurrent
-                            ? '2px solid #b8c8f5'
-                            : '2px solid var(--outline-variant)',
+                            ? '2px solid var(--secondary)'
+                            : '2px solid rgba(74, 68, 85, 0.65)',
                         }}
                       >
                         {isDone && (
                           <span
                             className="material-symbols-outlined"
-                             style={{ fontSize: '0.625rem', color: '#0b1020', fontVariationSettings: "'FILL' 1" }}
+                            style={{ fontSize: '0.625rem', color: '#18171d', fontVariationSettings: "'FILL' 1" }}
                           >
                             check
                           </span>

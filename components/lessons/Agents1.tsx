@@ -228,13 +228,14 @@ export default function Agents1() {
             borderRadius: '0.375rem',
             border: 'none',
             cursor: 'pointer',
-            background: 'linear-gradient(135deg, #ddb7ff, #4d8eff)',
-            color: '#131313',
+            background: 'var(--gradient)',
+            color: '#16101f',
             fontWeight: 600,
             fontSize: '0.875rem',
             display: 'flex',
             alignItems: 'center',
             gap: '0.375rem',
+            boxShadow: 'none',
           }}
         >
           {isLast ? (

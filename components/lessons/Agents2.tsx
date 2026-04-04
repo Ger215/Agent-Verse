@@ -106,7 +106,7 @@ export default function Agents2() {
         <div style={{
           width: 40, height: 40,
           borderRadius: '0.375rem',
-          background: 'linear-gradient(135deg, #ddb7ff, #4d8eff)',
+          background: 'var(--gradient)',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
           flexShrink: 0,
         }}>

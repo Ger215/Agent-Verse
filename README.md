@@ -1,56 +1,106 @@
 # Agent Verse
 
-An interactive course platform for learning modern AI systems — agents, skills, memory, MCP, and token optimization. Each lesson combines reading with animated demos and hands-on exercises, all within a single-page dark-themed UI.
+<p align="center">
+  <img src="./public/LogoBg.png" alt="Agent Verse Galaxy Logo" width="520" />
+</p>
 
-Progress is tracked per-lesson and persisted in the browser via `localStorage` — no account needed.
-
----
-
-## What you'll learn
-
-### Agents
-How agents work at a fundamental level: the perception -> action -> verification loop, the role of models vs tools, how context windows/sessions shape behavior, and how SDD (Spec-Driven Development) structures complex changes.
-
-### Skills
-What skills are in the context of AI agents, how a `SKILL.md` file is structured, and how skills are discovered, loaded, and invoked at runtime.
-
-### MCP (Model Context Protocol)
-How MCP enables client-server integrations via tools, resources, and prompts; when to use stdio vs HTTP transport; and how local/project/user scopes affect trust and team sharing.
-
-### Engram
-How Engram gives agents persistent memory across sessions with SQLite + FTS5, and how MCP tools like `mem_save`, `mem_search`, and `mem_session_summary` support reliable context recovery.
-
-### Tokens
-Why token budgets matter: context overflow, cost, and latency. Includes RTK (Rust Token Killer) command-output compression plus Claude Code hooks and plugins for scalable automation.
+<p align="center">
+  <strong>Learn modern AI systems through interactive, visual lessons.</strong><br/>
+  Agents, Skills, MCP, Engram memory, token optimization, and practical workflows in one place.
+</p>
 
 ---
 
-## Getting started
+## Why Agent Verse
+
+Agent Verse is not a static docs page. It is an interactive learning workspace where each lesson combines:
+
+- Narrative explanations
+- Visual architecture blocks
+- Click-through demos and simulations
+- Real command patterns you can apply immediately
+
+Progress is tracked per lesson and persisted locally in your browser (`localStorage`) with no account required.
+
+---
+
+## Learning Tracks
+
+| Track | What you learn |
+|------|-----------------|
+| Agents | The agentic loop (gather context -> take action -> verify), model vs tools, sessions/context control, and SDD basics |
+| Skills | How `SKILL.md` works, how skills are discovered and loaded, and how to structure reusable agent behavior |
+| MCP Protocol | Client-server tool architecture, prompts/resources/tools, transport choices, and trust boundaries |
+| Engram | Persistent memory design with SQLite + FTS5 and MCP memory operations (`mem_save`, `mem_search`, `mem_session_summary`) |
+| Token Optimization | Context budget strategy, RTK compression workflows, and hooks/plugins for scalable automation |
+
+---
+
+## Quick Start
 
 ```bash
 pnpm install
 pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000).
+Then open [http://localhost:3000](http://localhost:3000).
+
+### Useful scripts
 
 ```bash
-pnpm build    # Production build
+pnpm dev      # Start local dev server
 pnpm lint     # Run ESLint
+pnpm build    # Production build
+pnpm start    # Run production server
 ```
 
 ---
 
-## Stack
+## Product Highlights
+
+- Interactive lesson navigation with per-lesson completion state
+- Sidebar module organization with collapsible sections
+- Engram and RTK-focused lessons with real workflow examples
+- MCP visual flows and architecture explainers
+- Motion-enhanced UI built for readability and retention
+
+---
+
+## Tech Stack
 
 | Layer | Technology |
-|-------|-----------|
+|------|------------|
 | Framework | Next.js 16 (App Router, RSC-first) |
 | Runtime | React 19 |
 | Language | TypeScript 5 (strict) |
 | Styling | Inline styles + CSS custom properties |
-| Animations | Framer Motion 12 |
+| Motion | Framer Motion 12 |
 | Icons | Material Symbols Outlined |
-| Package manager | pnpm |
+| Package Manager | pnpm |
 
 ---
+
+## Project Structure
+
+```text
+app/                    # App Router entrypoints and global layout
+components/             # Shared UI + lesson components
+components/lessons/     # Individual lesson screens
+lib/courseData.ts       # Module + lesson metadata
+public/                 # Logos and static assets
+```
+
+---
+
+## Contributing Notes
+
+- Keep lessons interactive (not just long text blocks)
+- Reuse shared primitives (`LessonHeader`, `CodeBlock`, `CalloutBox`)
+- Update both metadata and lesson map when adding/removing lessons
+- Follow existing dark-theme token usage for visual consistency
+
+---
+
+## Vision
+
+Agent Verse aims to be the fastest way for developers to go from "I watched a demo" to "I can design and operate real AI workflows".

@@ -122,6 +122,11 @@ export default function Memory2() {
     <>
       <LessonHeader module="Engram" title="Engram Tool Flow" duration="6 min" type="interactive" />
 
+      <p style={{ fontSize: '1rem', lineHeight: 1.75, color: 'var(--on-surface)', marginBottom: '1.25rem' }}>
+        Engram gives coding agents durable memory through MCP tools and SQLite + FTS5 retrieval. Use the interactive
+        flow below to see how context is loaded, searched, expanded, and saved.
+      </p>
+
       <h2 style={{ fontSize: '1.2rem', fontWeight: 700, color: 'var(--on-surface)', margin: '0 0 0.8rem' }}>
         Architecture
       </h2>

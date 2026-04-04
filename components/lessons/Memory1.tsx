@@ -18,6 +18,37 @@ export default function Memory1() {
         and exposes that memory through MCP tools so agents can recover context after session resets.
       </p>
 
+      <a
+        href="https://github.com/Gentleman-Programming/engram"
+        target="_blank"
+        rel="noreferrer"
+        style={{
+          display: 'block',
+          textDecoration: 'none',
+          background: 'var(--surface-lowest)',
+          border: '1px solid rgba(70,69,84,0.2)',
+          borderRadius: '10px',
+          overflow: 'hidden',
+          marginBottom: '2rem',
+        }}
+      >
+        <div style={{ position: 'relative' }}>
+          <img
+            src="https://opengraph.githubassets.com/1/Gentleman-Programming/engram"
+            alt="Engram GitHub preview"
+            style={{ width: '100%', height: '160px', objectFit: 'cover', display: 'block', background: '#0b0c10', filter: 'brightness(0.58) saturate(0.9) contrast(1.05)' }}
+          />
+          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(0,0,0,0.28), rgba(0,0,0,0.42))' }} />
+        </div>
+        <div style={{ padding: '0.85rem 0.95rem', display: 'flex', justifyContent: 'space-between', gap: '0.75rem', alignItems: 'center' }}>
+          <div>
+            <div style={{ fontSize: '0.86rem', fontWeight: 700, color: 'var(--on-surface)', marginBottom: '0.2rem' }}>Gentleman-Programming/engram</div>
+            <div style={{ fontSize: '0.8rem', color: 'var(--on-surface-variant)' }}>Persistent memory for coding agents: MCP server, CLI, HTTP API, and TUI.</div>
+          </div>
+          <span style={{ fontSize: '0.75rem', color: '#93c5fd', flexShrink: 0 }}>Open repo -&gt;</span>
+        </div>
+      </a>
+
       {/* Two-column comparison */}
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '2rem' }}>
         {/* Session */}

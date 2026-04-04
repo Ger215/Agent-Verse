@@ -1,5 +1,4 @@
 import LessonHeader from '@/components/LessonHeader'
-import CalloutBox from '@/components/CalloutBox'
 
 const rtkSavings = [
   { operation: 'ls / tree', standard: '~2,000', rtk: '~400', savings: '-80%' },
@@ -37,6 +36,37 @@ export default function Tokens1() {
       <p style={{ fontSize: '1rem', lineHeight: 1.75, color: 'var(--on-surface)', marginBottom: '1.5rem' }}>
         RTK (Rust Token Killer) is a Rust CLI proxy that compresses command output before it reaches the LLM context.
       </p>
+
+      <a
+        href="https://github.com/rtk-ai/rtk"
+        target="_blank"
+        rel="noreferrer"
+        style={{
+          display: 'block',
+          textDecoration: 'none',
+          background: 'var(--surface-lowest)',
+          border: '1px solid rgba(70,69,84,0.2)',
+          borderRadius: '10px',
+          overflow: 'hidden',
+          marginBottom: '2rem',
+        }}
+      >
+        <div style={{ position: 'relative' }}>
+          <img
+            src="https://opengraph.githubassets.com/1/rtk-ai/rtk"
+            alt="RTK GitHub preview"
+            style={{ width: '100%', height: '160px', objectFit: 'cover', display: 'block', background: '#0b0c10', filter: 'brightness(0.58) saturate(0.9) contrast(1.05)' }}
+          />
+          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(0,0,0,0.28), rgba(0,0,0,0.42))' }} />
+        </div>
+        <div style={{ padding: '0.85rem 0.95rem', display: 'flex', justifyContent: 'space-between', gap: '0.75rem', alignItems: 'center' }}>
+          <div>
+            <div style={{ fontSize: '0.86rem', fontWeight: 700, color: 'var(--on-surface)', marginBottom: '0.2rem' }}>rtk-ai/rtk</div>
+            <div style={{ fontSize: '0.8rem', color: 'var(--on-surface-variant)' }}>Rust Token Killer for reducing command-output token usage in agent workflows.</div>
+          </div>
+          <span style={{ fontSize: '0.75rem', color: '#93c5fd', flexShrink: 0 }}>Open repo -&gt;</span>
+        </div>
+      </a>
 
       {/* Token equivalencies */}
       <div

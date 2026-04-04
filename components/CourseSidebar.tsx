@@ -49,7 +49,7 @@ export default function CourseSidebar({
         style={{
           width: '296px',
           flexShrink: 0,
-          background: 'rgba(10, 12, 18, 0.96)',
+          background: 'rgba(9, 10, 14, 0.86)',
           minHeight: 0,
           overflowY: 'hidden',
           scrollbarGutter: 'stable',

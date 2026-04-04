@@ -14,7 +14,7 @@ export default function Memory1() {
       <LessonHeader module="Engram" title="Why Engram Exists" duration="5 min" type="reading" />
 
       <p style={{ fontSize: '1rem', lineHeight: 1.75, color: 'var(--on-surface)', marginBottom: '1.5rem' }}>
-        Engram is a persistent memory system for coding agents. It stores important facts in SQLite with FTS5 search,
+        Engram is a persistent memory system for coding agents, it stores important information in SQLite with FTS5 search,
         and exposes that memory through MCP tools so agents can recover context after session resets.
       </p>
 
@@ -110,7 +110,7 @@ export default function Memory1() {
       </div>
 
       <CalloutBox variant="tip">
-        Session context is your short-term memory. Engram is the long-term notebook your agent can query anytime.
+        Session context is your short-term memory, Engram is the long-term notebook your agent can query anytime.
       </CalloutBox>
 
       <h2 style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--on-surface)', margin: '2rem 0 1rem', letterSpacing: '-0.02em' }}>

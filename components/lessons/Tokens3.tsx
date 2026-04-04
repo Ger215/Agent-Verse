@@ -52,7 +52,7 @@ export default function Tokens3() {
       <LessonHeader module="Token Optimization" title="Hooks & Plugins" duration="5 min" type="reading" />
 
       <p style={{ fontSize: '1rem', lineHeight: 1.75, color: 'var(--on-surface)', marginBottom: '1.5rem' }}>
-        Hooks automate behavior at runtime. Plugins package those automations, skills, agents, and MCP config so your
+        Hooks automate behavior at runtime and plugins package those automations, skills, agents, and MCP config so your
         whole team can reuse the same setup.
       </p>
 
@@ -182,7 +182,7 @@ export default function Tokens3() {
       </h2>
 
       <p style={{ fontSize: '0.9rem', lineHeight: 1.7, color: 'var(--on-surface-variant)', margin: '0 0 0.75rem' }}>
-        Use standalone `.claude/` config for local experiments. Use plugins when you need versioned, shareable behavior
+        Use standalone `.claude/` config for local experiments, use plugins when you need versioned, shareable behavior
         across projects or teams.
       </p>
 
@@ -208,11 +208,6 @@ export default function Tokens3() {
           /reload-plugins
         </div>
       </div>
-
-      <CalloutBox variant="info">
-        Hooks are runtime automation points. Plugins are distribution packages. Combine both to enforce team standards
-        with minimal prompt overhead.
-      </CalloutBox>
     </>
   )
 }

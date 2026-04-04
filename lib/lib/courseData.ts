@@ -26,12 +26,10 @@ export const modules: Module[] = [
   },
   {
     id: 'skills',
-    title: 'Skills & Tools',
+    title: 'Skills',
     icon: 'bolt',
     lessons: [
       { id: 'skills-1', title: 'What are Skills?', duration: '4 min', type: 'reading' },
-      { id: 'skills-2', title: 'Tool Definitions', duration: '5 min', type: 'interactive' },
-      { id: 'skills-3', title: 'Build a Tool Call', duration: '7 min', type: 'exercise' },
     ],
   },
   {
@@ -57,7 +55,7 @@ export const modules: Module[] = [
     title: 'Token Optimization',
     icon: 'generating_tokens',
     lessons: [
-      { id: 'tokens-1', title: 'Why RTK Matters', duration: '4 min', type: 'reading' },
+      { id: 'tokens-1', title: 'Why RTK', duration: '4 min', type: 'reading' },
       { id: 'tokens-2', title: 'RTK Compression in Action', duration: '5 min', type: 'interactive' },
       { id: 'tokens-3', title: 'Hooks & Plugins', duration: '5 min', type: 'reading' },
     ],

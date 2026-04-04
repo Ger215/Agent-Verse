@@ -7,7 +7,7 @@ interface LessonHeaderProps {
 
 const moduleIcons: Record<string, string> = {
   Agents: 'smart_toy',
-  'Skills & Tools': 'bolt',
+  'Skills': 'bolt',
   'MCP Protocol': 'account_tree',
   Engram: 'memory',
   'Token Optimization': 'generating_tokens',

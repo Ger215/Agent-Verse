@@ -63,7 +63,7 @@ export default function Agents1() {
       />
 
       <p style={{ color: 'var(--on-surface-variant)', lineHeight: 1.8, marginBottom: '0.75rem', fontSize: '1.0625rem' }}>
-        When you give Claude a task, it does not solve it in one response, it works in a loop called the "Agentic Loop".
+        When you give Claude a task, it does not solve it in one response, it works in a loop called the Agentic Loop.
       </p>
 
       <p style={{ color: 'var(--on-surface-variant)', lineHeight: 1.8, marginBottom: '1rem', fontSize: '1.0625rem' }}>

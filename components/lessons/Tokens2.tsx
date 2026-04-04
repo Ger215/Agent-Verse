@@ -83,7 +83,7 @@ export default function Tokens2() {
       <LessonHeader module="Token Optimization" title="RTK Compression in Action" duration="5 min" type="interactive" />
 
       <p style={{ fontSize: '1rem', lineHeight: 1.75, color: 'var(--on-surface)', marginBottom: '2rem' }}>
-        RTK compresses command output while preserving high-signal information. Trigger compression below to simulate
+        RTK compresses command output while preserving high-signal information, trigger compression below to simulate
         what happens when verbose context is rewritten into compact summaries.
       </p>
 
@@ -256,8 +256,7 @@ export default function Tokens2() {
           Hook Behavior
         </div>
         <p style={{ margin: 0, fontSize: '0.8125rem', color: 'var(--on-surface-variant)', lineHeight: 1.6 }}>
-          In Claude Code, RTK rewrites Bash commands through hooks. Built-in read/search tools bypass that hook, so
-          use shell workflows when you want RTK filtering.
+          In Claude Code, RTK rewrites Bash commands through a hook.
         </p>
       </div>
     </>

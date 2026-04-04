@@ -58,8 +58,8 @@ export default function Mcp2() {
       <LessonHeader module="MCP Protocol" title="Modular Architecture" duration="6 min" type="interactive" />
 
       <p style={{ fontSize: '1rem', lineHeight: 1.75, color: 'var(--on-surface)', marginBottom: '2rem' }}>
-        The Claude MCP architecture is client-server: the client discovers capabilities from MCP servers and invokes them
-        through a transport. Click each block to understand responsibilities and boundaries.
+        The MCP architecture is client-server: the client discovers capabilities from MCP servers and invokes them
+        through a transport.
       </p>
 
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', marginBottom: '2rem', alignItems: 'start' }}>

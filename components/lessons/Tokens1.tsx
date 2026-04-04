@@ -18,13 +18,13 @@ const problems = [
   {
     icon: 'payments',
     title: 'Higher Cost',
-    desc: 'Token-heavy workflows directly increase spend. Repeating verbose commands all day multiplies that cost fast.',
+    desc: 'Token-heavy workflows directly increase spend, repeating verbose commands all day multiplies that cost fast.',
     color: '#f59e0b',
   },
   {
-    icon: 'hourglass_slow',
+    icon: 'hourglass',
     title: 'Slower Iteration',
-    desc: 'More tokens means slower responses and slower debugging loops. Productivity drops when each step takes longer.',
+    desc: 'More tokens means slower responses and slower debugging loops, so productivity drops when each step takes longer.',
     color: '#ddb7ff',
   },
 ]
@@ -32,11 +32,10 @@ const problems = [
 export default function Tokens1() {
   return (
     <>
-      <LessonHeader module="Token Optimization" title="Why RTK Matters" duration="4 min" type="reading" />
+      <LessonHeader module="Token Optimization" title="Why RTK" duration="4 min" type="reading" />
 
       <p style={{ fontSize: '1rem', lineHeight: 1.75, color: 'var(--on-surface)', marginBottom: '1.5rem' }}>
         RTK (Rust Token Killer) is a Rust CLI proxy that compresses command output before it reaches the LLM context.
-        According to the project docs, common development workflows can cut token usage by 60 to 90 percent.
       </p>
 
       {/* Token equivalencies */}
@@ -103,10 +102,6 @@ export default function Tokens1() {
           </div>
         ))}
       </div>
-
-      <CalloutBox variant="warning">
-        RTK is strongest when used as a hook layer that rewrites shell commands to compact equivalents before execution.
-      </CalloutBox>
 
       {/* Three problems */}
       <h2 style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--on-surface)', margin: '2rem 0 1rem', letterSpacing: '-0.02em' }}>

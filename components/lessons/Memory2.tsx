@@ -2,6 +2,8 @@
 
 import { useState } from 'react'
 import LessonHeader from '@/components/LessonHeader'
+import CodeBlock from '@/components/CodeBlock'
+import CalloutBox from '@/components/CalloutBox'
 
 const presetQueries = [
   'How do we save architecture decisions?',
@@ -9,46 +11,73 @@ const presetQueries = [
   'Find bugfix context for auth',
 ]
 
+const flowSteps = [
+  {
+    id: 'context',
+    title: 'Load Context',
+    command: 'mem_context(project: "agent-verse")',
+    note: 'Gets recent sessions first, fast and cheap.',
+  },
+  {
+    id: 'search',
+    title: 'Search Memory',
+    command: 'mem_search(query: <topic>, project: "agent-verse")',
+    note: 'Uses SQLite + FTS5 to find relevant memories.',
+  },
+  {
+    id: 'get',
+    title: 'Get Full Record',
+    command: 'mem_get_observation(id: <from search>)',
+    note: 'Search results are short previews, fetch full detail before acting.',
+  },
+  {
+    id: 'save',
+    title: 'Save New Learning',
+    command: 'mem_save(title, type, What/Why/Where/Learned)',
+    note: 'Store bugfixes, architecture decisions, and discoveries immediately.',
+  },
+] as const
+
 const memories = [
   {
     id: 'm1',
+    title: 'MCP Transport Decision',
     text: 'Decision: Chose HTTP transport for remote MCP servers; SSE is deprecated where HTTP is available.',
     tags: ['decision', 'mcp', 'transport', 'http'],
     color: '#4d8eff',
-    x: 15,
-    y: 20,
+    type: 'decision',
   },
   {
     id: 'm2',
+    title: 'Session Summary Example',
     text: 'Session summary: Implemented interactive MCP communication diagram and server cards in the lesson.',
     tags: ['session', 'summary', 'mcp', 'diagram'],
     color: '#ddb7ff',
-    x: 65,
-    y: 15,
+    type: 'summary',
   },
   {
     id: 'm3',
+    title: 'Topic Key Pattern',
     text: 'Architecture note: Use topic_key for evolving decisions so future writes update instead of duplicating.',
     tags: ['architecture', 'topic_key', 'decision'],
     color: '#f59e0b',
-    x: 40,
-    y: 55,
+    type: 'pattern',
   },
   {
     id: 'm4',
+    title: 'Lint Bugfix Record',
     text: 'Bugfix memory: Corrected unescaped JSX entities in lesson content to satisfy lint rules.',
     tags: ['bugfix', 'lint', 'jsx'],
     color: '#34d399',
-    x: 80,
-    y: 60,
+    type: 'bugfix',
   },
   {
     id: 'm5',
+    title: 'Retrieval Workflow Rule',
     text: 'Workflow pattern: mem_search -> mem_get_observation is required to retrieve full memory details.',
     tags: ['workflow', 'mem_search', 'mem_get_observation'],
     color: '#fb923c',
-    x: 25,
-    y: 75,
+    type: 'workflow',
   },
 ]
 
@@ -62,11 +91,12 @@ function scoreMemory(query: string, memory: typeof memories[0]): number {
   if ((q.includes('summary') || q.includes('recent')) && memory.tags.includes('summary')) score += 0.6
   if ((q.includes('bugfix') || q.includes('auth') || q.includes('lint')) && memory.tags.includes('bugfix')) score += 0.5
   if ((q.includes('search') || q.includes('retrieve') || q.includes('context')) && memory.tags.includes('mem_search')) score += 0.5
-  return Math.min(score + Math.random() * 0.1, 0.99)
+  return Math.min(score, 0.99)
 }
 
 export default function Memory2() {
   const [query, setQuery] = useState('')
+  const [activeStep, setActiveStep] = useState(0)
   const [scores, setScores] = useState<Record<string, number>>({})
   const [searched, setSearched] = useState(false)
 
@@ -86,16 +116,72 @@ export default function Memory2() {
       )
     : null
 
+  const currentStep = flowSteps[activeStep]
+
   return (
     <>
       <LessonHeader module="Engram" title="Engram Tool Flow" duration="6 min" type="interactive" />
 
-      <p style={{ fontSize: '1rem', lineHeight: 1.75, color: 'var(--on-surface)', marginBottom: '2rem' }}>
-        Engram stores structured observations and lets agents retrieve them with search tools. Run a query to simulate
-        how an agent finds relevant context before calling <code style={{ fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace' }}>mem_get_observation</code>.
-      </p>
+      <h2 style={{ fontSize: '1.2rem', fontWeight: 700, color: 'var(--on-surface)', margin: '0 0 0.8rem' }}>
+        Architecture
+      </h2>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr auto 1fr auto 1fr auto 1fr', alignItems: 'center', gap: '0.5rem', background: 'var(--surface-low)', borderRadius: '10px', padding: '0.9rem', marginBottom: '2rem' }}>
+        {[
+          ['Agent', 'Claude / OpenCode'],
+          ['MCP', 'stdio transport'],
+          ['Engram', 'Go binary'],
+          ['Store', 'SQLite + FTS5'],
+        ].map((n, i) => (
+          <>
+            <div key={`${n[0]}-card`} style={{ background: 'var(--surface)', borderRadius: '8px', padding: '0.6rem 0.65rem', textAlign: 'center' }}>
+              <div style={{ fontSize: '0.72rem', color: 'var(--on-surface-variant)', marginBottom: '0.22rem', textTransform: 'uppercase', letterSpacing: '0.06em' }}>{n[0]}</div>
+              <div style={{ fontSize: '0.8rem', color: 'var(--on-surface)', fontWeight: 600 }}>{n[1]}</div>
+            </div>
+            {i < 3 && <span key={`${n[0]}-arrow`} style={{ color: 'var(--outline-variant)', fontSize: '0.85rem' }}>{'->'}</span>}
+          </>
+        ))}
+      </div>
 
-      {/* Query input */}
+      <h2 style={{ fontSize: '1.2rem', fontWeight: 700, color: 'var(--on-surface)', margin: '0 0 0.8rem' }}>
+        Interactive Retrieval Flow
+      </h2>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '0.5rem', marginBottom: '0.8rem' }}>
+        {flowSteps.map((step, i) => {
+          const active = i === activeStep
+          return (
+            <button
+              key={step.id}
+              onClick={() => setActiveStep(i)}
+              style={{
+                textAlign: 'left',
+                padding: '0.6rem 0.7rem',
+                borderRadius: '8px',
+                border: `1px solid ${active ? 'rgba(77,142,255,0.5)' : 'rgba(70,69,84,0.24)'}`,
+                background: active ? 'rgba(77,142,255,0.16)' : 'var(--surface-low)',
+                color: active ? 'var(--on-surface)' : 'var(--on-surface-variant)',
+                cursor: 'pointer',
+              }}
+            >
+              <div style={{ fontSize: '0.67rem', opacity: 0.82, marginBottom: '0.22rem' }}>{`STEP ${i + 1}`}</div>
+              <div style={{ fontSize: '0.82rem', fontWeight: 600 }}>{step.title}</div>
+            </button>
+          )
+        })}
+      </div>
+
+      <div style={{ background: 'var(--surface-low)', border: '1px solid rgba(70,69,84,0.2)', borderRadius: '10px', padding: '0.9rem', marginBottom: '1.7rem' }}>
+        <div style={{ fontSize: '0.74rem', color: 'var(--on-surface-variant)', letterSpacing: '0.06em', textTransform: 'uppercase', marginBottom: '0.35rem' }}>
+          {currentStep.title}
+        </div>
+        <CodeBlock language="mcp" code={currentStep.command} />
+        <p style={{ margin: '0.2rem 0 0', fontSize: '0.84rem', color: 'var(--on-surface-variant)', lineHeight: 1.6 }}>
+          {currentStep.note}
+        </p>
+      </div>
+
+      <h2 style={{ fontSize: '1.2rem', fontWeight: 700, color: 'var(--on-surface)', margin: '0 0 0.8rem' }}>
+        Search Simulation
+      </h2>
       <div style={{ marginBottom: '1rem' }}>
         <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.75rem' }}>
           <input
@@ -152,43 +238,21 @@ export default function Memory2() {
         </div>
       </div>
 
-      {/* Vector space visualization */}
-      <div
-        style={{
-          position: 'relative',
-          background: 'var(--surface-lowest)',
-          border: '1px solid rgba(70,69,84,0.2)',
-          borderRadius: '10px',
-          height: '200px',
-          marginBottom: '1.5rem',
-          overflow: 'hidden',
-        }}
-      >
-        <div style={{ position: 'absolute', top: '0.5rem', left: '0.75rem', fontSize: '0.6875rem', color: 'var(--outline-variant)' }}>
-          Memory Index Space
-        </div>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', marginBottom: '1.5rem' }}>
         {memories.map(m => {
-          const score = scores[m.id] || 0
+          const score = searched ? scores[m.id] || 0 : 0
           const isTop = topMatch?.id === m.id
           return (
-            <div
-              key={m.id}
-              title={m.text}
-              style={{
-                position: 'absolute',
-                left: `${m.x}%`,
-                top: `${m.y}%`,
-                width: isTop ? '14px' : '10px',
-                height: isTop ? '14px' : '10px',
-                borderRadius: '50%',
-                background: searched ? m.color : 'var(--surface-highest)',
-                opacity: searched ? (0.3 + score * 0.7) : 0.5,
-                transform: 'translate(-50%, -50%)',
-                transition: 'all 0.3s ease',
-                cursor: 'default',
-                boxShadow: isTop ? `0 0 0 3px ${m.color}44, 0 0 12px ${m.color}66` : 'none',
-              }}
-            />
+            <div key={m.id} style={{ background: 'var(--surface-low)', border: `1px solid ${isTop ? `${m.color}55` : 'rgba(70,69,84,0.16)'}`, borderRadius: '8px', padding: '0.6rem 0.75rem' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', gap: '0.75rem', marginBottom: '0.4rem' }}>
+                <div style={{ fontSize: '0.84rem', color: 'var(--on-surface)', fontWeight: 600 }}>{m.title}</div>
+                {searched && <div style={{ fontSize: '0.78rem', color: isTop ? m.color : 'var(--on-surface-variant)', fontVariantNumeric: 'tabular-nums' }}>{Math.round(score * 100)}%</div>}
+              </div>
+              <div style={{ height: '6px', borderRadius: '999px', background: 'var(--surface-high)', overflow: 'hidden', marginBottom: '0.5rem' }}>
+                <div style={{ width: `${searched ? Math.max(6, score * 100) : 6}%`, height: '100%', background: m.color, opacity: searched ? 0.9 : 0.4, transition: 'width 0.2s ease' }} />
+              </div>
+              <p style={{ margin: 0, fontSize: '0.8rem', lineHeight: 1.55, color: 'var(--on-surface-variant)' }}>{m.text}</p>
+            </div>
           )
         })}
       </div>
@@ -233,14 +297,10 @@ export default function Memory2() {
         </div>
       )}
 
-      <div style={{ marginTop: '1rem', background: 'var(--surface-low)', border: '1px solid rgba(70,69,84,0.2)', borderRadius: '10px', padding: '1rem' }}>
-        <div style={{ fontSize: '0.8125rem', color: 'var(--on-surface-variant)', marginBottom: '0.4rem', textTransform: 'uppercase', letterSpacing: '0.06em', fontWeight: 600 }}>
-          Recommended Retrieval Sequence
-        </div>
-        <div style={{ fontSize: '0.875rem', color: 'var(--on-surface)', lineHeight: 1.7, fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace' }}>
-          {`mem_context -> mem_search -> mem_get_observation -> mem_update or mem_save`}
-        </div>
-      </div>
+      <CalloutBox variant="tip">
+        Engram works best when you save high-value outcomes immediately: bugfixes, architecture decisions, and workflow
+        discoveries.
+      </CalloutBox>
     </>
   )
 }

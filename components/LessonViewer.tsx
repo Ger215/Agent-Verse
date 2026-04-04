@@ -8,8 +8,6 @@ import Agents2 from '@/components/lessons/Agents2'
 import Agents3 from '@/components/lessons/Agents3'
 import Agents4 from '@/components/lessons/Agents4'
 import Skills1 from '@/components/lessons/Skills1'
-import Skills2 from '@/components/lessons/Skills2'
-import Skills3 from '@/components/lessons/Skills3'
 import Mcp1 from '@/components/lessons/Mcp1'
 import Mcp2 from '@/components/lessons/Mcp2'
 import Memory1 from '@/components/lessons/Memory1'
@@ -24,8 +22,6 @@ const lessonComponents: Record<string, React.ComponentType> = {
   'agents-3': Agents3,
   'agents-4': Agents4,
   'skills-1': Skills1,
-  'skills-2': Skills2,
-  'skills-3': Skills3,
   'mcp-1': Mcp1,
   'mcp-2': Mcp2,
   'memory-1': Memory1,

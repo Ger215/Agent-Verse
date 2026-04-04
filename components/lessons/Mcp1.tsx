@@ -15,13 +15,13 @@ const principles = [
   {
     icon: 'lan',
     title: 'Transport-aware',
-    desc: 'Servers can run locally over stdio or remotely over HTTP. SSE exists but is now considered deprecated in modern setups.',
+    desc: 'Servers can run locally over stdio or remotely over HTTP, SSE exists but is now considered deprecated in modern setups.',
     color: '#ddb7ff',
   },
   {
     icon: 'policy',
     title: 'Scoped & Safe',
-    desc: 'MCP connections can be local, project, or user scoped. Treat third-party servers as code execution surfaces and review trust boundaries.',
+    desc: 'MCP connections can be local, project, or user scoped, treat third-party servers as code execution surfaces and review trust boundaries.',
     color: '#34d399',
   },
 ]
@@ -31,26 +31,37 @@ const popularMcps = [
     name: 'GitHub',
     useCase: 'PR reviews, issue workflows, repo automation',
     transport: 'HTTP',
+    link: 'https://github.com/github/github-mcp-server',
   },
   {
     name: 'Sentry',
     useCase: 'Production error triage and release correlation',
     transport: 'HTTP',
+    link: 'https://docs.sentry.io/product/sentry-mcp/',
   },
   {
-    name: 'Notion',
-    useCase: 'Knowledge retrieval and docs operations',
+    name: 'ClickUp',
+    useCase: 'Task management and sprint execution workflows',
     transport: 'HTTP',
+    link: 'https://developer.clickup.com/docs/connect-an-ai-assistant-to-clickups-mcp-server',
   },
   {
-    name: 'Asana',
-    useCase: 'Task tracking and planning workflows',
-    transport: 'SSE/HTTP',
+    name: 'Slite',
+    useCase: 'Team wiki retrieval and structured knowledge access',
+    transport: 'HTTP',
+    link: 'https://slite.slite.page/p/77mvFqJWG1tduF/Slite-MCP',
   },
   {
-    name: 'PostgreSQL (dbhub)',
+    name: 'Atlassian',
+    useCase: 'Jira and Confluence operations from one agent workflow',
+    transport: 'HTTP',
+    link: 'https://www.atlassian.com/platform/remote-mcp-server',
+  },
+  {
+    name: 'PostgreSQL',
     useCase: 'Natural-language database querying',
     transport: 'stdio',
+    link: 'https://github.com/crystaldba/postgres-mcp',
   },
 ]
 
@@ -69,7 +80,7 @@ export default function Mcp1() {
 
       <p style={{ fontSize: '1rem', lineHeight: 1.75, color: 'var(--on-surface)', marginBottom: '1.5rem' }}>
         MCP (Model Context Protocol) is an open standard that lets AI clients connect to external capabilities through
-        MCP servers. In practice, servers expose tools, resources, and prompts so the model can act on real systems
+        MCP servers, in practice, servers expose tools, resources, and prompts so the model can act on real systems
         (APIs, databases, issue trackers, docs) using one consistent contract.
       </p>
 
@@ -143,13 +154,13 @@ export default function Mcp1() {
             </div>
           </div>
           <p style={{ fontSize: '0.8125rem', color: 'var(--on-surface-variant)', marginTop: '1rem', marginBottom: 0, lineHeight: 1.6 }}>
-            One standard protocol. Plug any model to any tool — no custom code.
+            One standard protocol, plug any model to any tool, no custom code required.
           </p>
         </div>
       </div>
 
       <h2 style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--on-surface)', margin: '2rem 0 1rem', letterSpacing: '-0.02em' }}>
-        Communication Drawing
+        Communication Flow
       </h2>
 
       <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.75rem', flexWrap: 'wrap' }}>
@@ -223,27 +234,35 @@ export default function Mcp1() {
         <ConnectionDiagram mode={diagramMode} activeClient={activeClient} />
       </div>
 
-      <p style={{ margin: '0 0 2rem', fontSize: '0.8125rem', color: 'var(--on-surface-variant)', lineHeight: 1.6 }}>
-        Switch modes and click each client to see how communication paths change.
-      </p>
-
       <h2 style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--on-surface)', margin: '2rem 0 1rem', letterSpacing: '-0.02em' }}>
         Popular MCP Servers
       </h2>
 
-      <p style={{ fontSize: '0.9rem', lineHeight: 1.7, color: 'var(--on-surface-variant)', margin: '0 0 0.75rem' }}>
-        Common picks from Claude MCP docs and real-world workflows.
-      </p>
-
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(210px, 1fr))', gap: '0.75rem', marginBottom: '2rem' }}>
         {popularMcps.map(server => (
-          <div
+          <a
             key={server.name}
+            href={server.link}
+            target="_blank"
+            rel="noreferrer"
             style={{
+              display: 'block',
+              textDecoration: 'none',
               background: 'var(--surface-low)',
               border: '1px solid rgba(70,69,84,0.15)',
               borderRadius: '8px',
               padding: '0.875rem',
+              transition: 'transform 0.14s ease, border-color 0.14s ease, background 0.14s ease',
+            }}
+            onMouseOver={e => {
+              e.currentTarget.style.transform = 'translateY(-2px)'
+              e.currentTarget.style.borderColor = 'rgba(77,142,255,0.35)'
+              e.currentTarget.style.background = 'var(--surface)'
+            }}
+            onMouseOut={e => {
+              e.currentTarget.style.transform = 'translateY(0)'
+              e.currentTarget.style.borderColor = 'rgba(70,69,84,0.15)'
+              e.currentTarget.style.background = 'var(--surface-low)'
             }}
           >
             <div style={{ display: 'flex', justifyContent: 'space-between', gap: '0.625rem', alignItems: 'flex-start', marginBottom: '0.5rem' }}>
@@ -253,7 +272,7 @@ export default function Mcp1() {
               </span>
             </div>
             <p style={{ margin: 0, fontSize: '0.8125rem', lineHeight: 1.6, color: 'var(--on-surface-variant)' }}>{server.useCase}</p>
-          </div>
+          </a>
         ))}
       </div>
 
@@ -287,7 +306,7 @@ export default function Mcp1() {
       </div>
 
       <CalloutBox variant="info">
-        MCP is to AI systems what HTTP is to the web: one protocol, many implementations. Prefer trusted servers and
+        MCP is to AI systems what HTTP is to the web: one protocol, many implementations, prefer trusted servers and
         favor HTTP transport for remote services.
       </CalloutBox>
     </>
@@ -308,7 +327,7 @@ function ConnectionDiagram({ mode, activeClient }: { mode: DiagramMode; activeCl
         overflow: 'hidden',
       }}
     >
-      <motion.svg viewBox="0 0 1000 360" preserveAspectRatio="none" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }}>
+      <motion.svg viewBox="0 0 1000 360" preserveAspectRatio="none" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', zIndex: 0 }}>
         {mode === 'without' ? (
           <>
             {[0, 1].flatMap(c => [0, 1].map(t => ({ c, t }))).map(({ c, t }) => {
@@ -377,6 +396,7 @@ function ConnectionDiagram({ mode, activeClient }: { mode: DiagramMode; activeCl
             key={client}
             style={{
               position: 'absolute',
+              zIndex: 2,
               left: '8%',
               top,
               transform: 'translate(-50%, -50%)',
@@ -398,16 +418,18 @@ function ConnectionDiagram({ mode, activeClient }: { mode: DiagramMode; activeCl
         <div
           style={{
             position: 'absolute',
+            zIndex: 3,
             left: '50%',
             top: '50%',
             transform: 'translate(-50%, -50%)',
             padding: '0.4rem 0.75rem',
             borderRadius: '8px',
             border: '1px solid rgba(52,211,153,0.45)',
-            background: 'rgba(52,211,153,0.16)',
+            background: '#0f1d19',
             color: '#bbf7d0',
             fontSize: '0.75rem',
             fontWeight: 700,
+            boxShadow: '0 0 0 1px rgba(52,211,153,0.22), 0 8px 16px rgba(0,0,0,0.32)',
           }}
         >
           MCP Server
@@ -421,6 +443,7 @@ function ConnectionDiagram({ mode, activeClient }: { mode: DiagramMode; activeCl
             key={tool}
             style={{
               position: 'absolute',
+              zIndex: 2,
               left: '92%',
               top,
               transform: 'translate(-50%, -50%)',

@@ -11,81 +11,35 @@ export default function Skills1() {
       />
 
       {/* Intro */}
-      <p className="mt-8 text-base leading-7" style={{ color: "var(--on-surface)" }}>
-        Skills extend what Claude can do beyond its built-in capabilities. You create a{" "}
+      <p
+        className="mt-8 text-base leading-7"
+        style={{ color: "var(--on-surface)" }}
+      >
+        Skills extend what Claude can do beyond its built-in capabilities, you
+        create a{" "}
         <code
           className="px-1.5 py-0.5 rounded text-sm font-mono"
-          style={{ background: "var(--surface-high)", color: "var(--secondary)" }}
+          style={{
+            background: "var(--surface-high)",
+            color: "var(--secondary)",
+          }}
         >
           SKILL.md
         </code>{" "}
-        file with a set of instructions — Claude loads it automatically when relevant, or you
-        invoke it explicitly with{" "}
+        file with a set of instructions, then Claude loads it automatically when
+        needed or on trigger words, or you invoke it explicitly with{" "}
         <code
           className="px-1.5 py-0.5 rounded text-sm font-mono"
-          style={{ background: "var(--surface-high)", color: "var(--tertiary)" }}
+          style={{
+            background: "var(--surface-high)",
+            color: "var(--tertiary)",
+          }}
         >
           /skill-name
         </code>
-        . Think of it as giving Claude a specialized playbook for any recurring task in your
-        workflow.
+        , think of it as giving Claude a specialized playbook for any recurring
+        task in your workflow.
       </p>
-
-      {/* Skills vs built-in commands callout */}
-      <div
-        className="mt-8 rounded-r-xl p-5"
-        style={{
-          borderLeft: "4px solid var(--secondary)",
-          background: "var(--surface-low)",
-        }}
-      >
-        <p
-          className="text-xs font-semibold uppercase tracking-widest mb-3"
-          style={{ color: "var(--secondary)" }}
-        >
-          Skills vs built-in commands
-        </p>
-        <ul className="space-y-2.5">
-          {[
-            <>
-              Built-in commands like{" "}
-              <code
-                className="px-1 py-0.5 rounded text-xs font-mono"
-                style={{ background: "var(--surface-high)", color: "var(--on-surface)" }}
-              >
-                /compact
-              </code>{" "}
-              execute fixed, hard-coded logic — no flexibility.
-            </>,
-            "Skills are prompt-based — you give Claude a playbook and let it orchestrate using its own tools.",
-            "A skill can spawn parallel agents, read files, and adapt dynamically to your codebase.",
-            <>
-              Existing{" "}
-              <code
-                className="px-1 py-0.5 rounded text-xs font-mono"
-                style={{ background: "var(--surface-high)", color: "var(--on-surface)" }}
-              >
-                .claude/commands/
-              </code>{" "}
-              files keep working — skills are a superset, not a replacement.
-            </>,
-          ].map((item, i) => (
-            <li
-              key={i}
-              className="flex gap-3 text-sm leading-6"
-              style={{ color: "var(--on-surface-variant)" }}
-            >
-              <span
-                className="mt-0.5 shrink-0 material-symbols-outlined text-base"
-                style={{ color: "var(--secondary)", fontSize: "1rem" }}
-              >
-                arrow_forward
-              </span>
-              <span>{item}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
 
       {/* Two types of skill content */}
       <h2
@@ -94,9 +48,21 @@ export default function Skills1() {
       >
         Two types of skill content
       </h2>
-      <p className="mt-2 text-sm leading-6" style={{ color: "var(--on-surface-variant)" }}>
-        Not all skills are used the same way. The content of your SKILL.md determines how Claude
-        treats it.
+      <p
+        className="mt-2 text-sm leading-6"
+        style={{ color: "var(--on-surface-variant)" }}
+      >
+        Not all skills are used the same way, the content of your{" "}
+        <code
+          className="px-1.5 py-0.5 rounded text-sm font-mono"
+          style={{
+            background: "var(--surface-high)",
+            color: "var(--secondary)",
+          }}
+        >
+          SKILL.md
+        </code>{" "}
+        determines how Claude treats it
       </p>
 
       <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -115,13 +81,20 @@ export default function Skills1() {
             >
               menu_book
             </span>
-            <span className="font-semibold text-sm" style={{ color: "var(--on-surface)" }}>
+            <span
+              className="font-semibold text-sm"
+              style={{ color: "var(--on-surface)" }}
+            >
               Reference
             </span>
           </div>
-          <p className="text-xs leading-5" style={{ color: "var(--on-surface-variant)" }}>
-            Knowledge Claude applies inline — conventions, style guides, naming rules.
-            Auto-loaded when relevant based on the description.
+          <p
+            className="text-xs leading-5"
+            style={{ color: "var(--on-surface-variant)" }}
+          >
+            Knowledge Claude applies inline, conventions, style guides, naming
+            rules this type of skills are Auto-loaded when relevant based on the
+            description.
           </p>
           <pre
             className="rounded-lg p-3 text-xs leading-5 font-mono overflow-x-auto"
@@ -154,16 +127,21 @@ Prefer const over let.`}</pre>
             >
               task_alt
             </span>
-            <span className="font-semibold text-sm" style={{ color: "var(--on-surface)" }}>
+            <span
+              className="font-semibold text-sm"
+              style={{ color: "var(--on-surface)" }}
+            >
               Task
             </span>
           </div>
-          <p className="text-xs leading-5" style={{ color: "var(--on-surface-variant)" }}>
-            Step-by-step for specific actions. Usually triggered manually with{" "}
+          <p
+            className="text-xs leading-5"
+            style={{ color: "var(--on-surface-variant)" }}
+          >
+            Step-by-step for specific repetitive actions, usually triggered manually with{" "}
             <code className="font-mono" style={{ color: "var(--tertiary)" }}>
-              /name
+              /skill-name
             </code>
-            . Great for workflows with side effects.
           </p>
           <pre
             className="rounded-lg p-3 text-xs leading-5 font-mono overflow-x-auto"
@@ -190,9 +168,12 @@ disable-model-invocation:
       >
         Where skills live
       </h2>
-      <p className="mt-2 text-sm leading-6" style={{ color: "var(--on-surface-variant)" }}>
-        Skills are scoped by location. A skill found at a more specific scope takes precedence
-        over broader ones.
+      <p
+        className="mt-2 text-sm leading-6"
+        style={{ color: "var(--on-surface-variant)" }}
+      >
+        Skills are scoped by location, a skill found at a more specific scope
+        takes precedence over broader ones.
       </p>
 
       <div
@@ -230,8 +211,7 @@ disable-model-invocation:
             className="grid gap-4 px-5 py-4 text-sm"
             style={{
               gridTemplateColumns: "1fr 2fr 1fr",
-              background:
-                i % 2 === 0 ? "var(--surface-low)" : "var(--surface)",
+              background: i % 2 === 0 ? "var(--surface-low)" : "var(--surface)",
               borderBottom:
                 i < arr.length - 1
                   ? "1px solid var(--outline-variant)"
@@ -241,9 +221,18 @@ disable-model-invocation:
             <div className="flex items-center gap-2.5">
               <span
                 className="w-2.5 h-2.5 rounded-full shrink-0"
-                style={{ background: row.dot, width: "10px", height: "10px", borderRadius: "50%", flexShrink: 0 }}
+                style={{
+                  background: row.dot,
+                  width: "10px",
+                  height: "10px",
+                  borderRadius: "50%",
+                  flexShrink: 0,
+                }}
               />
-              <span className="font-medium" style={{ color: "var(--on-surface)" }}>
+              <span
+                className="font-medium"
+                style={{ color: "var(--on-surface)" }}
+              >
                 {row.scope}
               </span>
             </div>
@@ -253,7 +242,9 @@ disable-model-invocation:
             >
               {row.path}
             </code>
-            <span style={{ color: "var(--on-surface-variant)" }}>{row.applies}</span>
+            <span style={{ color: "var(--on-surface-variant)" }}>
+              {row.applies}
+            </span>
           </div>
         ))}
       </div>
@@ -265,9 +256,12 @@ disable-model-invocation:
       >
         Skill directory structure
       </h2>
-      <p className="mt-2 text-sm leading-6" style={{ color: "var(--on-surface-variant)" }}>
-        A skill is a directory, not just a file. Supporting files keep the instructions focused
-        and the skill self-contained.
+      <p
+        className="mt-2 text-sm leading-6"
+        style={{ color: "var(--on-surface-variant)" }}
+      >
+        A skill is a directory, not just a file, supporting files keep the
+        instructions focused and the skill self-contained.
       </p>
 
       <pre
@@ -288,20 +282,6 @@ disable-model-invocation:
         {"└── scripts/\n"}
         {"    └── validate.sh    # Script Claude can run"}
       </pre>
-
-      <p className="mt-4 text-xs leading-5" style={{ color: "var(--on-surface-variant)" }}>
-        <span
-          className="inline-flex items-center gap-1 font-medium"
-          style={{ color: "var(--secondary)" }}
-        >
-          <span className="material-symbols-outlined" style={{ fontSize: "0.875rem" }}>
-            info
-          </span>
-          Only SKILL.md is required.
-        </span>{" "}
-        Supporting files keep the skill focused — reference them from SKILL.md when Claude
-        needs them.
-      </p>
     </div>
   );
 }

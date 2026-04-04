@@ -10,7 +10,7 @@ const permissionModes = [
     label: 'Default',
     icon: 'shield',
     color: '#adc6ff',
-    description: 'Claude asks before file edits and shell commands. Good for sensitive work.',
+    description: 'Claude asks before file edits and shell commands',
     prompt: 'Shift+Tab ×1',
   },
   {
@@ -18,7 +18,7 @@ const permissionModes = [
     label: 'Auto-accept Edits',
     icon: 'edit_document',
     color: '#ddb7ff',
-    description: 'Claude edits files without asking, but still asks for shell commands.',
+    description: 'Claude edits files without asking, but still asks for shell commands',
     prompt: 'Shift+Tab ×2',
   },
   {
@@ -26,16 +26,8 @@ const permissionModes = [
     label: 'Plan Mode',
     icon: 'checklist',
     color: '#f59e0b',
-    description: 'Claude uses read-only tools and creates a plan. You approve before any changes are made.',
+    description: 'Claude uses read-only tools and creates a plan, you approve before any changes are made',
     prompt: 'Shift+Tab ×3',
-  },
-  {
-    id: 'auto',
-    label: 'Auto Mode',
-    icon: 'rocket_launch',
-    color: '#98d982',
-    description: 'Claude evaluates all actions with background safety checks. Research preview.',
-    prompt: 'Shift+Tab ×4',
   },
 ]
 
@@ -51,14 +43,14 @@ const memoryTypes = [
     icon: 'psychology',
     label: 'Auto Memory',
     color: '#adc6ff',
-    description: 'Learnings Claude saves automatically as you work — project patterns, your preferences. The first 200 lines of MEMORY.md load at session start.',
+    description: 'Learnings Claude saves automatically as you work such as project patterns and your preferences.',
     example: '# Auto Memory\nUser prefers pnpm over npm.\nProject uses Tailwind v4 syntax.',
   },
   {
     icon: 'chat',
     label: 'Session Context',
     color: '#c7c4d7',
-    description: 'Your conversation history within the current session. Includes messages, tool results, file contents. Lost when you start a new session.',
+    description: 'Your conversation history within the current session which includes messages, tool results, file contents, this memory is lost when you start a new session.',
     example: '// In-memory only\n// Compacted automatically\n// when context fills up',
   },
 ]
@@ -73,14 +65,14 @@ export default function Agents3() {
   return (
     <div style={{ maxWidth: 720, margin: '0 auto', padding: '2rem 1.5rem 4rem' }}>
       <LessonHeader
-        module="AI Agents"
+        module="Agents"
         title="Sessions, Context & Control"
         duration="5 min"
         type="reading"
       />
 
       <p style={{ color: 'var(--on-surface-variant)', lineHeight: 1.8, marginBottom: '2rem', fontSize: '1.0625rem' }}>
-        Every Claude Code session has its own context window — the conversation history, file contents, tool results, and instructions that Claude holds in memory. Understanding how this works helps you get better results and stay in control.
+        Every Claude Code session has its own context window, the conversation history, file contents, tool results, and instructions that Claude holds in memory.
       </p>
 
       {/* Context window visual */}
@@ -90,11 +82,12 @@ export default function Agents3() {
         </p>
         <div style={{ background: 'var(--surface-low)', borderRadius: '0.5rem', overflow: 'hidden' }}>
           {[
-            { label: 'CLAUDE.md + Auto Memory', size: 15, color: '#ddb7ff' },
-            { label: 'Conversation history', size: 30, color: '#adc6ff' },
-            { label: 'Tool results & file contents', size: 35, color: '#4d8eff' },
-            { label: 'System instructions', size: 10, color: '#c7c4d7' },
-            { label: 'Available space', size: 10, color: 'var(--surface-highest)' },
+            { label: 'CLAUDE.md', size: 15, color: '#ddb7ff' },
+            { label: 'Conversation history (Messages)', size: 30, color: '#adc6ff' },
+            { label: 'System Tools', size: 35, color: '#4d8eff' },
+            { label: 'Skills', size: 25, color: '#3FA04B' },
+            { label: 'System prompt', size: 10, color: '#c7c4d7' },
+            { label: 'Free space', size: 10, color: 'var(--surface-highest)' },
           ].map((item, i) => (
             <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '0.875rem', padding: '0.625rem 1rem' }}>
               <div style={{
@@ -110,7 +103,7 @@ export default function Agents3() {
           ))}
         </div>
         <p style={{ fontSize: '0.8125rem', color: 'var(--on-surface-variant)', marginTop: '0.625rem', lineHeight: 1.6 }}>
-          As you work, context fills up. Claude compacts automatically, but early instructions can get lost. Put persistent rules in <code style={{ color: 'var(--on-surface)', background: 'var(--surface-highest)', padding: '0.125rem 0.375rem', borderRadius: '0.25rem', fontSize: '0.8125rem' }}>CLAUDE.md</code> — not just in the conversation.
+          As you work, context fills up, Claude compacts it automatically, but this can cause important information from the session to get lost.
         </p>
       </div>
 
@@ -273,7 +266,7 @@ export default function Agents3() {
         <div>
           <p style={{ color: 'var(--on-surface)', fontWeight: 600, marginBottom: '0.375rem' }}>Every file edit is reversible</p>
           <p style={{ color: 'var(--on-surface-variant)', fontSize: '0.875rem', lineHeight: 1.7 }}>
-            Before Claude edits any file, it snapshots the current contents. If something goes wrong, press <code style={{ color: 'var(--on-surface)', background: 'var(--surface-highest)', padding: '0.125rem 0.375rem', borderRadius: '0.25rem', fontSize: '0.8125rem' }}>Esc Esc</code> to rewind, or just tell Claude to undo. Checkpoints are local to your session, separate from git.
+            Before Claude edits any file, it snapshots the current contents so if something goes wrong, you can press <code style={{ color: 'var(--on-surface)', background: 'var(--surface-highest)', padding: '0.125rem 0.375rem', borderRadius: '0.25rem', fontSize: '0.8125rem' }}>Esc Esc</code> to rewind, or just tell Claude to undo, checkpoints are local to your session and separate from git.
           </p>
         </div>
       </div>
@@ -288,13 +281,11 @@ export default function Agents3() {
       }}>
         <span className="material-symbols-outlined" style={{ color: '#adc6ff', fontSize: '1.25rem', marginTop: 2, flexShrink: 0 }}>fork_right</span>
         <div>
-          <p style={{ color: 'var(--on-surface)', fontWeight: 600, marginBottom: '0.375rem' }}>Sessions are independent — but resumable</p>
+          <p style={{ color: 'var(--on-surface)', fontWeight: 600, marginBottom: '0.375rem' }}>Sessions are independent but resumable</p>
           <p style={{ color: 'var(--on-surface-variant)', fontSize: '0.875rem', lineHeight: 1.7 }}>
-            Each new session starts with a fresh context. Use{' '}
-            <code style={{ color: 'var(--on-surface)', background: 'var(--surface-highest)', padding: '0.125rem 0.375rem', borderRadius: '0.25rem', fontSize: '0.8125rem' }}>claude --continue</code>{' '}
-            to pick up where you left off, or{' '}
-            <code style={{ color: 'var(--on-surface)', background: 'var(--surface-highest)', padding: '0.125rem 0.375rem', borderRadius: '0.25rem', fontSize: '0.8125rem' }}>--fork-session</code>{' '}
-            to branch off and try a different approach without losing the original.
+            Each new session starts with a fresh context, you can use{' '}
+            <code style={{ color: 'var(--on-surface)', background: 'var(--surface-highest)', padding: '0.125rem 0.375rem', borderRadius: '0.25rem', fontSize: '0.8125rem' }}>claude --continue</code> or <code style={{ color: 'var(--on-surface)', background: 'var(--surface-highest)', padding: '0.125rem 0.375rem', borderRadius: '0.25rem', fontSize: '0.8125rem' }}>claude --resume</code>{' '}
+            to pick up where you left off.
           </p>
         </div>
       </div>

@@ -20,7 +20,7 @@ const steps = [
     phase: 'Take Action',
     icon: 'edit',
     color: '#ddb7ff',
-    description: 'Claude edits files, runs commands, and calls APIs — whatever the task requires, based on what it learned.',
+    description: 'Claude edits files, runs commands and calls APIs, whatever the task requires, based on what it learned on the previous step.',
     example: 'Edit the source file to fix the token refresh logic',
     toolLabel: 'Edit: src/payments/token.ts',
     toolOutput: '- if (token.expiry < Date.now()) throw new Error(\'Token expired\')\n+ if (token.expiry < Date.now()) await token.refresh()',
@@ -30,7 +30,7 @@ const steps = [
     phase: 'Verify Results',
     icon: 'check_circle',
     color: '#98d982',
-    description: 'Claude checks its own work, runs tests, reads output, and decides if the task is done or needs another loop.',
+    description: 'Claude checks its own work, runs tests, reads output, and decides if the task is done or needs another iteration of the Agentic Loop.',
     example: 'Run the tests again to confirm the fix worked',
     toolLabel: '$ npm test',
     toolOutput: 'PASS src/payments/checkout.test.ts\n  ✓ should handle expired cards (42ms)\n  ✓ should process valid cards (18ms)\n\nTest Suites: 1 passed, 1 total',
@@ -56,20 +56,25 @@ export default function Agents1() {
   return (
     <div style={{ maxWidth: 720, margin: '0 auto', padding: '2rem 1.5rem 4rem' }}>
       <LessonHeader
-        module="AI Agents"
+        module="Agents"
         title="The Agentic Loop"
         duration="5 min"
         type="interactive"
       />
 
-      <p style={{ color: 'var(--on-surface-variant)', lineHeight: 1.8, marginBottom: '2rem', fontSize: '1.0625rem' }}>
-        When you give Claude a task, it works through a loop — not a single response.
-        Three phases repeat until the task is complete:{' '}
-        <strong style={{ color: 'var(--on-surface)' }}>gather context</strong>,{' '}
-        <strong style={{ color: 'var(--on-surface)' }}>take action</strong>, and{' '}
-        <strong style={{ color: 'var(--on-surface)' }}>verify results</strong>.
-        Step through the example below to see how it works.
+      <p style={{ color: 'var(--on-surface-variant)', lineHeight: 1.8, marginBottom: '0.75rem', fontSize: '1.0625rem' }}>
+        When you give Claude a task, it does not solve it in one response, it works in a loop called the "Agentic Loop".
       </p>
+
+      <p style={{ color: 'var(--on-surface-variant)', lineHeight: 1.8, marginBottom: '1rem', fontSize: '1.0625rem' }}>
+        These three phases repeat until the task is fully complete:
+      </p>
+
+      <ul style={{ color: 'var(--on-surface-variant)', marginTop: 0, marginBottom: '1.25rem', paddingLeft: '1.35rem', lineHeight: 1.8, fontSize: '1.0625rem' }}>
+        <li>1. <strong style={{ color: 'var(--on-surface)' }}>Gather context</strong></li>
+        <li>2. <strong style={{ color: 'var(--on-surface)' }}>Take action</strong></li>
+        <li>3. <strong style={{ color: 'var(--on-surface)' }}>Verify results</strong></li>
+      </ul>
 
       {/* Prompt being solved */}
       <div style={{
@@ -83,9 +88,9 @@ export default function Agents1() {
       }}>
         <span className="material-symbols-outlined" style={{ color: 'var(--on-surface-variant)', fontSize: '1.25rem', marginTop: 2 }}>person</span>
         <div>
-          <p style={{ fontSize: '0.75rem', color: 'var(--on-surface-variant)', marginBottom: '0.25rem', letterSpacing: '0.05em', textTransform: 'uppercase' }}>Your prompt</p>
+          <p style={{ fontSize: '0.75rem', color: 'var(--on-surface-variant)', marginBottom: '0.25rem', letterSpacing: '0.05em', textTransform: 'uppercase' }}>Example prompt</p>
           <p style={{ color: 'var(--on-surface)', fontStyle: 'italic' }}>
-            &ldquo;Fix the checkout flow broken for users with expired cards.&rdquo;
+            &ldquo;Fix the checkout flow broken for users with expired cards&rdquo;
           </p>
         </div>
       </div>

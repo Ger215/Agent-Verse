@@ -8,8 +8,8 @@ Progress is tracked per-lesson and persisted in the browser via `localStorage` �
 
 ## What you'll learn
 
-### AI Agents
-How agents work at a fundamental level: the perception → action → verification loop, the role of models vs tools, and how context windows and sessions shape agent behavior.
+### Agents
+How agents work at a fundamental level: the perception -> action -> verification loop, the role of models vs tools, how context windows/sessions shape behavior, and how SDD (Spec-Driven Development) structures complex changes.
 
 ### Skills
 What skills are in the context of AI agents, how a `SKILL.md` file is structured, and how skills are discovered, loaded, and invoked at runtime.

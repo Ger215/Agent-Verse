@@ -15,12 +15,13 @@ export interface Module {
 export const modules: Module[] = [
   {
     id: 'agents',
-    title: 'AI Agents',
+    title: 'Agents',
     icon: 'smart_toy',
     lessons: [
-      { id: 'agents-1', title: 'What is an AI Agent?', duration: '4 min', type: 'reading' },
-      { id: 'agents-2', title: 'The Reasoning Loop', duration: '6 min', type: 'interactive' },
-      { id: 'agents-3', title: 'Agent in Action', duration: '5 min', type: 'exercise' },
+      { id: 'agents-1', title: 'The Agentic Loop', duration: '5 min', type: 'interactive' },
+      { id: 'agents-2', title: 'Models & Tools', duration: '6 min', type: 'interactive' },
+      { id: 'agents-3', title: 'Sessions, Context & Control', duration: '5 min', type: 'reading' },
+      { id: 'agents-4', title: 'Spec-Driven Development (SDD)', duration: '6 min', type: 'reading' },
     ],
   },
   {

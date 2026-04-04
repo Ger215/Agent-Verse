@@ -6,6 +6,7 @@ import { allLessons } from '@/lib/courseData'
 import Agents1 from '@/components/lessons/Agents1'
 import Agents2 from '@/components/lessons/Agents2'
 import Agents3 from '@/components/lessons/Agents3'
+import Agents4 from '@/components/lessons/Agents4'
 import Skills1 from '@/components/lessons/Skills1'
 import Skills2 from '@/components/lessons/Skills2'
 import Skills3 from '@/components/lessons/Skills3'
@@ -21,6 +22,7 @@ const lessonComponents: Record<string, React.ComponentType> = {
   'agents-1': Agents1,
   'agents-2': Agents2,
   'agents-3': Agents3,
+  'agents-4': Agents4,
   'skills-1': Skills1,
   'skills-2': Skills2,
   'skills-3': Skills3,

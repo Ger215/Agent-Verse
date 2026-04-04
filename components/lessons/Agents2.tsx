@@ -16,7 +16,7 @@ const toolCategories = [
       { action: 'Edit code', code: 'Edit: src/payments/token.ts\n  line 42: await token.refresh()' },
       { action: 'Create a file', code: 'Write: src/utils/helpers.ts' },
     ],
-    insight: 'Claude sees your entire project — not just the current file. It reads across directories to understand how components connect.',
+    insight: 'Claude sees your entire project, not just the current file, it reads across directories to understand how components connect.',
   },
   {
     id: 'search',
@@ -29,20 +29,20 @@ const toolCategories = [
       { action: 'Search content', code: 'Grep: "token.refresh" → 3 matches' },
       { action: 'Find definition', code: 'Grep: "class TokenManager"' },
     ],
-    insight: 'Before editing, Claude searches to understand where things are. This is how it avoids guessing.',
+    insight: 'Before editing, Claude searches to understand where things are, this is how it avoids guessing.',
   },
   {
     id: 'execution',
     icon: 'terminal',
     label: 'Execution',
     color: '#98d982',
-    summary: 'Run shell commands, start servers, run tests, and use git — anything you can do from the terminal.',
+    summary: 'Run shell commands, start servers, run tests, and if needed also use git, basically anything you can do from the terminal.',
     examples: [
       { action: 'Run tests', code: '$ npm test\nPASS src/payments/ (3 tests)' },
       { action: 'Use git', code: '$ git diff HEAD\n$ git commit -m "fix: token refresh"' },
       { action: 'Build project', code: '$ npm run build\n✓ Compiled successfully' },
     ],
-    insight: 'If you can run it from the command line, Claude can too. This is what makes it actually useful for real tasks.',
+    insight: 'If you can run it from the command line, Claude can too, this is what makes it actually useful for real tasks.',
   },
   {
     id: 'web',
@@ -55,7 +55,7 @@ const toolCategories = [
       { action: 'Fetch docs', code: 'WebFetch: https://nextjs.org/docs/app/...' },
       { action: 'Look up error', code: 'WebSearch: "ERR_MODULE_NOT_FOUND typescript"' },
     ],
-    insight: 'Claude\'s training has a cutoff date. Web tools give it access to current docs, changelogs, and answers.',
+    insight: 'Claude\'s training has a cutoff date so Web tools give it access to updated docs, changelogs, and answers.',
   },
   {
     id: 'intelligence',
@@ -67,7 +67,7 @@ const toolCategories = [
       { action: 'Get diagnostics', code: 'getDiagnostics: 2 type errors found\n  src/token.ts:42 — Property \'refresh\'\n  does not exist on type \'Token\'.' },
       { action: 'Find references', code: 'References: TokenManager used in\n  src/payments/checkout.ts:18\n  src/auth/session.ts:34' },
     ],
-    insight: 'With IDE plugins, Claude gets the same real-time feedback you do. It can catch type errors immediately after making an edit.',
+    insight: 'With IDE plugins, Claude gets the same real-time feedback the IDE does, it can catch type errors immediately after making an edit.',
   },
 ]
 
@@ -79,7 +79,7 @@ export default function Agents2() {
   return (
     <div style={{ maxWidth: 720, margin: '0 auto', padding: '2rem 1.5rem 4rem' }}>
       <LessonHeader
-        module="AI Agents"
+        module="Agents"
         title="Models & Tools"
         duration="6 min"
         type="interactive"
@@ -87,10 +87,10 @@ export default function Agents2() {
 
       {/* Intro */}
       <p style={{ color: 'var(--on-surface-variant)', lineHeight: 1.8, marginBottom: '0.75rem', fontSize: '1.0625rem' }}>
-        The agentic loop runs on two things: a <strong style={{ color: 'var(--on-surface)' }}>model</strong> that reasons, and <strong style={{ color: 'var(--on-surface)' }}>tools</strong> that act. Without tools, Claude can only produce text. With them, it can read your code, run commands, search the web, and verify its own work.
+        The agentic loop runs on two things: a <strong style={{ color: 'var(--on-surface)' }}>model</strong> that reasons, and <strong style={{ color: 'var(--on-surface)' }}>tools</strong> that act. Without tools, Claude can only produce text, with them, it can read your code, run commands, search the web, and verify its own work.
       </p>
       <p style={{ color: 'var(--on-surface-variant)', lineHeight: 1.8, marginBottom: '2rem', fontSize: '1.0625rem' }}>
-        The built-in tools fall into five categories. Select each one below to explore what it does.
+        The built-in tools fall into five categories, select each one below to explore what it does.
       </p>
 
       {/* Model box */}
@@ -115,7 +115,7 @@ export default function Agents2() {
         <div>
           <p style={{ color: 'var(--on-surface)', fontWeight: 600, marginBottom: '0.25rem' }}>The Model (Claude Sonnet / Opus)</p>
           <p style={{ color: 'var(--on-surface-variant)', fontSize: '0.875rem', lineHeight: 1.6 }}>
-            The reasoning engine. It understands your code, breaks work into steps, decides which tools to use, and interprets the results. When the docs say &ldquo;Claude decides&rdquo; — this is what&apos;s deciding.
+            The reasoning engine, it understands your code, breaks work into steps, decides which tools to use, and interprets the results.
           </p>
         </div>
       </div>
@@ -262,7 +262,7 @@ export default function Agents2() {
             ))}
           </div>
           <p style={{ color: 'var(--on-surface-variant)', fontSize: '0.8125rem', marginTop: '0.875rem', lineHeight: 1.6 }}>
-            Each tool use gives Claude new information that informs the next step. <strong style={{ color: 'var(--on-surface)' }}>This is the agentic loop in action.</strong>
+            Each tool use gives Claude new information that enriches the next step, this is the <strong style={{ color: 'var(--on-surface)' }}>Agentic Loop</strong> in action.
           </p>
         </div>
       </div>

@@ -2,12 +2,6 @@
 
 import { modules } from '@/lib/courseData'
 
-const typeColors: Record<string, string> = {
-  reading: '#4d8eff',
-  interactive: '#ddb7ff',
-  exercise: '#f59e0b',
-}
-
 interface CourseSidebarProps {
   currentLessonId: string
   completed: Set<string>
@@ -187,32 +181,13 @@ export default function CourseSidebar({
                              fontSize: '0.8rem',
                             color: isCurrent ? 'var(--on-surface)' : 'var(--on-surface-variant)',
                             fontWeight: isCurrent ? 500 : 400,
-                            whiteSpace: 'nowrap',
-                            overflow: 'hidden',
-                            textOverflow: 'ellipsis',
-                             marginBottom: '0.16rem',
-                          }}
-                        >
-                          {lesson.title}
-                        </div>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.375rem' }}>
-                          <span
-                            style={{ fontSize: '0.6875rem', color: 'var(--outline-variant)' }}
-                          >
-                            {lesson.duration}
-                          </span>
-                          <span
-                            style={{
-                              fontSize: '0.625rem',
-                              padding: '0.1rem 0.35rem',
-                              borderRadius: '100px',
-                              color: typeColors[lesson.type],
-                              background: `${typeColors[lesson.type]}18`,
-                            }}
-                          >
-                            {lesson.type}
-                          </span>
-                        </div>
+                             whiteSpace: 'nowrap',
+                             overflow: 'hidden',
+                             textOverflow: 'ellipsis',
+                           }}
+                         >
+                           {lesson.title}
+                         </div>
                       </div>
                     </button>
                   )

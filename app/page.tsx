@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import TopBar from '@/components/TopBar'
 import CourseSidebar from '@/components/CourseSidebar'
 import LessonViewer from '@/components/LessonViewer'
@@ -9,7 +9,6 @@ import { allLessons } from '@/lib/courseData'
 const STORAGE_KEY = 'obsidian-ai-progress'
 
 function loadCompletedFromStorage(): Set<string> {
-  if (typeof window === 'undefined') return new Set()
   try {
     const stored = localStorage.getItem(STORAGE_KEY)
     if (!stored) return new Set()
@@ -22,8 +21,16 @@ function loadCompletedFromStorage(): Set<string> {
 
 export default function Home() {
   const [currentLessonId, setCurrentLessonId] = useState('agents-1')
-  const [completed, setCompleted] = useState<Set<string>>(loadCompletedFromStorage)
+  const [completed, setCompleted] = useState<Set<string>>(new Set())
   const [sidebarOpen, setSidebarOpen] = useState(false)
+
+  useEffect(() => {
+    const restored = loadCompletedFromStorage()
+    const frame = requestAnimationFrame(() => {
+      setCompleted(restored)
+    })
+    return () => cancelAnimationFrame(frame)
+  }, [])
 
   const saveCompleted = (updated: Set<string>) => {
     try {

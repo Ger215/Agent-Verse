@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import { allLessons } from '@/lib/courseData'
 
 interface TopBarProps {
@@ -30,18 +31,16 @@ export default function TopBar({ completed, onMenuToggle }: TopBarProps) {
       }}
     >
       <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexShrink: 0 }}>
-        <div
-          style={{
-            width: '32px',
-            height: '32px',
-            borderRadius: '8px',
-            background: 'var(--gradient)',
-            flexShrink: 0,
-            boxShadow: 'none',
-          }}
+        <Image
+          src="/Logo.png"
+          alt="Agent Verse logo"
+          width={48}
+          height={48}
+          priority
+          style={{ flexShrink: 0 }}
         />
         <span className="gradient-text" style={{ fontWeight: 700, fontSize: '0.95rem', letterSpacing: '-0.01em' }}>
-          Obsidian AI
+          Agent Verse
         </span>
         <span
           style={{
@@ -62,7 +61,7 @@ export default function TopBar({ completed, onMenuToggle }: TopBarProps) {
             background: 'rgba(15, 17, 23, 0.82)',
           }}
         >
-          Modern AI Systems
+          AI Topics Crash Course
         </span>
       </div>
 

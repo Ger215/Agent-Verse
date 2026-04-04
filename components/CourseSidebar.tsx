@@ -1,5 +1,6 @@
 'use client'
 
+import { useState } from 'react'
 import { modules } from '@/lib/courseData'
 
 interface CourseSidebarProps {
@@ -15,6 +16,17 @@ export default function CourseSidebar({
   onSelectLesson,
   open,
 }: CourseSidebarProps) {
+  const [expandedModules, setExpandedModules] = useState<Record<string, boolean>>(() =>
+    Object.fromEntries(modules.map(mod => [mod.id, true]))
+  )
+
+  const toggleModule = (moduleId: string) => {
+    setExpandedModules(prev => ({
+      ...prev,
+      [moduleId]: !prev[moduleId],
+    }))
+  }
+
   return (
     <>
       {/* Backdrop for mobile */}
@@ -62,12 +74,22 @@ export default function CourseSidebar({
                 }}
               >
                 <div
+                  role="button"
+                  tabIndex={0}
+                  onClick={() => toggleModule(mod.id)}
+                  onKeyDown={e => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault()
+                      toggleModule(mod.id)
+                    }
+                  }}
                   style={{
                     display: 'flex',
                     alignItems: 'center',
                     gap: '0.5rem',
                     padding: '0.65rem 0.85rem',
                     background: 'rgba(18, 20, 28, 0.92)',
+                    cursor: 'pointer',
                   }}
                 >
                   <span
@@ -98,9 +120,21 @@ export default function CourseSidebar({
                   >
                     {completedCount}/{total}
                   </span>
+                  <span
+                    className="material-symbols-outlined"
+                    style={{
+                      fontSize: '1rem',
+                      color: 'var(--on-surface-variant)',
+                      transform: expandedModules[mod.id] ? 'rotate(180deg)' : 'rotate(0deg)',
+                      transition: 'transform 0.18s ease',
+                    }}
+                    aria-hidden
+                  >
+                    expand_more
+                  </span>
                 </div>
 
-                {mod.lessons.map(lesson => {
+                {expandedModules[mod.id] && mod.lessons.map(lesson => {
                   const isCurrent = lesson.id === currentLessonId
                   const isDone = completed.has(lesson.id)
 

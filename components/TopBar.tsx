@@ -61,7 +61,7 @@ export default function TopBar({ completed, onMenuToggle }: TopBarProps) {
             background: 'rgba(15, 17, 23, 0.82)',
           }}
         >
-          AI Topics Crash Course
+          AI Workflow Crash Course
         </span>
       </div>
 

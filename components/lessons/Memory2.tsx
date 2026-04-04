@@ -137,13 +137,13 @@ export default function Memory2() {
           ['Engram', 'Go binary'],
           ['Store', 'SQLite + FTS5'],
         ].map((n, i) => (
-          <>
-            <div key={`${n[0]}-card`} style={{ background: 'var(--surface)', borderRadius: '8px', padding: '0.6rem 0.65rem', textAlign: 'center' }}>
+          <div key={n[0]} style={{ display: 'contents' }}>
+            <div style={{ background: 'var(--surface)', borderRadius: '8px', padding: '0.6rem 0.65rem', textAlign: 'center' }}>
               <div style={{ fontSize: '0.72rem', color: 'var(--on-surface-variant)', marginBottom: '0.22rem', textTransform: 'uppercase', letterSpacing: '0.06em' }}>{n[0]}</div>
               <div style={{ fontSize: '0.8rem', color: 'var(--on-surface)', fontWeight: 600 }}>{n[1]}</div>
             </div>
-            {i < 3 && <span key={`${n[0]}-arrow`} style={{ color: 'var(--outline-variant)', fontSize: '0.85rem' }}>{'->'}</span>}
-          </>
+            {i < 3 && <span style={{ color: 'var(--outline-variant)', fontSize: '0.85rem' }}>{'->'}</span>}
+          </div>
         ))}
       </div>
 

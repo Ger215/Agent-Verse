@@ -75,7 +75,7 @@ export default function LessonViewer({
         >
           <div
             style={{
-              background: 'rgba(16, 18, 26, 0.62)',
+              background: 'rgba(10, 12, 18, 0.7)',
               backdropFilter: 'blur(12px)',
               borderRadius: '12px',
               padding: '1.75rem clamp(1rem, 2.5vw, 2rem)',

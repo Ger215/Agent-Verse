@@ -46,7 +46,7 @@ export const modules: Module[] = [
     title: 'Engram',
     icon: 'memory',
     lessons: [
-      { id: 'memory-1', title: 'Why Engram Exists', duration: '5 min', type: 'reading' },
+      { id: 'memory-1', title: 'Why Engram', duration: '5 min', type: 'reading' },
       { id: 'memory-2', title: 'Engram Tool Flow', duration: '6 min', type: 'interactive' },
     ],
   },

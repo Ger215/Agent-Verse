@@ -8,7 +8,7 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Agent Verse - AI Topics Crash Course",
+  title: "Agent Verse - AI Workflow Crash Course",
   description: "An interactive course on AI agents, skills, memory, and token optimization.",
   icons: {
     icon: "/Logo.png",

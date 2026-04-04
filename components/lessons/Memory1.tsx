@@ -11,7 +11,7 @@ const useCases = [
 export default function Memory1() {
   return (
     <>
-      <LessonHeader module="Engram" title="Why Engram Exists" duration="5 min" type="reading" />
+      <LessonHeader module="Engram" title="Why Engram" duration="5 min" type="reading" />
 
       <p style={{ fontSize: '1rem', lineHeight: 1.75, color: 'var(--on-surface)', marginBottom: '1.5rem' }}>
         Engram is a persistent memory system for coding agents, it stores important information in SQLite with FTS5 search,

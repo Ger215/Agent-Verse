@@ -2,12 +2,12 @@
 
 :root {
   --background: #050008;
-  --surface-lowest: #090a0e;
-  --surface-low: #0f1117;
-  --surface: #13151c;
-  --surface-high: #171a22;
-  --surface-highest: #1d212b;
-  --surface-bright: #12141b;
+  --surface-lowest: #07090e;
+  --surface-low: #0c0f16;
+  --surface: #10131a;
+  --surface-high: #141925;
+  --surface-highest: #1a2030;
+  --surface-bright: #0f1219;
   --surface-variant: rgba(24, 26, 33, 0.72);
   --on-surface: #e5e2e1;
   --on-surface-variant: #b8b3c2;

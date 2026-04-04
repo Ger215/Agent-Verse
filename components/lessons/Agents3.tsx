@@ -80,7 +80,7 @@ export default function Agents3() {
         <p style={{ fontSize: '0.75rem', color: 'var(--on-surface-variant)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '0.875rem' }}>
           What&apos;s inside the context window
         </p>
-        <div style={{ background: 'var(--surface-low)', borderRadius: '0.5rem', overflow: 'hidden' }}>
+        <div style={{ background: 'rgba(9, 10, 14, 0.9)', borderRadius: '0.5rem', overflow: 'hidden' }}>
           {[
             { label: 'CLAUDE.md', size: 15, color: '#ddb7ff' },
             { label: 'Conversation history (Messages)', size: 30, color: '#adc6ff' },
@@ -122,7 +122,7 @@ export default function Agents3() {
               borderRadius: '0.375rem',
               border: 'none',
               cursor: 'pointer',
-              background: activeMemory === m.label ? 'var(--surface-highest)' : 'var(--surface-low)',
+              background: activeMemory === m.label ? 'rgba(24, 28, 38, 0.96)' : 'rgba(9, 10, 14, 0.9)',
               transition: 'background 0.15s',
               display: 'flex',
               flexDirection: 'column',
@@ -159,7 +159,7 @@ export default function Agents3() {
         >
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem' }}>
             <div style={{
-              background: 'var(--surface)',
+              background: 'rgba(12, 14, 20, 0.94)',
               borderRadius: '0.5rem',
               padding: '1.25rem',
               borderLeft: `3px solid ${currentMemory.color}`,
@@ -168,8 +168,8 @@ export default function Agents3() {
                 {currentMemory.description}
               </p>
             </div>
-            <div style={{ background: 'var(--surface-lowest)', borderRadius: '0.5rem', overflow: 'hidden' }}>
-              <div style={{ padding: '0.375rem 0.875rem', background: 'var(--surface-low)', fontSize: '0.75rem', color: 'var(--on-surface-variant)', borderBottom: '1px solid rgba(70,69,84,0.1)' }}>
+            <div style={{ background: 'rgba(8, 9, 13, 0.96)', borderRadius: '0.5rem', overflow: 'hidden' }}>
+              <div style={{ padding: '0.375rem 0.875rem', background: 'rgba(12, 14, 20, 0.94)', fontSize: '0.75rem', color: 'var(--on-surface-variant)', borderBottom: '1px solid rgba(70,69,84,0.1)' }}>
                 example
               </div>
               <pre style={{
@@ -202,7 +202,7 @@ export default function Agents3() {
               borderRadius: '0.375rem',
               border: 'none',
               cursor: 'pointer',
-              background: activeMode === mode.id ? 'var(--surface-highest)' : 'var(--surface-low)',
+              background: activeMode === mode.id ? 'rgba(24, 28, 38, 0.96)' : 'rgba(9, 10, 14, 0.9)',
               transition: 'background 0.15s',
               display: 'flex',
               alignItems: 'center',
@@ -226,7 +226,7 @@ export default function Agents3() {
                   fontSize: '0.7rem',
                   padding: '0.1rem 0.4rem',
                   borderRadius: '0.25rem',
-                  background: 'var(--surface-lowest)',
+                   background: 'rgba(8, 9, 13, 0.96)',
                   color: 'var(--on-surface-variant)',
                   fontFamily: 'monospace',
                 }}>
@@ -255,7 +255,7 @@ export default function Agents3() {
 
       {/* Checkpoints */}
       <div style={{
-        background: 'var(--surface-low)',
+        background: 'rgba(9, 10, 14, 0.9)',
         borderRadius: '0.5rem',
         padding: '1.25rem',
         display: 'flex',
@@ -266,14 +266,14 @@ export default function Agents3() {
         <div>
           <p style={{ color: 'var(--on-surface)', fontWeight: 600, marginBottom: '0.375rem' }}>Every file edit is reversible</p>
           <p style={{ color: 'var(--on-surface-variant)', fontSize: '0.875rem', lineHeight: 1.7 }}>
-            Before Claude edits any file, it snapshots the current contents so if something goes wrong, you can press <code style={{ color: 'var(--on-surface)', background: 'var(--surface-highest)', padding: '0.125rem 0.375rem', borderRadius: '0.25rem', fontSize: '0.8125rem' }}>Esc Esc</code> to rewind, or just tell Claude to undo, checkpoints are local to your session and separate from git.
+            Before Claude edits any file, it snapshots the current contents so if something goes wrong, you can press <code style={{ color: 'var(--on-surface)', background: 'rgba(24, 28, 38, 0.96)', padding: '0.125rem 0.375rem', borderRadius: '0.25rem', fontSize: '0.8125rem' }}>Esc Esc</code> to rewind, or just tell Claude to undo, checkpoints are local to your session and separate from git.
           </p>
         </div>
       </div>
 
       {/* Sessions */}
       <div style={{
-        background: 'var(--surface-low)',
+        background: 'rgba(9, 10, 14, 0.9)',
         borderRadius: '0.5rem',
         padding: '1.25rem',
         display: 'flex',
@@ -284,7 +284,7 @@ export default function Agents3() {
           <p style={{ color: 'var(--on-surface)', fontWeight: 600, marginBottom: '0.375rem' }}>Sessions are independent but resumable</p>
           <p style={{ color: 'var(--on-surface-variant)', fontSize: '0.875rem', lineHeight: 1.7 }}>
             Each new session starts with a fresh context, you can use{' '}
-            <code style={{ color: 'var(--on-surface)', background: 'var(--surface-highest)', padding: '0.125rem 0.375rem', borderRadius: '0.25rem', fontSize: '0.8125rem' }}>claude --continue</code> or <code style={{ color: 'var(--on-surface)', background: 'var(--surface-highest)', padding: '0.125rem 0.375rem', borderRadius: '0.25rem', fontSize: '0.8125rem' }}>claude --resume</code>{' '}
+            <code style={{ color: 'var(--on-surface)', background: 'rgba(24, 28, 38, 0.96)', padding: '0.125rem 0.375rem', borderRadius: '0.25rem', fontSize: '0.8125rem' }}>claude --continue</code> or <code style={{ color: 'var(--on-surface)', background: 'rgba(24, 28, 38, 0.96)', padding: '0.125rem 0.375rem', borderRadius: '0.25rem', fontSize: '0.8125rem' }}>claude --resume</code>{' '}
             to pick up where you left off.
           </p>
         </div>

@@ -265,7 +265,7 @@ export default function Agents1() {
         <div>
           <p style={{ color: 'var(--on-surface)', fontWeight: 600, marginBottom: '0.375rem' }}>The loop adapts to the task</p>
           <p style={{ color: 'var(--on-surface-variant)', fontSize: '0.9rem', lineHeight: 1.7 }}>
-            A quick question might only need context gathering. A bug fix cycles through all three phases. A large refactor might loop dozens of times — Claude chains actions together and course-corrects as it learns. You can interrupt at any point to steer it differently.
+            A quick question might only need context gathering, a bug fix cycles through all three phases until fixing it and a large refactor might loop dozens of times, the Agent chains actions together and course-corrects as it learns.
           </p>
         </div>
       </div>

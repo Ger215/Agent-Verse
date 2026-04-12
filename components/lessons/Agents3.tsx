@@ -190,7 +190,7 @@ export default function Agents3() {
 
       {/* Permission modes */}
       <p style={{ fontSize: '0.75rem', color: 'var(--on-surface-variant)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>
-        Permission modes — press Shift+Tab to cycle
+        Permission modes , press Shift+Tab to cycle
       </p>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', marginBottom: '2.5rem' }}>
         {permissionModes.map(mode => (
@@ -253,6 +253,67 @@ export default function Agents3() {
         ))}
       </div>
 
+      {/* Context commands */}
+      <p style={{ fontSize: '0.75rem', color: 'var(--on-surface-variant)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>
+        Context management commands
+      </p>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', marginBottom: '2.5rem' }}>
+        {[
+          {
+            cmd: '/compact',
+            icon: 'compress',
+            color: '#ddb7ff',
+            description: 'Summarizes the conversation history to free up space while preserving key decisions and context. Use this proactively before the window fills up.',
+          },
+          {
+            cmd: '/clear',
+            icon: 'delete_sweep',
+            color: '#adc6ff',
+            description: 'Wipes the entire session context and starts fresh. Useful when switching tasks or after a bad chain of reasoning that you want to abandon.',
+          },
+          {
+            cmd: '/context',
+            icon: 'data_usage',
+            color: '#4d8eff',
+            description: 'Shows how much of the context window is currently in use, broken down by category. Run this to know when to compact before Claude degrades.',
+          },
+        ].map(item => (
+          <div
+            key={item.cmd}
+            style={{
+              padding: '0.875rem 1rem',
+              borderRadius: '0.375rem',
+              background: 'rgba(9, 10, 14, 0.9)',
+              display: 'flex',
+              alignItems: 'flex-start',
+              gap: '0.875rem',
+              borderLeft: `3px solid ${item.color}`,
+            }}
+          >
+            <span className="material-symbols-outlined" style={{ fontSize: '1.125rem', color: item.color, marginTop: 2, flexShrink: 0 }}>
+              {item.icon}
+            </span>
+            <div>
+              <code style={{
+                fontSize: '0.8125rem',
+                color: item.color,
+                background: 'rgba(24, 28, 38, 0.96)',
+                padding: '0.125rem 0.5rem',
+                borderRadius: '0.25rem',
+                fontFamily: 'monospace',
+                display: 'inline-block',
+                marginBottom: '0.375rem',
+              }}>
+                {item.cmd}
+              </code>
+              <p style={{ color: 'var(--on-surface-variant)', fontSize: '0.875rem', lineHeight: 1.7, margin: 0 }}>
+                {item.description}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+
       {/* Checkpoints */}
       <div style={{
         background: 'rgba(9, 10, 14, 0.9)',
@@ -278,6 +339,7 @@ export default function Agents3() {
         padding: '1.25rem',
         display: 'flex',
         gap: '0.75rem',
+        marginBottom: '2.5rem',
       }}>
         <span className="material-symbols-outlined" style={{ color: '#adc6ff', fontSize: '1.25rem', marginTop: 2, flexShrink: 0 }}>fork_right</span>
         <div>
@@ -289,6 +351,7 @@ export default function Agents3() {
           </p>
         </div>
       </div>
+
     </div>
   )
 }

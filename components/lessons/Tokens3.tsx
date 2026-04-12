@@ -4,13 +4,6 @@ import { useState } from 'react'
 import LessonHeader from '@/components/LessonHeader'
 import CalloutBox from '@/components/CalloutBox'
 
-const hookEvents = [
-  { name: 'PreToolUse', use: 'Runs before a tool call; can allow or deny' },
-  { name: 'PostToolUse', use: 'Runs after successful tool execution' },
-  { name: 'UserPromptSubmit', use: 'Validates prompts before Claude processes them' },
-  { name: 'Stop', use: 'Runs when Claude is about to finish a response' },
-]
-
 const pluginPieces = [
   { name: '.claude-plugin/plugin.json', desc: 'Plugin identity: name, version, author, metadata' },
   { name: 'skills/', desc: 'Reusable skills namespaced as /plugin-name:skill' },
@@ -141,12 +134,40 @@ export default function Tokens3() {
         Hooks (Claude Code)
       </h2>
 
+      {/* Hook types */}
+      <p style={{ fontSize: '0.75rem', color: 'var(--on-surface-variant)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '0.625rem' }}>Hook types</p>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '0.5rem', marginBottom: '1.25rem' }}>
+        {[
+          { type: 'command', color: '#93c5fd', desc: 'Runs a shell script. Receives JSON via stdin, returns decision via stdout.' },
+          { type: 'http', color: '#86efac', desc: 'POSTs JSON to a remote endpoint. Useful for team-wide policy enforcement.' },
+          { type: 'prompt', color: '#ddb7ff', desc: 'Sends a single-turn prompt to Claude for AI-powered evaluation.' },
+          { type: 'agent', color: '#fcd34d', desc: 'Spawns a subagent with Read/Grep/Glob tools to verify conditions before acting.' },
+        ].map(item => (
+          <div key={item.type} style={{ background: 'var(--surface-low)', border: '1px solid rgba(70,69,84,0.2)', borderRadius: '8px', padding: '0.75rem' }}>
+            <code style={{ fontSize: '0.8rem', fontWeight: 700, color: item.color, fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace', display: 'block', marginBottom: '0.35rem' }}>
+              type: &quot;{item.type}&quot;
+            </code>
+            <p style={{ fontSize: '0.8125rem', color: 'var(--on-surface-variant)', lineHeight: 1.6, margin: 0 }}>{item.desc}</p>
+          </div>
+        ))}
+      </div>
+
+      {/* Events table */}
       <div style={{ border: '1px solid rgba(70,69,84,0.2)', borderRadius: '10px', overflow: 'hidden', marginBottom: '1.25rem' }}>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.5fr', background: 'var(--surface-high)', padding: '0.75rem 1rem', fontSize: '0.75rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.06em', color: 'var(--on-surface-variant)' }}>
           <div>Event</div>
           <div>Purpose</div>
         </div>
-        {hookEvents.map((event, i) => (
+        {[
+          { name: 'PreToolUse', use: 'Before tool execution , can allow, deny, ask, or defer' },
+          { name: 'PostToolUse', use: 'After successful execution , can block with feedback' },
+          { name: 'UserPromptSubmit', use: 'Before Claude processes a prompt , can block or inject context' },
+          { name: 'Stop', use: 'When Claude finishes responding , can block' },
+          { name: 'SessionStart', use: 'New or resumed session , inject env vars or additional context' },
+          { name: 'SubagentStart', use: 'Subagent spawned , inject context into a specific agent type' },
+          { name: 'Notification', use: 'System events like permission prompts or idle , forward to Slack, etc.' },
+          { name: 'FileChanged', use: 'Watched file changed , trigger linters, reloads, or validations' },
+        ].map((event, i) => (
           <div
             key={event.name}
             style={{ display: 'grid', gridTemplateColumns: '1fr 1.5fr', padding: '0.75rem 1rem', borderTop: '1px solid rgba(70,69,84,0.1)', background: i % 2 === 0 ? 'transparent' : 'var(--surface-low)' }}
@@ -157,24 +178,57 @@ export default function Tokens3() {
         ))}
       </div>
 
-      <div style={{ background: 'var(--surface-low)', border: '1px solid rgba(70,69,84,0.2)', borderRadius: '10px', padding: '1rem', marginBottom: '2rem' }}>
+      {/* Decision values */}
+      <p style={{ fontSize: '0.75rem', color: 'var(--on-surface-variant)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '0.625rem' }}>PreToolUse decision values</p>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(170px, 1fr))', gap: '0.5rem', marginBottom: '1.25rem' }}>
+        {[
+          { value: 'allow', color: '#86efac', desc: 'Skip the permission prompt entirely' },
+          { value: 'deny', color: '#fca5a5', desc: 'Block the tool call with a reason' },
+          { value: 'ask', color: '#fcd34d', desc: 'Force the user confirmation dialog' },
+          { value: 'defer', color: '#c4b5fd', desc: 'Pause for external UI (non-interactive mode)' },
+        ].map(item => (
+          <div key={item.value} style={{ background: 'var(--surface-low)', border: '1px solid rgba(70,69,84,0.2)', borderRadius: '8px', padding: '0.625rem 0.75rem' }}>
+            <code style={{ fontSize: '0.8rem', fontWeight: 700, color: item.color, fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace', display: 'block', marginBottom: '0.3rem' }}>
+              &quot;{item.value}&quot;
+            </code>
+            <p style={{ fontSize: '0.8125rem', color: 'var(--on-surface-variant)', lineHeight: 1.5, margin: 0 }}>{item.desc}</p>
+          </div>
+        ))}
+      </div>
+
+      <div style={{ background: 'var(--surface-low)', border: '1px solid rgba(70,69,84,0.2)', borderRadius: '10px', padding: '1rem', marginBottom: '1rem' }}>
         <div style={{ fontSize: '0.75rem', color: 'var(--on-surface-variant)', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '0.35rem', fontWeight: 600 }}>
-          Hook Example
+          Hook config example , command type with decision output
         </div>
         <pre style={{ margin: 0, fontSize: '0.75rem', lineHeight: 1.6, color: 'var(--on-surface)', fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace', overflowX: 'auto' }}>
-{`{
+{`// .claude/settings.json
+{
   "hooks": {
-    "PreToolUse": [
-      {
-        "matcher": "Bash",
-        "hooks": [
-          { "type": "command", "command": "./hooks/validate.sh" }
-        ]
-      }
-    ]
+    "PreToolUse": [{
+      "matcher": "Bash",
+      "hooks": [{
+        "type": "command",
+        "command": "./.claude/hooks/validate.sh"
+      }]
+    }]
   }
-}`}
+}
+
+// validate.sh , deny destructive commands
+COMMAND=$(echo "$1" | jq -r '.tool_input.command')
+if echo "$COMMAND" | grep -q 'rm -rf'; then
+  echo '{"hookSpecificOutput":{"hookEventName":"PreToolUse","permissionDecision":"deny","permissionDecisionReason":"Destructive command blocked"}}'
+else
+  exit 0  # allow
+fi`}
         </pre>
+      </div>
+
+      <div style={{ background: 'rgba(77,142,255,0.08)', border: '1px solid rgba(77,142,255,0.2)', borderRadius: '8px', padding: '0.75rem 1rem', marginBottom: '2rem', display: 'flex', alignItems: 'center', gap: '0.625rem' }}>
+        <span className="material-symbols-outlined" style={{ fontSize: '1rem', color: '#93c5fd', flexShrink: 0 }}>terminal</span>
+        <p style={{ margin: 0, fontSize: '0.875rem', color: 'var(--on-surface-variant)', lineHeight: 1.6 }}>
+          Run <code style={{ color: 'var(--on-surface)', background: 'rgba(24,28,38,0.96)', padding: '0.1rem 0.375rem', borderRadius: '0.25rem', fontFamily: 'monospace' }}>/hooks</code> inside Claude Code to browse all configured hooks , source, event, matcher, type, and full config.
+        </p>
       </div>
 
       <h2 style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--on-surface)', margin: '2rem 0 1rem', letterSpacing: '-0.02em' }}>

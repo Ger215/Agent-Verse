@@ -7,9 +7,11 @@ import Agents1 from "@/components/lessons/Agents1";
 import Agents2 from "@/components/lessons/Agents2";
 import Agents3 from "@/components/lessons/Agents3";
 import Agents4 from "@/components/lessons/Agents4";
+import Agents5 from "@/components/lessons/Agents5";
 import Skills1 from "@/components/lessons/Skills1";
 import Mcp1 from "@/components/lessons/Mcp1";
 import Mcp2 from "@/components/lessons/Mcp2";
+import Mcp3 from "@/components/lessons/Mcp3";
 import Memory1 from "@/components/lessons/Memory1";
 import Memory2 from "@/components/lessons/Memory2";
 import Tokens1 from "@/components/lessons/Tokens1";
@@ -21,9 +23,11 @@ const lessonComponents: Record<string, React.ComponentType> = {
   "agents-2": Agents2,
   "agents-3": Agents3,
   "agents-4": Agents4,
+  "agents-5": Agents5,
   "skills-1": Skills1,
   "mcp-1": Mcp1,
   "mcp-2": Mcp2,
+  "mcp-3": Mcp3,
   "memory-1": Memory1,
   "memory-2": Memory2,
   "tokens-1": Tokens1,
@@ -67,6 +71,16 @@ const lessonReferences: Record<
   ],
   "agents-4": [
     {
+      label: "Create custom subagents (Claude Code Docs)",
+      href: "https://code.claude.com/docs/en/sub-agents",
+    },
+    {
+      label: "Agent Teams (Claude Code Docs)",
+      href: "https://code.claude.com/docs/en/agent-teams",
+    },
+  ],
+  "agents-5": [
+    {
       label: "Martin Fowler — Software Design and Development in the Era of AI",
       href: "https://martinfowler.com/articles/exploring-gen-ai/sdd-3-tools.html",
     },
@@ -91,6 +105,16 @@ const lessonReferences: Record<
     {
       label: "MCP Architecture Concepts",
       href: "https://modelcontextprotocol.io/docs/learn/architecture",
+    },
+  ],
+  "mcp-3": [
+    {
+      label: "Claude Code Skills (Anthropic Docs)",
+      href: "https://code.claude.com/docs/en/skills",
+    },
+    {
+      label: "Claude Code Hooks",
+      href: "https://code.claude.com/docs/en/hooks",
     },
   ],
   "memory-1": [

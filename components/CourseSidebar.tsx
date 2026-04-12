@@ -51,7 +51,7 @@ export default function CourseSidebar({
           flexShrink: 0,
           background: 'rgba(9, 10, 14, 0.86)',
           minHeight: 0,
-          overflowY: 'hidden',
+          overflowY: 'auto',
           scrollbarGutter: 'stable',
           height: '100%',
         }}

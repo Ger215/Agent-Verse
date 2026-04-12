@@ -50,19 +50,32 @@ export default function TopBar({ completed, onMenuToggle }: TopBarProps) {
             opacity: 0.5,
           }}
         />
-        <span
-          style={{
-            fontSize: '0.75rem',
-            color: 'var(--on-surface-variant)',
-            fontWeight: 600,
-            padding: '0.22rem 0.5rem',
-            borderRadius: '999px',
-            boxShadow: 'none',
-            background: 'rgba(15, 17, 23, 0.82)',
-          }}
-        >
-          AI Workflow Crash Course
-        </span>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.1rem' }}>
+          <span
+            style={{
+              fontSize: '0.75rem',
+              color: 'var(--on-surface-variant)',
+              fontWeight: 600,
+              padding: '0.22rem 0.5rem',
+              borderRadius: '999px',
+              boxShadow: 'none',
+              background: 'rgba(15, 17, 23, 0.82)',
+            }}
+          >
+            AI Workflow Crash Course
+          </span>
+          <span style={{ fontSize: '0.65rem', color: 'var(--on-surface-variant)', opacity: 0.6, paddingLeft: '0.5rem' }}>
+            Developed By{' '}
+            <a
+              href="https://www.linkedin.com/in/germ%C3%A1n-ramos-199596204/"
+              target="_blank"
+              rel="noreferrer"
+              style={{ color: 'inherit', textDecoration: 'underline', textDecorationStyle: 'solid', cursor: 'pointer' }}
+            >
+              Germán Ramos
+            </a>
+          </span>
+        </div>
       </div>
 
       <div

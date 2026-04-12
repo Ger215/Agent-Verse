@@ -21,7 +21,8 @@ export const modules: Module[] = [
       { id: 'agents-1', title: 'The Agentic Loop', duration: '5 min', type: 'interactive' },
       { id: 'agents-2', title: 'Models & Tools', duration: '6 min', type: 'interactive' },
       { id: 'agents-3', title: 'Sessions, Context & Control', duration: '5 min', type: 'reading' },
-      { id: 'agents-4', title: 'Spec-Driven Development (SDD)', duration: '6 min', type: 'reading' },
+      { id: 'agents-4', title: 'Subagents', duration: '5 min', type: 'reading' },
+      { id: 'agents-5', title: 'Spec-Driven Development (SDD)', duration: '6 min', type: 'reading' },
     ],
   },
   {
@@ -39,6 +40,7 @@ export const modules: Module[] = [
     lessons: [
       { id: 'mcp-1', title: 'Context Flow Explained', duration: '5 min', type: 'reading' },
       { id: 'mcp-2', title: 'Modular Architecture', duration: '6 min', type: 'interactive' },
+      { id: 'mcp-3', title: 'MCP Alternative Use', duration: '6 min', type: 'interactive' },
     ],
   },
   {

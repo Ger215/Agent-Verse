@@ -1,137 +1,233 @@
-import LessonHeader from '@/components/LessonHeader'
-import CalloutBox from '@/components/CalloutBox'
-import CodeBlock from '@/components/CodeBlock'
+'use client'
 
-const phases = [
+import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import LessonHeader from '@/components/LessonHeader'
+
+const builtInAgents = [
   {
     name: 'Explore',
-    goal: 'Understand the problem and constraints before committing to implementation',
+    model: 'Haiku',
+    tools: 'Read-only',
+    color: '#ddb7ff',
+    icon: 'travel_explore',
+    desc: 'Fast, read-only agent optimized for searching and analyzing codebases. Claude uses it whenever it needs to understand code without making changes, keeping exploration results out of your main context.',
   },
   {
-    name: 'Propose',
-    goal: 'Define intent, scope, and expected impact of the change',
+    name: 'Plan',
+    model: 'Inherits',
+    tools: 'Read-only',
+    color: '#adc6ff',
+    icon: 'checklist',
+    desc: "Used during Plan Mode to gather codebase context before presenting a plan. Subagents cannot spawn other subagents, so this prevents infinite nesting while still researching what's needed.",
   },
   {
-    name: 'Spec + Design',
-    goal: 'Write requirements and technical design so implementation has clear acceptance criteria',
-  },
-  {
-    name: 'Implement',
-    goal: 'Break work into execution steps and implement in focused batches',
-  },
-  {
-    name: 'Verify',
-    goal: 'Validate against spec, if the work made corresponds to the original intent and meets the acceptance criteria',
+    name: 'General-purpose',
+    model: 'Inherits',
+    tools: 'All tools',
+    color: '#4d8eff',
+    icon: 'smart_toy',
+    desc: 'Capable agent for complex, multi-step tasks that require both exploration and action , code modifications, multi-file operations, or tasks with multiple dependent steps.',
   },
 ]
 
-const levels = [
+const benefits = [
+  { icon: 'hub', color: '#ddb7ff', label: 'Preserve context', desc: 'Exploration and heavy tasks stay out of your main conversation' },
+  { icon: 'lock', color: '#adc6ff', label: 'Enforce constraints', desc: 'Limit which tools a subagent can use for safety' },
+  { icon: 'recycling', color: '#4d8eff', label: 'Reuse configs', desc: 'Define once, available across all your projects' },
+  { icon: 'savings', color: '#98d982', label: 'Control costs', desc: 'Route lightweight tasks to faster, cheaper models like Haiku' },
+]
+
+const scopeOptions = [
   {
-    name: 'Spec-first',
-    detail: 'Write specs before coding with AI, but treat them as temporary task artifacts.',
+    id: 'project',
+    label: 'Project',
+    path: '.claude/agents/',
+    color: '#ddb7ff',
+    desc: 'Available only in this project. Check into version control so your team can use and improve them collaboratively.',
   },
   {
-    name: 'Spec-anchored',
-    detail: 'Keep specs after delivery and evolve them with the feature over time.',
-  },
-  {
-    name: 'Spec-as-source',
-    detail: 'Specs become the primary artifact; code is generated and humans mostly edit specs.',
+    id: 'user',
+    label: 'Personal',
+    path: '~/.claude/agents/',
+    color: '#4d8eff',
+    desc: 'Available in all your projects on this machine. Great for personal workflows you reuse everywhere.',
   },
 ]
 
 export default function Agents4() {
+  const [activeAgent, setActiveAgent] = useState('Explore')
+  const [activeScope, setActiveScope] = useState('project')
+
+  const currentAgent = builtInAgents.find(a => a.name === activeAgent)!
+  const currentScope = scopeOptions.find(s => s.id === activeScope)!
+
   return (
     <div style={{ maxWidth: 720, margin: '0 auto', padding: '2rem 1.5rem 4rem' }}>
-      <LessonHeader module="Agents" title="Spec-Driven Development (SDD)" duration="6 min" type="reading" />
+      <LessonHeader
+        module="Agents"
+        title="Subagents"
+        duration="5 min"
+        type="reading"
+      />
 
-      <p style={{ color: 'var(--on-surface-variant)', lineHeight: 1.8, marginBottom: '1rem', fontSize: '1.0625rem' }}>
-        SDD is how you make autonomous coding agents predictable, instead of jumping directly into edits, you force an
-        explicit sequence: explore, propose, specify, design, implement, verify.
-      </p>
       <p style={{ color: 'var(--on-surface-variant)', lineHeight: 1.8, marginBottom: '2rem', fontSize: '1.0625rem' }}>
-        The result is lower rework, clearer collaboration, and fewer accidental regressions when tasks get large.
+        Subagents are specialized AI assistants that run in their own context window. When a task would flood your main conversation with logs, search results, or file contents you won&apos;t need again, Claude delegates it to a subagent, which does the work in isolation and returns only the summary.
       </p>
 
-      <p style={{ fontSize: '0.75rem', color: 'var(--on-surface-variant)', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>
-        SDD Levels (Fowler / Thoughtworks)
+      {/* Benefits */}
+      <p style={{ fontSize: '0.75rem', color: 'var(--on-surface-variant)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>
+        Why use subagents
       </p>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', marginBottom: '2rem' }}>
-        {levels.map(level => (
-          <div key={level.name} style={{ background: 'var(--surface-low)', borderRadius: '0.6rem', padding: '0.85rem 1rem' }}>
-            <p style={{ margin: 0, color: 'var(--on-surface)', fontWeight: 600, fontSize: '0.92rem' }}>{level.name}</p>
-            <p style={{ margin: '0.3rem 0 0', color: 'var(--on-surface-variant)', fontSize: '0.875rem', lineHeight: 1.6 }}>
-              {level.detail}
-            </p>
-          </div>
-        ))}
-      </div>
-
-      <p style={{ fontSize: '0.75rem', color: 'var(--on-surface-variant)', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>
-        SDD Lifecycle
-      </p>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', marginBottom: '2rem' }}>
-        {phases.map((phase, i) => (
-          <div
-            key={phase.name}
-            style={{
-              background: 'var(--surface-low)',
-              borderRadius: '0.6rem',
-              padding: '0.85rem 1rem',
-              display: 'flex',
-              gap: '0.75rem',
-              alignItems: 'flex-start',
-            }}
-          >
-            <span
-              style={{
-                width: 22,
-                height: 22,
-                borderRadius: '999px',
-                background: 'var(--surface-highest)',
-                color: 'var(--on-surface-variant)',
-                fontSize: '0.72rem',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                flexShrink: 0,
-                marginTop: 1,
-              }}
-            >
-              {i + 1}
-            </span>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem', marginBottom: '2.5rem' }}>
+        {benefits.map(item => (
+          <div key={item.label} style={{ background: 'rgba(9, 10, 14, 0.9)', borderRadius: '0.375rem', padding: '0.875rem', display: 'flex', gap: '0.625rem', alignItems: 'flex-start' }}>
+            <span className="material-symbols-outlined" style={{ fontSize: '1rem', color: item.color, marginTop: 2, flexShrink: 0 }}>{item.icon}</span>
             <div>
-              <p style={{ margin: 0, color: 'var(--on-surface)', fontWeight: 600, fontSize: '0.92rem' }}>{phase.name}</p>
-              <p style={{ margin: '0.25rem 0 0', color: 'var(--on-surface-variant)', fontSize: '0.875rem', lineHeight: 1.6 }}>
-                {phase.goal}
-              </p>
+              <p style={{ color: 'var(--on-surface)', fontSize: '0.8125rem', fontWeight: 600, marginBottom: '0.2rem' }}>{item.label}</p>
+              <p style={{ color: 'var(--on-surface-variant)', fontSize: '0.75rem', lineHeight: 1.6, margin: 0 }}>{item.desc}</p>
             </div>
           </div>
         ))}
       </div>
 
-      <p style={{ fontSize: '0.75rem', color: 'var(--on-surface-variant)', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>
-        Command Flow
+      {/* Built-in subagents */}
+      <p style={{ fontSize: '0.75rem', color: 'var(--on-surface-variant)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>
+        Built-in subagents
       </p>
-      <CodeBlock
-        language="bash"
-        code={`/sdd-init
-/sdd-new improve-auth-flow
-/sdd-ff improve-auth-flow
-/sdd-apply improve-auth-flow
-/sdd-verify improve-auth-flow
-/sdd-archive improve-auth-flow`}
-      />
+      <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1rem' }}>
+        {builtInAgents.map(a => (
+          <button
+            key={a.name}
+            onClick={() => setActiveAgent(a.name)}
+            style={{
+              flex: 1,
+              padding: '0.625rem 0.5rem',
+              borderRadius: '0.375rem',
+              border: 'none',
+              cursor: 'pointer',
+              background: activeAgent === a.name ? 'rgba(24, 28, 38, 0.96)' : 'rgba(9, 10, 14, 0.9)',
+              transition: 'background 0.15s',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              gap: '0.25rem',
+            }}
+          >
+            <span className="material-symbols-outlined" style={{ fontSize: '1.125rem', color: activeAgent === a.name ? a.color : 'var(--on-surface-variant)' }}>
+              {a.icon}
+            </span>
+            <span style={{ fontSize: '0.7rem', color: activeAgent === a.name ? 'var(--on-surface)' : 'var(--on-surface-variant)', fontWeight: activeAgent === a.name ? 600 : 400, textAlign: 'center' }}>
+              {a.name}
+            </span>
+          </button>
+        ))}
+      </div>
 
-      <CalloutBox variant="tip">
-        Use SDD for changes that are ambiguous, risky, or cross multiple files, for tiny fixes, direct prompting is
-        usually faster.
-      </CalloutBox>
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={activeAgent}
+          initial={{ opacity: 0, y: 6 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -6 }}
+          transition={{ duration: 0.15 }}
+          style={{ marginBottom: '2.5rem' }}
+        >
+          <div style={{ background: 'rgba(9, 10, 14, 0.9)', borderRadius: '0.5rem', padding: '1.25rem', borderLeft: `3px solid ${currentAgent.color}` }}>
+            <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.75rem', flexWrap: 'wrap' }}>
+              <code style={{ fontSize: '0.7rem', padding: '0.1rem 0.4rem', borderRadius: '0.25rem', background: 'rgba(24, 28, 38, 0.96)', color: 'var(--on-surface-variant)', fontFamily: 'monospace' }}>
+                model: {currentAgent.model}
+              </code>
+              <code style={{ fontSize: '0.7rem', padding: '0.1rem 0.4rem', borderRadius: '0.25rem', background: 'rgba(24, 28, 38, 0.96)', color: 'var(--on-surface-variant)', fontFamily: 'monospace' }}>
+                tools: {currentAgent.tools}
+              </code>
+            </div>
+            <p style={{ color: 'var(--on-surface-variant)', fontSize: '0.875rem', lineHeight: 1.7, margin: 0 }}>
+              {currentAgent.desc}
+            </p>
+          </div>
+        </motion.div>
+      </AnimatePresence>
 
-      <CalloutBox variant="warning">
-        Key caution mentioned by Martin Fowler: A rigid SDD workflow does not fit every problem size, if spec overhead becomes
-        heavier than the change itself, scale the process down.
-      </CalloutBox>
+      {/* Create a subagent */}
+      <p style={{ fontSize: '0.75rem', color: 'var(--on-surface-variant)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>
+        Create a custom subagent
+      </p>
+      <p style={{ color: 'var(--on-surface-variant)', fontSize: '0.875rem', lineHeight: 1.7, marginBottom: '1rem' }}>
+        Run <code style={{ color: 'var(--on-surface)', background: 'rgba(24, 28, 38, 0.96)', padding: '0.125rem 0.375rem', borderRadius: '0.25rem', fontSize: '0.8125rem' }}>/agents</code> to open the interactive manager, or create a Markdown file with YAML frontmatter. Choose where to save it:
+      </p>
+
+      {/* Scope selector */}
+      <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1rem' }}>
+        {scopeOptions.map(s => (
+          <button
+            key={s.id}
+            onClick={() => setActiveScope(s.id)}
+            style={{
+              flex: 1,
+              padding: '0.625rem 1rem',
+              borderRadius: '0.375rem',
+              border: 'none',
+              cursor: 'pointer',
+              background: activeScope === s.id ? 'rgba(24, 28, 38, 0.96)' : 'rgba(9, 10, 14, 0.9)',
+              transition: 'background 0.15s',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.5rem',
+            }}
+          >
+            <span style={{ fontSize: '0.8125rem', color: activeScope === s.id ? 'var(--on-surface)' : 'var(--on-surface-variant)', fontWeight: activeScope === s.id ? 600 : 400 }}>
+              {s.label}
+            </span>
+            <code style={{ fontSize: '0.7rem', padding: '0.1rem 0.4rem', borderRadius: '0.25rem', background: 'rgba(8, 9, 13, 0.96)', color: activeScope === s.id ? currentScope.color : 'var(--on-surface-variant)', fontFamily: 'monospace' }}>
+              {s.path}
+            </code>
+          </button>
+        ))}
+      </div>
+
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={activeScope}
+          initial={{ opacity: 0, y: 6 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -6 }}
+          transition={{ duration: 0.15 }}
+          style={{ marginBottom: '2.5rem' }}
+        >
+          <div style={{ background: 'rgba(8, 9, 13, 0.96)', borderRadius: '0.5rem', overflow: 'hidden' }}>
+            <div style={{ padding: '0.375rem 0.875rem', background: 'rgba(12, 14, 20, 0.94)', fontSize: '0.75rem', color: 'var(--on-surface-variant)', borderBottom: '1px solid rgba(70,69,84,0.1)', display: 'flex', justifyContent: 'space-between' }}>
+              <span>{currentScope.path}code-reviewer.md</span>
+              <span style={{ color: currentScope.color }}>{currentScope.label.toLowerCase()} scope</span>
+            </div>
+            <pre style={{ padding: '0.875rem', margin: 0, fontSize: '0.8125rem', lineHeight: 1.65, color: 'var(--on-surface-variant)', fontFamily: 'monospace', whiteSpace: 'pre-wrap' }}>{`---
+name: code-reviewer
+description: Reviews code for quality, security, and best practices
+tools: Read, Glob, Grep
+model: sonnet
+---
+
+You are a code reviewer. Analyze the code and provide
+specific, actionable feedback on quality, security,
+and best practices. Show the problematic code and
+a corrected version for each issue you find.`}</pre>
+          </div>
+          <p style={{ fontSize: '0.8125rem', color: 'var(--on-surface-variant)', marginTop: '0.625rem', lineHeight: 1.6 }}>
+            {currentScope.desc}
+          </p>
+        </motion.div>
+      </AnimatePresence>
+
+      {/* Note on nesting */}
+      <div style={{ background: 'rgba(9, 10, 14, 0.9)', borderRadius: '0.5rem', padding: '1.25rem', display: 'flex', gap: '0.75rem' }}>
+        <span className="material-symbols-outlined" style={{ color: '#f59e0b', fontSize: '1.25rem', marginTop: 2, flexShrink: 0 }}>warning</span>
+        <div>
+          <p style={{ color: 'var(--on-surface)', fontWeight: 600, marginBottom: '0.375rem' }}>Subagents cannot spawn other subagents</p>
+          <p style={{ color: 'var(--on-surface-variant)', fontSize: '0.875rem', lineHeight: 1.7, margin: 0 }}>
+            Nesting is intentionally blocked. If you need multiple agents working in parallel and communicating with each other, use <strong style={{ color: 'var(--on-surface)' }}>Agent Teams</strong> instead, they coordinate across separate sessions.
+          </p>
+        </div>
+      </div>
     </div>
   )
 }

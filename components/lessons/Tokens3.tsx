@@ -2,7 +2,6 @@
 
 import { useState } from 'react'
 import LessonHeader from '@/components/LessonHeader'
-import CalloutBox from '@/components/CalloutBox'
 
 const pluginPieces = [
   { name: '.claude-plugin/plugin.json', desc: 'Plugin identity: name, version, author, metadata' },
@@ -134,7 +133,6 @@ export default function Tokens3() {
         Hooks (Claude Code)
       </h2>
 
-      {/* Hook types */}
       <p style={{ fontSize: '0.75rem', color: 'var(--on-surface-variant)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '0.625rem' }}>Hook types</p>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '0.5rem', marginBottom: '1.25rem' }}>
         {[
@@ -152,9 +150,9 @@ export default function Tokens3() {
         ))}
       </div>
 
-      {/* Events table */}
-      <div style={{ border: '1px solid rgba(70,69,84,0.2)', borderRadius: '10px', overflow: 'hidden', marginBottom: '1.25rem' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.5fr', background: 'var(--surface-high)', padding: '0.75rem 1rem', fontSize: '0.75rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.06em', color: 'var(--on-surface-variant)' }}>
+      <div className="lesson-table-scroll" style={{ marginBottom: '1.25rem' }}>
+        <div className="lesson-table-2" style={{ border: '1px solid rgba(70,69,84,0.2)', borderRadius: '10px', overflow: 'hidden' }}>
+        <div className="lesson-table-header" style={{ background: 'var(--surface-high)', padding: '0.75rem 1rem', fontSize: '0.75rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.06em', color: 'var(--on-surface-variant)' }}>
           <div>Event</div>
           <div>Purpose</div>
         </div>
@@ -170,15 +168,16 @@ export default function Tokens3() {
         ].map((event, i) => (
           <div
             key={event.name}
-            style={{ display: 'grid', gridTemplateColumns: '1fr 1.5fr', padding: '0.75rem 1rem', borderTop: '1px solid rgba(70,69,84,0.1)', background: i % 2 === 0 ? 'transparent' : 'var(--surface-low)' }}
+            className="lesson-table-row"
+            style={{ padding: '0.75rem 1rem', borderTop: '1px solid rgba(70,69,84,0.1)', background: i % 2 === 0 ? 'transparent' : 'var(--surface-low)' }}
           >
             <div style={{ fontSize: '0.8125rem', color: '#93c5fd', fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace' }}>{event.name}</div>
             <div style={{ fontSize: '0.875rem', color: 'var(--on-surface-variant)' }}>{event.use}</div>
           </div>
         ))}
+        </div>
       </div>
 
-      {/* Decision values */}
       <p style={{ fontSize: '0.75rem', color: 'var(--on-surface-variant)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '0.625rem' }}>PreToolUse decision values</p>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(170px, 1fr))', gap: '0.5rem', marginBottom: '1.25rem' }}>
         {[

@@ -63,7 +63,7 @@ export default function Agents4() {
   const currentScope = scopeOptions.find(s => s.id === activeScope)!
 
   return (
-    <div style={{ maxWidth: 720, margin: '0 auto', padding: '2rem 1.5rem 4rem' }}>
+    <div className="lesson-shell">
       <LessonHeader
         module="Agents"
         title="Subagents"
@@ -75,11 +75,10 @@ export default function Agents4() {
         Subagents are specialized AI assistants that run in their own context window. When a task would flood your main conversation with logs, search results, or file contents you won&apos;t need again, Claude delegates it to a subagent, which does the work in isolation and returns only the summary.
       </p>
 
-      {/* Benefits */}
       <p style={{ fontSize: '0.75rem', color: 'var(--on-surface-variant)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>
         Why use subagents
       </p>
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem', marginBottom: '2.5rem' }}>
+      <div className="lesson-card-grid-2" style={{ gap: '0.5rem', marginBottom: '2.5rem' }}>
         {benefits.map(item => (
           <div key={item.label} style={{ background: 'rgba(9, 10, 14, 0.9)', borderRadius: '0.375rem', padding: '0.875rem', display: 'flex', gap: '0.625rem', alignItems: 'flex-start' }}>
             <span className="material-symbols-outlined" style={{ fontSize: '1rem', color: item.color, marginTop: 2, flexShrink: 0 }}>{item.icon}</span>
@@ -91,11 +90,10 @@ export default function Agents4() {
         ))}
       </div>
 
-      {/* Built-in subagents */}
       <p style={{ fontSize: '0.75rem', color: 'var(--on-surface-variant)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>
         Built-in subagents
       </p>
-      <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1rem' }}>
+      <div className="lesson-tab-row" style={{ marginBottom: '1rem' }}>
         {builtInAgents.map(a => (
           <button
             key={a.name}
@@ -149,7 +147,6 @@ export default function Agents4() {
         </motion.div>
       </AnimatePresence>
 
-      {/* Create a subagent */}
       <p style={{ fontSize: '0.75rem', color: 'var(--on-surface-variant)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>
         Create a custom subagent
       </p>
@@ -157,8 +154,7 @@ export default function Agents4() {
         Run <code style={{ color: 'var(--on-surface)', background: 'rgba(24, 28, 38, 0.96)', padding: '0.125rem 0.375rem', borderRadius: '0.25rem', fontSize: '0.8125rem' }}>/agents</code> to open the interactive manager, or create a Markdown file with YAML frontmatter. Choose where to save it:
       </p>
 
-      {/* Scope selector */}
-      <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1rem' }}>
+      <div className="lesson-tab-row" style={{ marginBottom: '1rem' }}>
         {scopeOptions.map(s => (
           <button
             key={s.id}
@@ -218,7 +214,6 @@ a corrected version for each issue you find.`}</pre>
         </motion.div>
       </AnimatePresence>
 
-      {/* Note on nesting */}
       <div style={{ background: 'rgba(9, 10, 14, 0.9)', borderRadius: '0.5rem', padding: '1.25rem', display: 'flex', gap: '0.75rem' }}>
         <span className="material-symbols-outlined" style={{ color: '#f59e0b', fontSize: '1.25rem', marginTop: 2, flexShrink: 0 }}>warning</span>
         <div>

@@ -29,7 +29,6 @@ export default function CourseSidebar({
 
   return (
     <>
-      {/* Backdrop for mobile */}
       {open && (
         <div
           onClick={() => onSelectLesson(currentLessonId)}
@@ -164,7 +163,6 @@ export default function CourseSidebar({
                         if (!isCurrent) e.currentTarget.style.background = 'transparent'
                       }}
                     >
-                      {/* Active glow indicator */}
                       {isCurrent && (
                         <div
                           style={{
@@ -180,7 +178,6 @@ export default function CourseSidebar({
                         />
                       )}
 
-                      {/* Status icon */}
                       <div
                         style={{
                           width: '16px',
@@ -210,7 +207,6 @@ export default function CourseSidebar({
                         )}
                       </div>
 
-                      {/* Title + meta */}
                       <div style={{ flex: 1, minWidth: 0 }}>
                         <div
                           style={{
@@ -239,18 +235,28 @@ export default function CourseSidebar({
         @media (max-width: 768px) {
           .course-sidebar {
             position: fixed;
-            top: 56px;
-            left: 0;
-            bottom: 0;
-            z-index: 20;
+            top: calc(var(--mobile-header-height) + 0.75rem);
+            left: 0.5rem;
+            bottom: 0.5rem;
+            z-index: 40;
+            width: min(320px, calc(100vw - 1rem));
+            height: auto;
             transform: translateX(-100%);
             transition: transform 0.25s ease;
+            border-radius: 14px;
+            border: 1px solid rgba(74, 68, 85, 0.28);
+            box-shadow: 0 24px 64px rgba(0, 0, 0, 0.55);
+            visibility: hidden;
+            pointer-events: none;
           }
           .course-sidebar.open {
             transform: translateX(0);
+            visibility: visible;
+            pointer-events: auto;
           }
           .sidebar-backdrop {
             display: block !important;
+            z-index: 35 !important;
           }
         }
       `}</style>

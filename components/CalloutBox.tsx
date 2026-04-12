@@ -30,13 +30,13 @@ export default function CalloutBox({ children, variant = 'tip' }: CalloutBoxProp
   const s = variantStyles[variant]
   return (
     <div
+      className="lesson-inline-row lesson-mobile-stack"
       style={{
         boxShadow: 'none',
         background: s.bg,
         borderRadius: '8px',
         padding: '1rem 1.25rem',
         margin: '1.5rem 0',
-        display: 'flex',
         gap: '0.75rem',
         alignItems: 'flex-start',
         backdropFilter: 'blur(12px)',

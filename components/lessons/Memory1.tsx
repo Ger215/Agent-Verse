@@ -49,9 +49,7 @@ export default function Memory1() {
         </div>
       </a>
 
-      {/* Two-column comparison */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '2rem' }}>
-        {/* Session */}
+      <div className="lesson-card-grid-2" style={{ marginBottom: '2rem' }}>
         <div
           style={{
             background: 'var(--surface-low)',
@@ -95,7 +93,6 @@ export default function Memory1() {
           </div>
         </div>
 
-        {/* Persistent */}
         <div
           style={{
             background: 'var(--surface-low)',
@@ -166,41 +163,39 @@ export default function Memory1() {
         ))}
       </div>
 
-      {/* Use cases table */}
       <h2 style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--on-surface)', margin: '2rem 0 1rem', letterSpacing: '-0.02em' }}>
         When to Use Each
       </h2>
 
-      <div
-        style={{
-          border: '1px solid rgba(70,69,84,0.2)',
-          borderRadius: '10px',
-          overflow: 'hidden',
-          marginBottom: '2rem',
-        }}
-      >
+      <div className="lesson-table-scroll" style={{ marginBottom: '2rem' }}>
         <div
+          className="lesson-table-2"
           style={{
-            display: 'grid',
-            gridTemplateColumns: '1fr 1fr',
-            background: 'var(--surface-high)',
-            padding: '0.75rem 1.25rem',
-            fontSize: '0.75rem',
-            fontWeight: 600,
-            textTransform: 'uppercase',
-            letterSpacing: '0.06em',
-            color: 'var(--on-surface-variant)',
+            border: '1px solid rgba(70,69,84,0.2)',
+            borderRadius: '10px',
+            overflow: 'hidden',
           }}
         >
-          <div>Session</div>
-          <div>Engram</div>
-        </div>
+          <div
+            className="lesson-table-header"
+            style={{
+              background: 'var(--surface-high)',
+              padding: '0.75rem 1.25rem',
+              fontSize: '0.75rem',
+              fontWeight: 600,
+              textTransform: 'uppercase',
+              letterSpacing: '0.06em',
+              color: 'var(--on-surface-variant)',
+            }}
+          >
+            <div>Session</div>
+            <div>Engram</div>
+          </div>
         {useCases.map((row, i) => (
           <div
             key={i}
+            className="lesson-table-row"
             style={{
-              display: 'grid',
-              gridTemplateColumns: '1fr 1fr',
               padding: '0.75rem 1.25rem',
               borderTop: '1px solid rgba(70,69,84,0.1)',
               background: i % 2 === 0 ? 'transparent' : 'var(--surface-low)',
@@ -210,6 +205,7 @@ export default function Memory1() {
             <div style={{ fontSize: '0.875rem', color: 'var(--on-surface-variant)' }}>{row.persistent}</div>
           </div>
         ))}
+        </div>
       </div>
     </>
   )

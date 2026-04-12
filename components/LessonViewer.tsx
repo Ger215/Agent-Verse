@@ -212,13 +212,7 @@ export default function LessonViewer({
           scrollbarGutter: "stable",
         }}
       >
-        <div
-          style={{
-            maxWidth: "860px",
-            margin: "0 auto",
-            padding: "2rem 1.25rem 1.5rem",
-          }}
-        >
+        <div className="lesson-viewer-inner">
           <div
             style={{
               background: "rgba(10, 12, 18, 0.7)",

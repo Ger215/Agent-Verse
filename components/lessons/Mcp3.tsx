@@ -146,7 +146,7 @@ export default function Mcp3() {
   }
 
   return (
-    <div style={{ maxWidth: 720, margin: '0 auto', padding: '2rem 1.5rem 4rem' }}>
+    <div className="lesson-shell">
       <LessonHeader
         module="MCP Protocol"
         title="MCP Alternatives: CLIs or REST APIs + Skills"
@@ -160,7 +160,6 @@ export default function Mcp3() {
         Less infrastructure, less tokens to get the same result.
       </p>
 
-      {/* Decision tree */}
       <p style={{ fontSize: '0.75rem', color: 'var(--on-surface-variant)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>
         Which approach should I use?
       </p>
@@ -204,7 +203,7 @@ export default function Mcp3() {
               <p style={{ color: 'var(--on-surface)', fontSize: '0.9375rem', fontWeight: 600, marginBottom: '1rem' }}>
                 {decisionSteps[decisionStep].question}
               </p>
-              <div style={{ display: 'flex', gap: '0.5rem' }}>
+              <div className="lesson-inline-row">
                 <button onClick={() => handleDecision('yes')} style={{ padding: '0.5rem 1.25rem', borderRadius: '0.375rem', border: '1px solid rgba(52,211,153,0.4)', background: 'rgba(52,211,153,0.08)', color: '#86efac', fontSize: '0.875rem', cursor: 'pointer', fontWeight: 600 }}>
                   Yes
                 </button>
@@ -217,23 +216,21 @@ export default function Mcp3() {
         </AnimatePresence>
       </div>
 
-      {/* ── Disclaimer ──────────────────────────────────────────────────────── */}
-      <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start', background: 'rgba(245,158,11,0.07)', border: '1px solid rgba(245,158,11,0.25)', borderRadius: '0.5rem', padding: '0.875rem 1rem', marginBottom: '2rem' }}>
+      <div className="lesson-inline-row" style={{ background: 'rgba(245,158,11,0.07)', border: '1px solid rgba(245,158,11,0.25)', borderRadius: '0.5rem', padding: '0.875rem 1rem', marginBottom: '2rem' }}>
         <span className="material-symbols-outlined" style={{ fontSize: '1.1rem', color: '#f59e0b', flexShrink: 0, marginTop: 1 }}>warning</span>
         <p style={{ color: 'var(--on-surface-variant)', fontSize: '0.8125rem', lineHeight: 1.7, margin: 0 }}>
           The skill files below are <strong style={{ color: 'var(--on-surface)' }}>starting points, not drop-in solutions,</strong> each one will need to be adapted to your own setup, binary paths, workspace IDs, API tokens, project keys, and auth methods will differ from environment to environment so treat them just as templates.
         </p>
       </div>
 
-      {/* ── CLI + Skill ──────────────────────────────────────────────────────── */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.75rem' }}>
+      <div className="lesson-inline-row" style={{ marginBottom: '0.75rem' }}>
         <span className="material-symbols-outlined" style={{ fontSize: '1rem', color: '#34d399' }}>terminal</span>
         <p style={{ fontSize: '0.75rem', color: 'var(--on-surface-variant)', letterSpacing: '0.08em', textTransform: 'uppercase', margin: 0 }}>CLI + Skill</p>
       </div>
       <p style={{ color: 'var(--on-surface-variant)', fontSize: '0.875rem', lineHeight: 1.7, marginBottom: '1rem' }}>
         The tool ships a binary, the skill teaches Claude which commands to run, which flags to use, and gotchas like binary path overrides.
       </p>
-      <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.75rem' }}>
+      <div className="lesson-tab-row" style={{ marginBottom: '0.75rem' }}>
         {cliSkills.map(s => (
           <button
             key={s.id}
@@ -261,7 +258,7 @@ export default function Mcp3() {
 
       <AnimatePresence mode="wait">
         <motion.div key={activeCliSkill} initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} transition={{ duration: 0.15 }} style={{ marginBottom: '2.5rem' }}>
-          <div style={{ background: 'rgba(9,10,14,0.9)', borderRadius: '0.5rem', padding: '1rem 1.25rem', borderLeft: `3px solid ${currentCli.color}`, display: 'flex', gap: '1rem', alignItems: 'center' }}>
+          <div className="lesson-inline-row" style={{ background: 'rgba(9,10,14,0.9)', borderRadius: '0.5rem', padding: '1rem 1.25rem', borderLeft: `3px solid ${currentCli.color}`, gap: '1rem' }}>
             <div style={{ flex: 1 }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.25rem' }}>
                 <img src={currentCli.logo} alt={currentCli.tool} width={18} height={18} />
@@ -277,15 +274,14 @@ export default function Mcp3() {
         </motion.div>
       </AnimatePresence>
 
-      {/* ── REST API + Skill ─────────────────────────────────────────────────── */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.75rem' }}>
+      <div className="lesson-inline-row" style={{ marginBottom: '0.75rem' }}>
         <span className="material-symbols-outlined" style={{ fontSize: '1rem', color: '#4d8eff' }}>api</span>
         <p style={{ fontSize: '0.75rem', color: 'var(--on-surface-variant)', letterSpacing: '0.08em', textTransform: 'uppercase', margin: 0 }}>REST API + Skill</p>
       </div>
       <p style={{ color: 'var(--on-surface-variant)', fontSize: '0.875rem', lineHeight: 1.7, marginBottom: '1rem' }}>
         The tool only has an HTTP API. The skill defines the base URL, auth header, and the most common curl patterns so Claude never has to guess.
       </p>
-      <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.75rem' }}>
+      <div className="lesson-tab-row" style={{ marginBottom: '0.75rem' }}>
         {restSkills.map(s => (
           <button
             key={s.id}
@@ -312,7 +308,7 @@ export default function Mcp3() {
 
       <AnimatePresence mode="wait">
         <motion.div key={activeRestSkill} initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} transition={{ duration: 0.15 }} style={{ marginBottom: '2.5rem' }}>
-          <div style={{ background: 'rgba(9,10,14,0.9)', borderRadius: '0.5rem', padding: '1rem 1.25rem', borderLeft: `3px solid ${currentRest.color}`, display: 'flex', gap: '1rem', alignItems: 'center' }}>
+          <div className="lesson-inline-row" style={{ background: 'rgba(9,10,14,0.9)', borderRadius: '0.5rem', padding: '1rem 1.25rem', borderLeft: `3px solid ${currentRest.color}`, gap: '1rem' }}>
             <div style={{ flex: 1 }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.25rem' }}>
                 <img src={currentRest.logo} alt={currentRest.tool} width={18} height={18} />
@@ -328,7 +324,6 @@ export default function Mcp3() {
         </motion.div>
       </AnimatePresence>
 
-      {/* ── When to still use MCP ────────────────────────────────────────────── */}
       <p style={{ fontSize: '0.75rem', color: 'var(--on-surface-variant)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>
         When to still use MCP
       </p>

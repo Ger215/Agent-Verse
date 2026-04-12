@@ -77,34 +77,13 @@ export default function Home() {
   const hasPrev = currentIndex > 0
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        height: '100dvh',
-        overflow: 'hidden',
-        background: 'transparent',
-        padding: '0.75rem',
-      }}
-    >
+    <div className="app-shell">
       <TopBar
         completed={completed}
-        currentLessonId={currentLessonId}
         onMenuToggle={() => setSidebarOpen(o => !o)}
       />
 
-      <div
-        style={{
-          display: 'flex',
-          flex: 1,
-          minHeight: 0,
-          overflow: 'hidden',
-          marginTop: '0.75rem',
-          borderRadius: '10px',
-          boxShadow: 'none',
-          background: 'rgba(12, 14, 20, 0.94)',
-        }}
-      >
+      <div className="app-frame">
         <CourseSidebar
           currentLessonId={currentLessonId}
           completed={completed}

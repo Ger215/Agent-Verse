@@ -42,7 +42,7 @@ const levels = [
 
 export default function Agents5() {
   return (
-    <div style={{ maxWidth: 720, margin: '0 auto', padding: '2rem 1.5rem 4rem' }}>
+    <div className="lesson-shell">
       <LessonHeader module="Agents" title="Spec-Driven Development (SDD)" duration="6 min" type="reading" />
 
       <p style={{ color: 'var(--on-surface-variant)', lineHeight: 1.8, marginBottom: '1rem', fontSize: '1.0625rem' }}>

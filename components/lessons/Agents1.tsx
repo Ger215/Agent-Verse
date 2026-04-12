@@ -54,7 +54,7 @@ export default function Agents1() {
   }
 
   return (
-    <div style={{ maxWidth: 720, margin: '0 auto', padding: '2rem 1.5rem 4rem' }}>
+    <div className="lesson-shell">
       <LessonHeader
         module="Agents"
         title="The Agentic Loop"
@@ -76,7 +76,6 @@ export default function Agents1() {
         <li>3. <strong style={{ color: 'var(--on-surface)' }}>Verify results</strong></li>
       </ul>
 
-      {/* Prompt being solved */}
       <div style={{
         background: 'var(--surface-low)',
         borderRadius: '0.5rem',
@@ -95,8 +94,7 @@ export default function Agents1() {
         </div>
       </div>
 
-      {/* Phase tabs */}
-      <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1.5rem' }}>
+      <div className="lesson-tab-row" style={{ marginBottom: '1.5rem' }}>
         {steps.map((step, i) => (
           <button
             key={step.id}
@@ -148,7 +146,6 @@ export default function Agents1() {
         ))}
       </div>
 
-      {/* Step detail */}
       <AnimatePresence mode="wait">
         <motion.div
           key={activeStep}
@@ -172,7 +169,6 @@ export default function Agents1() {
             </p>
           </div>
 
-          {/* Tool output */}
           <div style={{ background: 'var(--surface-lowest)', borderRadius: '0.5rem', overflow: 'hidden', marginBottom: '1.5rem' }}>
             <div style={{
               padding: '0.5rem 1rem',
@@ -203,9 +199,8 @@ export default function Agents1() {
         </motion.div>
       </AnimatePresence>
 
-      {/* Controls */}
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+      <div className="lesson-actions-row">
+        <div className="lesson-inline-row">
           <span style={{ fontSize: '0.8125rem', color: 'var(--on-surface-variant)' }}>
             Phase {activeStep + 1} of {steps.length}
           </span>
@@ -252,7 +247,6 @@ export default function Agents1() {
         </button>
       </div>
 
-      {/* Key callout */}
       <div style={{
         marginTop: '2.5rem',
         padding: '1.25rem',

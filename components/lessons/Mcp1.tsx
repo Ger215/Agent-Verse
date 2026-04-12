@@ -84,13 +84,11 @@ export default function Mcp1() {
         (APIs, databases, issue trackers, docs) using one consistent contract.
       </p>
 
-      {/* Before / After */}
       <h2 style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--on-surface)', margin: '2rem 0 1rem', letterSpacing: '-0.02em' }}>
         Before vs After MCP
       </h2>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '2rem' }}>
-        {/* Before */}
+      <div className="lesson-card-grid-2" style={{ marginBottom: '2rem' }}>
         <div
           style={{
             background: 'var(--surface-low)',
@@ -120,7 +118,6 @@ export default function Mcp1() {
           </p>
         </div>
 
-        {/* After */}
         <div
           style={{
             background: 'var(--surface-low)',

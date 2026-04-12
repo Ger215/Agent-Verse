@@ -59,11 +59,10 @@ export default function Agents3() {
   const [activeMode, setActiveMode] = useState('default')
   const [activeMemory, setActiveMemory] = useState('CLAUDE.md')
 
-  const currentMode = permissionModes.find(m => m.id === activeMode)!
   const currentMemory = memoryTypes.find(m => m.label === activeMemory)!
 
   return (
-    <div style={{ maxWidth: 720, margin: '0 auto', padding: '2rem 1.5rem 4rem' }}>
+    <div className="lesson-shell">
       <LessonHeader
         module="Agents"
         title="Sessions, Context & Control"
@@ -75,7 +74,6 @@ export default function Agents3() {
         Every Claude Code session has its own context window, the conversation history, file contents, tool results, and instructions that Claude holds in memory.
       </p>
 
-      {/* Context window visual */}
       <div style={{ marginBottom: '2.5rem' }}>
         <p style={{ fontSize: '0.75rem', color: 'var(--on-surface-variant)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '0.875rem' }}>
           What&apos;s inside the context window
@@ -107,11 +105,10 @@ export default function Agents3() {
         </p>
       </div>
 
-      {/* Memory types */}
       <p style={{ fontSize: '0.75rem', color: 'var(--on-surface-variant)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>
         Three kinds of memory
       </p>
-      <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1rem' }}>
+      <div className="lesson-tab-row" style={{ marginBottom: '1rem' }}>
         {memoryTypes.map(m => (
           <button
             key={m.label}
@@ -157,7 +154,7 @@ export default function Agents3() {
           transition={{ duration: 0.15 }}
           style={{ marginBottom: '2.5rem' }}
         >
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem' }}>
+          <div className="lesson-card-grid-2" style={{ gap: '0.75rem' }}>
             <div style={{
               background: 'rgba(12, 14, 20, 0.94)',
               borderRadius: '0.5rem',
@@ -188,7 +185,6 @@ export default function Agents3() {
         </motion.div>
       </AnimatePresence>
 
-      {/* Permission modes */}
       <p style={{ fontSize: '0.75rem', color: 'var(--on-surface-variant)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>
         Permission modes , press Shift+Tab to cycle
       </p>
@@ -253,7 +249,6 @@ export default function Agents3() {
         ))}
       </div>
 
-      {/* Context commands */}
       <p style={{ fontSize: '0.75rem', color: 'var(--on-surface-variant)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>
         Context management commands
       </p>
@@ -314,7 +309,6 @@ export default function Agents3() {
         ))}
       </div>
 
-      {/* Checkpoints */}
       <div style={{
         background: 'rgba(9, 10, 14, 0.9)',
         borderRadius: '0.5rem',
@@ -332,7 +326,6 @@ export default function Agents3() {
         </div>
       </div>
 
-      {/* Sessions */}
       <div style={{
         background: 'rgba(9, 10, 14, 0.9)',
         borderRadius: '0.5rem',

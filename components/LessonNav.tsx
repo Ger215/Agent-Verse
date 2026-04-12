@@ -168,6 +168,10 @@ export default function LessonNav({
             width: 100%;
             justify-content: center;
           }
+          .lesson-nav > div {
+            width: 100%;
+            justify-content: center;
+          }
         }
       `}</style>
     </div>

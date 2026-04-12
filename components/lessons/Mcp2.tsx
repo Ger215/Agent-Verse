@@ -62,10 +62,9 @@ export default function Mcp2() {
         through a transport.
       </p>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', marginBottom: '2rem', alignItems: 'start' }}>
-        {/* Architecture blocks */}
+      <div className="lesson-split-grid" style={{ marginBottom: '2rem' }}>
         <div>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem', marginBottom: '1rem' }}>
+          <div className="lesson-card-grid-2" style={{ gap: '0.75rem', marginBottom: '1rem' }}>
             {blocks.map(block => {
               const isActive = active === block.id
               const isConnected = activeBlock?.connections.includes(block.id) || block.connections.includes(active || '')
@@ -101,7 +100,6 @@ export default function Mcp2() {
             })}
           </div>
 
-          {/* MCP label */}
           <div
             style={{
               padding: '0.5rem',
@@ -117,7 +115,6 @@ export default function Mcp2() {
           </div>
         </div>
 
-        {/* Detail panel */}
         <div
           style={{
             background: activeBlock ? `${activeBlock.color}10` : 'var(--surface-low)',

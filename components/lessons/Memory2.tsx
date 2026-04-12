@@ -130,7 +130,7 @@ export default function Memory2() {
       <h2 style={{ fontSize: '1.2rem', fontWeight: 700, color: 'var(--on-surface)', margin: '0 0 0.8rem' }}>
         Architecture
       </h2>
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr auto 1fr auto 1fr auto 1fr', alignItems: 'center', gap: '0.5rem', background: 'var(--surface-low)', borderRadius: '10px', padding: '0.9rem', marginBottom: '2rem' }}>
+      <div className="lesson-flow-grid" style={{ background: 'var(--surface-low)', borderRadius: '10px', padding: '0.9rem', marginBottom: '2rem' }}>
         {[
           ['Agent', 'Claude / OpenCode'],
           ['MCP', 'stdio transport'],
@@ -188,7 +188,7 @@ export default function Memory2() {
         Search Simulation
       </h2>
       <div style={{ marginBottom: '1rem' }}>
-        <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.75rem' }}>
+        <div className="lesson-tab-row" style={{ marginBottom: '0.75rem' }}>
           <input
             type="text"
             value={query}
@@ -263,7 +263,6 @@ export default function Memory2() {
         })}
       </div>
 
-      {/* Retrieved memory */}
       {searched && topMatch && (
         <div
           style={{

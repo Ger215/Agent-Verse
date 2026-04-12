@@ -108,11 +108,9 @@ export default function Tokens2() {
         </div>
       </div>
 
-      {/* Token counter */}
       <div
+        className="lesson-inline-row"
         style={{
-          display: 'flex',
-          alignItems: 'center',
           gap: '1.5rem',
           padding: '1.25rem',
           background: 'var(--surface-low)',
@@ -150,7 +148,6 @@ export default function Tokens2() {
         )}
       </div>
 
-      {/* Context display */}
       <div
         style={{
           background: 'var(--surface-lowest)',
@@ -188,8 +185,7 @@ export default function Tokens2() {
         </pre>
       </div>
 
-      {/* Controls */}
-      <div style={{ display: 'flex', gap: '0.75rem', marginBottom: '2rem' }}>
+      <div className="lesson-tab-row" style={{ marginBottom: '2rem' }}>
         <button
           onClick={handleCompress}
           disabled={compressed || animating}
@@ -229,7 +225,6 @@ export default function Tokens2() {
         </button>
       </div>
 
-      {/* Techniques */}
       <h2 style={{ fontSize: '1.125rem', fontWeight: 700, color: 'var(--on-surface)', margin: '0 0 1rem', letterSpacing: '-0.02em' }}>
         Techniques Used
       </h2>

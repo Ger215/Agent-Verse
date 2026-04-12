@@ -68,7 +68,6 @@ export default function Tokens1() {
         </div>
       </a>
 
-      {/* Token equivalencies */}
       <div
         style={{
           background: 'var(--surface-low)',
@@ -81,7 +80,7 @@ export default function Tokens1() {
         <h3 style={{ fontSize: '0.875rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.06em', color: 'var(--on-surface-variant)', margin: '0 0 1rem' }}>
           RTK Snapshot
         </h3>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1rem' }}>
+        <div className="lesson-card-grid-3">
           {[
             { tokens: 'Rust binary', equals: 'single executable', icon: 'memory' },
             { tokens: '100+ commands', equals: 'supported rewrites', icon: 'terminal' },
@@ -108,13 +107,13 @@ export default function Tokens1() {
         </div>
       </div>
 
-      {/* RTK savings table */}
       <h2 style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--on-surface)', margin: '2rem 0 1rem', letterSpacing: '-0.02em' }}>
         Typical Savings by Command
       </h2>
 
-      <div style={{ border: '1px solid rgba(70,69,84,0.2)', borderRadius: '10px', overflow: 'hidden', marginBottom: '2rem' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr 1fr 0.8fr', background: 'var(--surface-high)', padding: '0.75rem 1.25rem', fontSize: '0.75rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.06em', color: 'var(--on-surface-variant)' }}>
+      <div className="lesson-table-scroll" style={{ marginBottom: '2rem' }}>
+        <div className="lesson-table-4" style={{ border: '1px solid rgba(70,69,84,0.2)', borderRadius: '10px', overflow: 'hidden' }}>
+        <div className="lesson-table-header" style={{ background: 'var(--surface-high)', padding: '0.75rem 1.25rem', fontSize: '0.75rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.06em', color: 'var(--on-surface-variant)' }}>
           <div>Operation</div>
           <div>Standard</div>
           <div>RTK</div>
@@ -123,7 +122,8 @@ export default function Tokens1() {
         {rtkSavings.map((row, i) => (
           <div
             key={row.operation}
-            style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr 1fr 0.8fr', padding: '0.75rem 1.25rem', borderTop: '1px solid rgba(70,69,84,0.1)', background: i % 2 === 0 ? 'transparent' : 'var(--surface-low)' }}
+            className="lesson-table-row"
+            style={{ padding: '0.75rem 1.25rem', borderTop: '1px solid rgba(70,69,84,0.1)', background: i % 2 === 0 ? 'transparent' : 'var(--surface-low)' }}
           >
             <div style={{ fontSize: '0.875rem', color: 'var(--on-surface)', fontWeight: 500 }}>{row.operation}</div>
             <div style={{ fontSize: '0.875rem', color: '#fca5a5', fontFamily: 'ui-monospace, monospace' }}>{row.standard}</div>
@@ -131,9 +131,9 @@ export default function Tokens1() {
             <div style={{ fontSize: '0.875rem', color: '#34d399', fontWeight: 700 }}>{row.savings}</div>
           </div>
         ))}
+        </div>
       </div>
 
-      {/* Three problems */}
       <h2 style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--on-surface)', margin: '2rem 0 1rem', letterSpacing: '-0.02em' }}>
         The Three Problems
       </h2>

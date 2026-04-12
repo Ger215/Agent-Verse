@@ -5,7 +5,6 @@ import { allLessons } from '@/lib/courseData'
 
 interface TopBarProps {
   completed: Set<string>
-  currentLessonId: string
   onMenuToggle: () => void
 }
 
@@ -15,34 +14,24 @@ export default function TopBar({ completed, onMenuToggle }: TopBarProps) {
   const pct = total > 0 ? (done / total) * 100 : 0
 
   return (
-    <header
-      style={{
-        background: 'rgba(9, 10, 14, 0.86)',
-        backdropFilter: 'blur(12px)',
-        borderRadius: '12px',
-        minHeight: '62px',
-        display: 'flex',
-        alignItems: 'center',
-        padding: '0.7rem 1rem',
-        gap: '1rem',
-        flexShrink: 0,
-        zIndex: 10,
-        boxShadow: 'none',
-      }}
-    >
-      <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexShrink: 0 }}>
+    <header className="topbar-shell">
+      <div className="topbar-brand">
         <Image
           src="/Logo.png"
           alt="Agent Verse logo"
           width={48}
           height={48}
           priority
-          style={{ flexShrink: 0 }}
+          style={{ flexShrink: 0, width: 'auto', height: 'auto', maxWidth: '48px' }}
         />
-        <span className="gradient-text" style={{ fontWeight: 700, fontSize: '0.95rem', letterSpacing: '-0.01em' }}>
+        <span
+          className="gradient-text"
+          style={{ fontWeight: 700, fontSize: '0.95rem', letterSpacing: '-0.01em', flexShrink: 0 }}
+        >
           Agent Verse
         </span>
         <span
+          aria-hidden
           style={{
             width: '1px',
             height: '16px',
@@ -50,7 +39,7 @@ export default function TopBar({ completed, onMenuToggle }: TopBarProps) {
             opacity: 0.5,
           }}
         />
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.1rem' }}>
+        <div className="topbar-brand-copy">
           <span
             style={{
               fontSize: '0.75rem',
@@ -60,11 +49,21 @@ export default function TopBar({ completed, onMenuToggle }: TopBarProps) {
               borderRadius: '999px',
               boxShadow: 'none',
               background: 'rgba(15, 17, 23, 0.82)',
+              width: 'fit-content',
+              maxWidth: '100%',
             }}
           >
             AI Workflow Crash Course
           </span>
-          <span style={{ fontSize: '0.65rem', color: 'var(--on-surface-variant)', opacity: 0.6, paddingLeft: '0.5rem' }}>
+          <span
+            style={{
+              fontSize: '0.65rem',
+              color: 'var(--on-surface-variant)',
+              opacity: 0.6,
+              paddingLeft: '0.5rem',
+              overflowWrap: 'anywhere',
+            }}
+          >
             Developed By{' '}
             <a
               href="https://www.linkedin.com/in/germ%C3%A1n-ramos-199596204/"
@@ -78,20 +77,7 @@ export default function TopBar({ completed, onMenuToggle }: TopBarProps) {
         </div>
       </div>
 
-      <div
-        style={{
-          flex: 1,
-          display: 'flex',
-          alignItems: 'center',
-          gap: '0.55rem',
-          maxWidth: '360px',
-          margin: '0 auto',
-          background: 'rgba(9, 10, 14, 0.8)',
-          padding: '0.45rem 0.6rem',
-          borderRadius: '8px',
-        }}
-        className="topbar-progress"
-      >
+      <div className="topbar-progress">
         <span
           style={{
             fontSize: '0.72rem',
@@ -136,32 +122,24 @@ export default function TopBar({ completed, onMenuToggle }: TopBarProps) {
 
       <button
         onClick={onMenuToggle}
-        style={{
-          marginLeft: 'auto',
-          background: 'transparent',
-          boxShadow: 'none',
-          border: 'none',
-          borderRadius: '6px',
-          cursor: 'pointer',
-          color: 'var(--on-surface)',
-          padding: '0.35rem',
-          display: 'none',
-          transition: 'background 0.15s ease',
-        }}
+        style={{ boxShadow: 'none' }}
         onMouseOver={e => (e.currentTarget.style.background = 'var(--surface-high)')}
         onMouseOut={e => (e.currentTarget.style.background = 'transparent')}
         className="menu-toggle"
         aria-label="Toggle menu"
       >
-        <span className="material-symbols-outlined">menu</span>
+        <span
+          className="material-symbols-outlined"
+          style={{
+            lineHeight: 1,
+            fontSize: '1.25rem',
+            display: 'block',
+            margin: '0 auto',
+          }}
+        >
+          menu
+        </span>
       </button>
-
-      <style>{`
-        @media (max-width: 768px) {
-          .topbar-progress { display: none !important; }
-          .menu-toggle { display: flex !important; }
-        }
-      `}</style>
     </header>
   )
 }

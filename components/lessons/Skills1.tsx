@@ -2,7 +2,7 @@ import LessonHeader from "@/components/LessonHeader";
 
 export default function Skills1() {
   return (
-    <div className="max-w-3xl mx-auto px-6 py-10">
+    <div className="lesson-shell">
       <LessonHeader
         module="Skills"
         title="What are Skills?"
@@ -10,7 +10,6 @@ export default function Skills1() {
         type="reading"
       />
 
-      {/* Intro */}
       <p
         className="mt-8 text-base leading-7"
         style={{ color: "var(--on-surface)" }}
@@ -41,7 +40,6 @@ export default function Skills1() {
         task in your workflow.
       </p>
 
-      {/* Two types of skill content */}
       <h2
         className="mt-12 text-lg font-semibold"
         style={{ color: "var(--on-surface)" }}
@@ -66,7 +64,6 @@ export default function Skills1() {
       </p>
 
       <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-4">
-        {/* Reference */}
         <div
           className="rounded-xl p-5 flex flex-col gap-3"
           style={{
@@ -112,7 +109,6 @@ Always use named exports.
 Prefer const over let.`}</pre>
         </div>
 
-        {/* Task */}
         <div
           className="rounded-xl p-5 flex flex-col gap-3"
           style={{
@@ -161,7 +157,6 @@ disable-model-invocation:
         </div>
       </div>
 
-      {/* Where skills live */}
       <h2
         className="mt-12 text-lg font-semibold"
         style={{ color: "var(--on-surface)" }}
@@ -208,9 +203,8 @@ disable-model-invocation:
         ].map((row, i, arr) => (
           <div
             key={i}
-            className="grid gap-4 px-5 py-4 text-sm"
+            className="skills-scope-row px-5 py-4 text-sm"
             style={{
-              gridTemplateColumns: "1fr 2fr 1fr",
               background: i % 2 === 0 ? "var(--surface-low)" : "var(--surface)",
               borderBottom:
                 i < arr.length - 1
@@ -249,7 +243,6 @@ disable-model-invocation:
         ))}
       </div>
 
-      {/* Directory structure */}
       <h2
         className="mt-12 text-lg font-semibold"
         style={{ color: "var(--on-surface)" }}

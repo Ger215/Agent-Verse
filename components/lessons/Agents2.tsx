@@ -77,7 +77,7 @@ export default function Agents2() {
   const active = toolCategories.find(t => t.id === activeId)!
 
   return (
-    <div style={{ maxWidth: 720, margin: '0 auto', padding: '2rem 1.5rem 4rem' }}>
+    <div className="lesson-shell">
       <LessonHeader
         module="Agents"
         title="Models & Tools"
@@ -85,7 +85,6 @@ export default function Agents2() {
         type="interactive"
       />
 
-      {/* Intro */}
       <p style={{ color: 'var(--on-surface-variant)', lineHeight: 1.8, marginBottom: '0.75rem', fontSize: '1.0625rem' }}>
         The agentic loop runs on two things: a <strong style={{ color: 'var(--on-surface)' }}>model</strong> that reasons, and <strong style={{ color: 'var(--on-surface)' }}>tools</strong> that act. Without tools, Claude can only produce text, with them, it can read your code, run commands, search the web, and verify its own work.
       </p>
@@ -93,7 +92,6 @@ export default function Agents2() {
         The built-in tools fall into five categories, select each one below to explore what it does.
       </p>
 
-      {/* Model box */}
       <div style={{
         background: 'var(--surface)',
         borderRadius: '0.5rem',
@@ -120,7 +118,6 @@ export default function Agents2() {
         </div>
       </div>
 
-      {/* Tool category selector */}
       <p style={{ fontSize: '0.75rem', color: 'var(--on-surface-variant)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>
         Tool Categories
       </p>
@@ -159,7 +156,6 @@ export default function Agents2() {
         ))}
       </div>
 
-      {/* Active category detail */}
       <AnimatePresence mode="wait">
         <motion.div
           key={activeId}
@@ -184,7 +180,6 @@ export default function Agents2() {
             </p>
           </div>
 
-          {/* Examples */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', marginBottom: '1.25rem' }}>
             {active.examples.map((ex, i) => (
               <div key={i} style={{ background: 'var(--surface-lowest)', borderRadius: '0.375rem', overflow: 'hidden' }}>
@@ -212,7 +207,6 @@ export default function Agents2() {
             ))}
           </div>
 
-          {/* Insight */}
           <div style={{
             padding: '1rem 1.25rem',
             background: 'var(--surface-low)',
@@ -229,7 +223,6 @@ export default function Agents2() {
         </motion.div>
       </AnimatePresence>
 
-      {/* How they chain together */}
       <div style={{ marginTop: '2.5rem' }}>
         <p style={{ fontSize: '0.75rem', color: 'var(--on-surface-variant)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '1rem' }}>
           How they chain together
